@@ -15,6 +15,7 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 call plug#begin()
+Plug 'w0rp/ale'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 Plug 'tweekmonster/braceless.vim'
 Plug 'lilydjwg/colorizer'
@@ -36,6 +37,11 @@ Plug 'christoomey/vim-tmux-navigator' "TODO: learn this
 Plug 'wakatime/vim-wakatime'
 Plug 'lervag/vimtex'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
+Plug 'Shougo/neco-syntax'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh'
+    \ }
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
 call plug#end()
