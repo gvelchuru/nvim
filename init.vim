@@ -51,7 +51,7 @@ if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
 endif 
 let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-
+set conceallevel=2
 
 
 "let g:deoplete#disable_auto_complete = 1
