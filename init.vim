@@ -53,7 +53,8 @@ if !exists('g:deoplete#omni#input_patterns')
 endif 
 let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 set conceallevel=2
-let g:colorcoder_enable_filetypes = ['python'] "add cpp later? currently seems to conflict possibly with cquery
+let g:colorcoder_enable_filetypes = ['python'] 
+"add cpp later? currently seems to conflict possibly with cquery
 
 
 "let g:deoplete#disable_auto_complete = 1
