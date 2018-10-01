@@ -14,6 +14,11 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+   function! s:my_cr_function() abort
+     return deoplete#close_popup() . "\<CR>"
+   endfunction                 
+
 call plug#begin()
 Plug 'w0rp/ale'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
@@ -44,6 +49,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
+Plug 'artur-shaik/vim-javacomplete2'
 call plug#end()
 
 let g:deoplete#enable_at_startup=1
@@ -57,10 +63,16 @@ let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 "let g:deoplete#disable_auto_complete = 1
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-augroup omnifuncs
-    autocmd!
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-augroup end
+"augroup omnifuncs
+    "autocmd!
+    "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"augroup end
+
+call deoplete#custom#source('omni', 'functions', {
+    \ 'python': 'pythoncomplete#Complete',
+    \ 'vim' : ['vim']
+    \})
+"call deoplete#custom#source('_', 'sorters', ['sorter_word'])
 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
@@ -142,7 +154,7 @@ let g:ale_fixers = {
 \}
 
 let g:ale_fix_on_save=1
-let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_text_changed = 'always'
 "let g:ale_lint_on_save ='always'
 
 nnoremap <C-J> <C-W><C-J>
@@ -246,7 +258,7 @@ let g:colorizer_auto_color = 1
 "endif
 "let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
-let g:vimtex_view_general_viewer = 'evince'
+"let g:vimtex_view_general_viewer = 'evince'
 
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
@@ -266,7 +278,6 @@ hi! link GitGutterDelete GruvboxRed
 ":set mouse=a
 "
 
-let g:vimtex_compiler_progname = 'nvr'
 
 
 
