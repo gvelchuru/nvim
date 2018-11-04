@@ -19,12 +19,15 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
      return deoplete#close_popup() . "\<CR>"
    endfunction                 
 
+noremap <C-]> <C-W><C-]>
+
 call plug#begin()
 Plug 'w0rp/ale'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 Plug 'tweekmonster/braceless.vim'
 Plug 'lilydjwg/colorizer'
-Plug 'ctrlp/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'gvelchuru/gruvbox'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'scrooloose/nerdtree'
@@ -32,7 +35,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'python-mode/python-mode', {'branch': 'develop'}
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -49,7 +51,9 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'zchee/deoplete-clang'
+Plug 'majutsushi/tagbar'
+Plug 'semanser/vim-outdated-plugins'
 call plug#end()
 
 let g:deoplete#enable_at_startup=1
@@ -149,7 +153,7 @@ autocmd FileType python BracelessEnable +fold +highlight
 
 let g:ale_fixers = {
 \    'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'],
-\   'cpp' : ['clang-format'],
+\   'cpp' : ['clang-format', 'uncrustify'],
 \   'haskell': ['brittany', 'hfmt', 'remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace']
 \}
