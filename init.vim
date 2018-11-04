@@ -24,7 +24,7 @@ Plug 'w0rp/ale'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 Plug 'tweekmonster/braceless.vim'
 Plug 'lilydjwg/colorizer'
-Plug 'ctrlp/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gvelchuru/gruvbox'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'scrooloose/nerdtree'
@@ -147,8 +147,9 @@ let g:pymode_rope_completion = 0
 autocmd FileType python BracelessEnable +fold +highlight
 
 
+"add isort, black, autopep8, yapf
 let g:ale_fixers = {
-\    'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'],
+\    'python' : ['add_blank_lines_for_python_control_statements', 'remove_trailing_lines', 'trim_whitespace'],
 \   'cpp' : ['clang-format'],
 \   'haskell': ['brittany', 'hfmt', 'remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace']
