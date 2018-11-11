@@ -54,6 +54,8 @@ Plug 'zchee/deoplete-jedi'
 Plug 'zchee/deoplete-clang'
 Plug 'majutsushi/tagbar'
 Plug 'semanser/vim-outdated-plugins'
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
 call plug#end()
 
 let g:deoplete#enable_at_startup=1
@@ -152,7 +154,7 @@ autocmd FileType python BracelessEnable +fold +highlight
 
 
 let g:ale_fixers = {
-\    'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'],
+\    'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'isort', 'black', 'remove_trailing_lines', 'trim_whitespace'],
 \   'cpp' : ['clang-format', 'uncrustify'],
 \   'haskell': ['brittany', 'hfmt', 'remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace']
