@@ -153,6 +153,7 @@ let g:pymode_rope_completion = 0
 autocmd FileType python BracelessEnable +fold +highlight
 
 
+"add isort, black, autopep8, yapf
 let g:ale_fixers = {
 \    'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'isort', 'black', 'remove_trailing_lines', 'trim_whitespace'],
 \   'cpp' : ['clang-format', 'uncrustify'],
