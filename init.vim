@@ -24,7 +24,7 @@ Plug 'w0rp/ale'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 Plug 'tweekmonster/braceless.vim'
 Plug 'lilydjwg/colorizer'
-Plug 'ctrlp/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gvelchuru/gruvbox'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'scrooloose/nerdtree'
