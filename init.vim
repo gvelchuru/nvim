@@ -54,8 +54,13 @@ Plug 'zchee/deoplete-jedi'
 Plug 'zchee/deoplete-clang'
 Plug 'majutsushi/tagbar'
 Plug 'semanser/vim-outdated-plugins'
-Plug 'tpope/vim-obsession'
-Plug 'dhruvasagar/vim-prosession'
+Plug 'tmsvg/pear-tree'
+"Plug 'tpope/vim-obsession'
+"Plug 'dhruvasagar/vim-prosession'
+"Plug 'artur-shaik/vim-javacomplete2'
+Plug 'TaDaa/vimade'
+Plug 'junegunn/limelight.vim'
+"Plug 'junegunn/goyo.vim'
 call plug#end()
 
 let g:deoplete#enable_at_startup=1
@@ -83,6 +88,10 @@ call deoplete#custom#source('omni', 'functions', {
 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+"JAVA
+"set omnifunc=syntaxcomplete#Complete
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"let g:deoplete#omni#input_patterns.java = '[^. *\t]\.\w*'
 
 set autoindent
 set cindent
@@ -286,6 +295,7 @@ hi! link GitGutterDelete GruvboxRed
 ":set mouse=a
 "
 
+let g:limelight_conceal_ctermfg = 'gray'
 
 
 
