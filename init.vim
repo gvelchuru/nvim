@@ -1,8 +1,8 @@
 "set runtimepath^=~/.vim runtimepath+=~/.vim/after
 "let &packpath = &runtimepath
 
-let mapleader = ","
-let maplocalleader = ","
+let mapleader = ','
+let maplocalleader = ','
 noremap \ ,
 ":set lazyredraw
 set wildmode=full
@@ -35,7 +35,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'python-mode/python-mode', {'branch': 'develop'}
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -52,12 +51,16 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-clang'
+Plug 'majutsushi/tagbar'
+Plug 'semanser/vim-outdated-plugins'
 Plug 'tmsvg/pear-tree'
 "Plug 'tpope/vim-obsession'
 "Plug 'dhruvasagar/vim-prosession'
 "Plug 'artur-shaik/vim-javacomplete2'
 "Plug 'TaDaa/vimade'
 "Plug 'junegunn/limelight.vim'
+"Plug 'junegunn/goyo.vim'
 Plug 'oblitum/vim-operator-highlight'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-jp/vim-cpp'
@@ -90,6 +93,10 @@ call deoplete#custom#source('omni', 'functions', {
 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+"JAVA
+"set omnifunc=syntaxcomplete#Complete
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"let g:deoplete#omni#input_patterns.java = '[^. *\t]\.\w*'
 
 set autoindent
 set cindent
@@ -118,13 +125,13 @@ set cursorline
 "nnoremap <space> za
 
 
-let g:jedi#goto_command = ""
-let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = ""
-let g:jedi#usages_command = ""
-let g:jedi#completions_command = ""
-let g:jedi#rename_command = ""
+let g:jedi#goto_command = ''
+let g:jedi#goto_assignments_command = ''
+let g:jedi#goto_definitions_command = ''
+let g:jedi#documentation_command = ''
+let g:jedi#usages_command = ''
+let g:jedi#completions_command = ''
+let g:jedi#rename_command = ''
 
 
 "let g:auto_save=1
@@ -160,12 +167,15 @@ let g:pymode_rope_completion = 0
 autocmd FileType python BracelessEnable +fold +highlight
 
 
+"add isort, black, autopep8, yapf
 let g:ale_fixers = {
-\    'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'],
-\   'cpp' : ['clang-format'],
+\   '*' : ['remove_trailing_lines', 'trim_whitespace'],
+\   'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'],
+\   'cpp' : ['clang-format', 'uncrustify'],
 \   'c': ['clang-format', 'uncrustify', 'remove_trailing_lines', 'trim_whitespace'],
 \   'haskell': ['brittany', 'hfmt', 'remove_trailing_lines', 'trim_whitespace'],
-\   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace']
+\   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace'],
+\   'tex': ['remove_trailing_lines', 'trim_whitespace']
 \}
 
 let g:ale_fix_on_save=1
@@ -195,7 +205,10 @@ autocmd VimEnter * wincmd p
 
 
 " set Vim-specific sequences for RGB colors
-"set termguicolors
+set termguicolors
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark= 'soft'
 colorscheme gruvbox
@@ -295,3 +308,4 @@ hi! link GitGutterDelete GruvboxRed
 "
 "let g:limelight_conceal_ctermfg = 'gray'
 "au VimEnter * Limelight
+
