@@ -60,8 +60,11 @@ Plug 'tmsvg/pear-tree'
 "Plug 'dhruvasagar/vim-prosession'
 "Plug 'artur-shaik/vim-javacomplete2'
 "Plug 'TaDaa/vimade'
-Plug 'junegunn/limelight.vim'
+"Plug 'junegunn/limelight.vim'
 "Plug 'junegunn/goyo.vim'
+Plug 'oblitum/vim-operator-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'vim-jp/vim-cpp'
 call plug#end()
 
 let g:deoplete#enable_at_startup=1
@@ -72,6 +75,8 @@ let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 set conceallevel=2
 
 
+let g:deoplete#sources#clang#libclang_path = "/homes/iws/gauthv/llvm/lib/libclang.so"
+let g:deoplete#sources#clang#clang_header = "/homes/iws/gauthv/llvm/lib/clang/6.0.1/include"
 
 "let g:deoplete#disable_auto_complete = 1
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -164,8 +169,10 @@ autocmd FileType python BracelessEnable +fold +highlight
 
 "add isort, black, autopep8, yapf
 let g:ale_fixers = {
-\    'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'isort', 'black', 'remove_trailing_lines', 'trim_whitespace'],
+\   '*' : ['remove_trailing_lines', 'trim_whitespace'],
+\   'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'],
 \   'cpp' : ['clang-format', 'uncrustify'],
+\   'c': ['clang-format', 'uncrustify', 'remove_trailing_lines', 'trim_whitespace'],
 \   'haskell': ['brittany', 'hfmt', 'remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace'],
 \   'tex': ['remove_trailing_lines', 'trim_whitespace', 'textlint'],
@@ -300,6 +307,7 @@ hi! link GitGutterAdd GruvboxGreen
 hi! link GitGutterDelete GruvboxRed
 ":set mouse=a
 "
-
-let g:limelight_conceal_ctermfg = 'gray'
+"
+"let g:limelight_conceal_ctermfg = 'gray'
+"au VimEnter * Limelight
 
