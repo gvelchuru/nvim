@@ -7,6 +7,7 @@ noremap \ ,
 ":set lazyredraw
 set wildmode=full
 set history=200
+imap jj <Esc>
 
 "train to not use arrow keys
 noremap <Up> <Nop>
@@ -97,7 +98,6 @@ set autoindent
 set cindent
 "set statusline+=set statusline+=%#warningmsg#
 "set statusline+=%*
-imap jj <Esc>
 " imap jk <Esc>
 set tabstop=4
 set shiftwidth=4
@@ -168,12 +168,14 @@ let g:ale_fixers = {
 \   'cpp' : ['clang-format', 'uncrustify'],
 \   'haskell': ['brittany', 'hfmt', 'remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace'],
-\   'tex': ['remove_trailing_lines', 'trim_whitespace']
+\   'tex': ['remove_trailing_lines', 'trim_whitespace', 'textlint'],
+\   'java': ['google_java_format', 'uncrustify']
 \}
 
 let g:ale_fix_on_save=1
-let g:ale_lint_on_text_changed = 'always'
-"let g:ale_lint_on_save ='always'
+"let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save ='always'
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
