@@ -19,12 +19,15 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
      return deoplete#close_popup() . "\<CR>"
    endfunction                 
 
+noremap <C-]> <C-W><C-]>
+
 call plug#begin()
 Plug 'w0rp/ale'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 Plug 'tweekmonster/braceless.vim'
 Plug 'lilydjwg/colorizer'
-Plug 'ctrlp/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'gvelchuru/gruvbox'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'scrooloose/nerdtree'
@@ -49,7 +52,15 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'tmsvg/pear-tree'
+"Plug 'tpope/vim-obsession'
+"Plug 'dhruvasagar/vim-prosession'
+"Plug 'artur-shaik/vim-javacomplete2'
+"Plug 'TaDaa/vimade'
+"Plug 'junegunn/limelight.vim'
+Plug 'oblitum/vim-operator-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'vim-jp/vim-cpp'
 call plug#end()
 
 let g:deoplete#enable_at_startup=1
@@ -60,6 +71,8 @@ let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 set conceallevel=2
 
 
+let g:deoplete#sources#clang#libclang_path = "/homes/iws/gauthv/llvm/lib/libclang.so"
+let g:deoplete#sources#clang#clang_header = "/homes/iws/gauthv/llvm/lib/clang/6.0.1/include"
 
 "let g:deoplete#disable_auto_complete = 1
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -150,13 +163,14 @@ autocmd FileType python BracelessEnable +fold +highlight
 let g:ale_fixers = {
 \    'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'],
 \   'cpp' : ['clang-format'],
+\   'c': ['clang-format', 'uncrustify', 'remove_trailing_lines', 'trim_whitespace'],
 \   'haskell': ['brittany', 'hfmt', 'remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace']
 \}
 
 let g:ale_fix_on_save=1
-let g:ale_lint_on_text_changed = 'always'
-"let g:ale_lint_on_save ='always'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save ='always'
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -278,8 +292,6 @@ hi! link GitGutterAdd GruvboxGreen
 hi! link GitGutterDelete GruvboxRed
 ":set mouse=a
 "
-
-
-
-
-
+"
+"let g:limelight_conceal_ctermfg = 'gray'
+"au VimEnter * Limelight
