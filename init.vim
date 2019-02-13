@@ -21,59 +21,75 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
    endfunction
 
 noremap <C-]> <C-W><C-]>
+nmap <C-N> :NERDTreeToggle<CR>
 
-call plug#begin()
-Plug 'w0rp/ale'
-Plug 'donRaphaco/neotex', { 'for': 'tex' }
-Plug 'tweekmonster/braceless.vim'
-Plug 'lilydjwg/colorizer'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'gvelchuru/gruvbox'
-Plug 'scrooloose/nerdcommenter'
-"Plug 'scrooloose/nerdtree'
+if &compatible
+    set nocompatible
+endif
+
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
 "TODO: check branches for other ones, automated install
-Plug 'python-mode/python-mode', {'branch': 'develop'}
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'ryanoasis/vim-devicons'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'mhinz/vim-startify'
-Plug 'tpope/vim-surround'
-Plug 'christoomey/vim-tmux-navigator' "TODO: learn this
-Plug 'wakatime/vim-wakatime'
-Plug 'lervag/vimtex'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'Shougo/neco-syntax'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh'
-    \ }
-Plug 'davidhalter/jedi'
-Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-clang'
-Plug 'majutsushi/tagbar'
-Plug 'semanser/vim-outdated-plugins'
-Plug 'tmsvg/pear-tree'
+if dein#load_state('~/.cache/dein')
+    call dein#begin('~/.cache/dein')
+    call dein#add('w0rp/ale') "TODO: LSP functions
+    call dein#add('donRaphaco/neotex', {'on_ft': 'tex'})
+    call dein#add('tweekmonster/braceless.vim', {'on_ft': 'py'})
+    call dein#add('lilydjwg/colorizer', {'on_ft': ['html', 'css']})
+    call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
+    call dein#add('easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'})
+    call dein#add('ludovicchabant/vim-gutentags')
+    call dein#add('gvelchuru/gruvbox')
+    call dein#add('scrooloose/nerdcommenter', {'on_map': ['<Leader>cc', '<Leader>c<space>', '<Leader>cs']})
+    call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
+    call dein#add('python-mode/python-mode', {'rev': 'develop', 'on_ft': 'py', 'hook_source': 'autocmd FileType python BracelessEnable +fold +highlight'})
+    call dein#add('kien/rainbow_parentheses.vim')
+    call dein#add('vim-airline/vim-airline')
+    call dein#add('ryanoasis/vim-devicons')
+    call dein#add('tpope/vim-fugitive') "TODO: cmd
+    call dein#add('airblade/vim-gitgutter')
+    call dein#add('mhinz/vim-startify')
+    call dein#add('tpope/vim-surround') "TODO: mappings
+    call dein#add('christoomey/vim-tmux-navigator')
+    call dein#add('wakatime/vim-wakatime')
+    call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete'})
+    call dein#add('Shougo/deoplete.nvim')
+    call dein#add('Shougo/neco-syntax')
+    call dein#add('davidhalter/jedi', {'on_ft': 'py'})
+    call dein#add('zchee/deoplete-jedi', {'on_ft': 'py', 'hook_source': 'call init#_py()'})
+    call dein#add('zchee/deoplete-clang', {'on_ft': ['c', 'cpp'], 'hook_source': 'call init#_clang()'})
+    call dein#add('majutsushi/tagbar')
+    call dein#add('tmsvg/pear-tree')
 "Plug 'tpope/vim-obsession'
 "Plug 'dhruvasagar/vim-prosession'
 "Plug 'artur-shaik/vim-javacomplete2'
 "Plug 'TaDaa/vimade'
 "Plug 'junegunn/limelight.vim'
 "Plug 'junegunn/goyo.vim'
-call plug#end()
+    "call dein#add('autozimu/LanguageClient-neovim', {
+    "\ 'rev': 'next',
+    "\ 'build': 'bash install.sh'
+    "\ })
+    call dein#end()
+    call dein#save_state()
+endif
+if dein#check_install()
+    call dein#install()
+endif
+filetype plugin on
 
 let g:deoplete#enable_at_startup=1
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
 endif
-let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 set conceallevel=2
 
 
-let g:deoplete#sources#clang#libclang_path = "/homes/iws/gauthv/llvm/lib/libclang.so"
-let g:deoplete#sources#clang#clang_header = "/homes/iws/gauthv/llvm/lib/clang/6.0.1/include"
+"TODO: hook
+function! init#_clang() abort
+    let g:deoplete#sources#clang#libclang_path = '/homes/iws/gauthv/llvm/lib/libclang.so'
+    let g:deoplete#sources#clang#clang_header = '/homes/iws/gauthv/llvm/lib/clang/6.0.1/include'
+endfunction
 
 "let g:deoplete#disable_auto_complete = 1
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -85,7 +101,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 call deoplete#custom#source('omni', 'functions', {
     \ 'python': 'pythoncomplete#Complete',
-    \ 'vim' : ['vim']
+    \ 'vim' : 'vim'
     \})
 "call deoplete#custom#source('_', 'sorters', ['sorter_word'])
 
@@ -122,57 +138,57 @@ set cursorline
 "nnoremap <space> za
 
 
-let g:jedi#goto_command = ''
-let g:jedi#goto_assignments_command = ''
-let g:jedi#goto_definitions_command = ''
-let g:jedi#documentation_command = ''
-let g:jedi#usages_command = ''
-let g:jedi#completions_command = ''
-let g:jedi#rename_command = ''
+function! init#_py() abort
+    let g:jedi#goto_command = ''
+    let g:jedi#goto_assignments_command = ''
+    let g:jedi#goto_definitions_command = ''
+    let g:jedi#documentation_command = ''
+    let g:jedi#usages_command = ''
+    let g:jedi#completions_command = ''
+    let g:jedi#rename_command = ''
 
 
-"let g:auto_save=1
+    "let g:auto_save=1
 
 
-let g:pymode_options_max_line_length = 79
-let g:pymode_options_colorcolumn = 0
-let g:pymode_python = 'python3'
-let g:pymode_indent = 1
-let g:pymode_folding = 0
-let g:pymode_motion = 0
-"let g:pymode_doc = 1
-"let g:pymode_doc_bind = '<leader>k'
-let g:pymode_lint = 0
-"let g:pymode_lint_on_fly = 1
-let g:pymode_virtualenv = 1
-let g:pymode_run = 1
-let g:pymode_run_bind = '<Leader>r'
-let g:pymode_rope_show_doc_bind = '<Leader>K'
-let g:pymode_rope_regenerate_on_write = 1
-let g:pymode_rope_autoimport_bind = '<leader>a'
-let g:pymode_rope_goto_definition_bind = '<Leader>g'
-"let g:pymode_rope_rename_bind = '<C-c>rr'
-"let g:pymode_rope_autoimport_bind = '<C-c>ra'
-let g:pymode_syntax = 1
-let g:pymode_syntax_slow_sync = 1
-let g:pymode_syntax_all = 1
-let g:pymode_rope_completion = 0
-"let g:pymode_lint_cwindow = 0
-"let g:pymode_lint_unmodified = 1
+    let g:pymode_options_max_line_length = 79
+    let g:pymode_options_colorcolumn = 0
+    let g:pymode_python = 'python3'
+    let g:pymode_indent = 1
+    let g:pymode_folding = 0
+    let g:pymode_motion = 0
+    "let g:pymode_doc = 1
+    "let g:pymode_doc_bind = '<leader>k'
+    let g:pymode_lint = 0
+    "let g:pymode_lint_on_fly = 1
+    let g:pymode_virtualenv = 1
+    let g:pymode_run = 1
+    let g:pymode_run_bind = '<Leader>r'
+    let g:pymode_rope_show_doc_bind = '<Leader>K'
+    let g:pymode_rope_regenerate_on_write = 1
+    let g:pymode_rope_autoimport_bind = '<leader>a'
+    let g:pymode_rope_goto_definition_bind = '<Leader>g'
+    "let g:pymode_rope_rename_bind = '<C-c>rr'
+    "let g:pymode_rope_autoimport_bind = '<C-c>ra'
+    let g:pymode_syntax = 1
+    let g:pymode_syntax_slow_sync = 1
+    let g:pymode_syntax_all = 1
+    let g:pymode_rope_completion = 0
+    "let g:pymode_lint_cwindow = 0
+    "let g:pymode_lint_unmodified = 1
+endfunction
 
-
-autocmd FileType python BracelessEnable +fold +highlight
 
 
 "add isort, black, autopep8, yapf
 let g:ale_fixers = {
 \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
-\   'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'],
+\   'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf'],
 \   'cpp' : ['clang-format', 'uncrustify'],
-\   'c': ['clang-format', 'uncrustify', 'remove_trailing_lines', 'trim_whitespace'],
-\   'haskell': ['brittany', 'hfmt', 'remove_trailing_lines', 'trim_whitespace'],
-\   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace'],
-\   'tex': ['remove_trailing_lines', 'trim_whitespace', 'textlint'],
+\   'c': ['clang-format', 'uncrustify'],
+\   'haskell': ['brittany', 'hfmt'],
+\   'ruby': ['rubocop'],
+\   'tex': ['textlint'],
 \   'java': ['google_java_format', 'uncrustify']
 \}
 
@@ -195,8 +211,9 @@ let g:typescript_compiler_binary = 'tsc'
 let g:typescript_compiler_options = ''
 
 
-"autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
+autocmd VimEnter * silent call dein#update()
+autocmd VimEnter * silent call dein#remote_plugins()
 
 "let g:NERDTreeUpdateOnWrite = 0
 
@@ -211,7 +228,6 @@ autocmd VimEnter * wincmd p
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark= 'soft'
 colorscheme gruvbox
-"colorscheme gotham
 set background=dark
 "highlight BadWhitespace ctermbg=red guibg=darkred
 "au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
@@ -239,51 +255,33 @@ let g:airline#extensions#ale#enabled = 1
 
 
 
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
+if !exists('g:airline_symbols')
+let g:airline_symbols = {}
+endif
 
-  " unicode symbols
-  "let g:airline_left_sep = '»'
-  "let g:airline_left_sep = '▶'
-  "let g:airline_right_sep = '«'
-  "let g:airline_right_sep = '◀'
-  let g:airline_symbols.crypt = '🔒'
-  "let g:airline_symbols.linenr = '☰'
-  "let g:airline_symbols.linenr = '␊'
-  "let g:airline_symbols.linenr = '␤'
-  let g:airline_symbols.linenr = '¶'
-  "let g:airline_symbols.maxlinenr = ''
-  "let g:airline_symbols.maxlinenr = '㏑'
-  "let g:airline_symbols.branch = '⎇'
-  let g:airline_symbols.paste = 'ρ'
-  "let g:airline_symbols.paste = 'Þ'
-  "let g:airline_symbols.paste = '∥'
-  let g:airline_symbols.spell = 'Ꞩ'
-  let g:airline_symbols.notexists = '∄'
-  let g:airline_symbols.whitespace = 'Ξ'
+" unicode symbols
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
 
-  " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  "let g:airline_symbols.linenr = '☰'
-  let g:airline_symbols.maxlinenr = ''
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.maxlinenr = ''
 
- "mine
- "let g:airline_left_sep = ''
- "let g:airline_right_sep = ''
+"mine
+"let g:airline_left_sep = ''
+"let g:airline_right_sep = ''
 
 
 let g:colorizer_auto_color = 1
-
-"if !exists('g:ycm_semantic_triggers')
-    "let g:ycm_semantic_triggers = {}
-"endif
-"let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
 "let g:vimtex_view_general_viewer = 'evince'
 
@@ -295,15 +293,11 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-
 hi Normal guibg=NONE ctermbg=NONE
 hi! link ALEErrorSign GruvboxRed
 hi! link ALEWarningSign GruvboxYellow
 hi! link GitGutterChange GruvboxGreen
 hi! link GitGutterAdd GruvboxGreen
 hi! link GitGutterDelete GruvboxRed
-":set mouse=a
-"
-"
 "let g:limelight_conceal_ctermfg = 'gray'
 "au VimEnter * Limelight
