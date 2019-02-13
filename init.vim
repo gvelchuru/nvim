@@ -18,7 +18,7 @@ noremap <Right> <Nop>
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
    function! s:my_cr_function() abort
      return deoplete#close_popup() . "\<CR>"
-   endfunction                 
+   endfunction
 
 noremap <C-]> <C-W><C-]>
 
@@ -62,15 +62,12 @@ Plug 'tmsvg/pear-tree'
 "Plug 'TaDaa/vimade'
 "Plug 'junegunn/limelight.vim'
 "Plug 'junegunn/goyo.vim'
-Plug 'oblitum/vim-operator-highlight'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'vim-jp/vim-cpp'
 call plug#end()
 
 let g:deoplete#enable_at_startup=1
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
-endif 
+endif
 let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 set conceallevel=2
 
@@ -138,10 +135,10 @@ let g:jedi#rename_command = ''
 
 
 let g:pymode_options_max_line_length = 79
-let g:pymode_options_colorcolumn = 0 
+let g:pymode_options_colorcolumn = 0
 let g:pymode_python = 'python3'
 let g:pymode_indent = 1
-let g:pymode_folding = 0  
+let g:pymode_folding = 0
 let g:pymode_motion = 0
 "let g:pymode_doc = 1
 "let g:pymode_doc_bind = '<leader>k'
@@ -207,9 +204,9 @@ autocmd VimEnter * wincmd p
 
 
 " set Vim-specific sequences for RGB colors
-set termguicolors
+"set termguicolors
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark= 'soft'
@@ -310,4 +307,3 @@ hi! link GitGutterDelete GruvboxRed
 "
 "let g:limelight_conceal_ctermfg = 'gray'
 "au VimEnter * Limelight
-
