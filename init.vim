@@ -20,6 +20,7 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
      return deoplete#close_popup() . "\<CR>"
    endfunction
 
+nnoremap <C-]> :YcmCompleter GoToDefinition
 noremap <C-]> <C-W><C-]>
 nmap <C-N> :NERDTreeToggle<CR>
 
@@ -28,6 +29,10 @@ if &compatible
 endif
 
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+endif
 
 "TODO: check branches for other ones, automated install
 if dein#load_state('~/.cache/dein')
@@ -42,7 +47,6 @@ if dein#load_state('~/.cache/dein')
     call dein#add('gvelchuru/gruvbox')
     call dein#add('scrooloose/nerdcommenter', {'on_map': ['<Leader>cc', '<Leader>c<space>', '<Leader>cs']})
     call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
-    call dein#add('python-mode/python-mode', {'rev': 'develop', 'on_ft': 'py', 'hook_source': 'autocmd FileType python BracelessEnable +fold +highlight'})
     call dein#add('kien/rainbow_parentheses.vim')
     call dein#add('vim-airline/vim-airline')
     call dein#add('ryanoasis/vim-devicons')
@@ -52,14 +56,12 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-surround') "TODO: mappings
     call dein#add('christoomey/vim-tmux-navigator')
     call dein#add('wakatime/vim-wakatime')
-    call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete'})
-    call dein#add('Shougo/deoplete.nvim')
-    call dein#add('Shougo/neco-syntax')
-    call dein#add('davidhalter/jedi', {'on_ft': 'py'})
-    call dein#add('zchee/deoplete-jedi', {'on_ft': 'py', 'hook_source': 'call init#_py()'})
-    call dein#add('zchee/deoplete-clang', {'on_ft': ['c', 'cpp'], 'hook_source': 'call init#_clang()'})
+    call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme'})
+    call dein#add('Valloric/YouCompleteMe', {'build': './install.py --clang-completer'})
+    call dein#add('davidhalter/jedi', {'on_ft': 'py', 'hook_source': 'call init#_py()'})
     call dein#add('majutsushi/tagbar')
     call dein#add('tmsvg/pear-tree')
+    call dein#add('rdnetto/YCM-Generator')
 "Plug 'tpope/vim-obsession'
 "Plug 'dhruvasagar/vim-prosession'
 "Plug 'artur-shaik/vim-javacomplete2'
@@ -78,11 +80,9 @@ if dein#check_install()
 endif
 filetype plugin on
 
-let g:deoplete#enable_at_startup=1
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
 set conceallevel=2
+
+let g:ycm_confirm_extra_conf = 0
 
 
 "TODO: hook
@@ -101,10 +101,11 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
     "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 "augroup end
 
-call deoplete#custom#source('omni', 'functions', {
-    \ 'python': 'pythoncomplete#Complete',
-    \ 'vim' : 'vim'
-    \})
+"TODO: do I need custom source
+"call deoplete#custom#source('omni', 'functions', {
+    "\ 'python': 'pythoncomplete#Complete',
+    "\ 'vim' : 'vim'
+    "\})
 "call deoplete#custom#source('_', 'sorters', ['sorter_word'])
 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -148,36 +149,7 @@ function! init#_py() abort
     let g:jedi#usages_command = ''
     let g:jedi#completions_command = ''
     let g:jedi#rename_command = ''
-
-
-    "let g:auto_save=1
-
-
-    let g:pymode_options_max_line_length = 79
-    let g:pymode_options_colorcolumn = 0
-    let g:pymode_python = 'python3'
-    let g:pymode_indent = 1
-    let g:pymode_folding = 0
-    let g:pymode_motion = 0
-    "let g:pymode_doc = 1
-    "let g:pymode_doc_bind = '<leader>k'
-    let g:pymode_lint = 0
-    "let g:pymode_lint_on_fly = 1
-    let g:pymode_virtualenv = 1
-    let g:pymode_run = 1
-    let g:pymode_run_bind = '<Leader>r'
-    let g:pymode_rope_show_doc_bind = '<Leader>K'
-    let g:pymode_rope_regenerate_on_write = 1
-    let g:pymode_rope_autoimport_bind = '<leader>a'
-    let g:pymode_rope_goto_definition_bind = '<Leader>g'
-    "let g:pymode_rope_rename_bind = '<C-c>rr'
-    "let g:pymode_rope_autoimport_bind = '<C-c>ra'
-    let g:pymode_syntax = 1
-    let g:pymode_syntax_slow_sync = 1
-    let g:pymode_syntax_all = 1
-    let g:pymode_rope_completion = 0
-    "let g:pymode_lint_cwindow = 0
-    "let g:pymode_lint_unmodified = 1
+    autocmd FileType python BracelessEnable +fold +highlight
 endfunction
 
 
