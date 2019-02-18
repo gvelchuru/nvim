@@ -9,12 +9,6 @@ set wildmode=full
 set history=200
 imap jj <Esc>
 
-"train to not use arrow keys
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
    function! s:my_cr_function() abort
      return deoplete#close_popup() . "\<CR>"
@@ -36,6 +30,9 @@ endif
 
 "TODO: check branches for other ones, automated install
 if dein#load_state('~/.cache/dein')
+    "PY
+    call dein#add('davidhalter/jedi', {'on_ft': 'py', 'hook_source': 'call init#_py()'})
+
     call dein#begin('~/.cache/dein')
     call dein#add('w0rp/ale') "TODO: LSP functions
     call dein#add('donRaphaco/neotex', {'on_ft': 'tex'})
@@ -43,7 +40,6 @@ if dein#load_state('~/.cache/dein')
     call dein#add('lilydjwg/colorizer', {'on_ft': ['html', 'css']})
     call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
     call dein#add('easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'})
-    call dein#add('ludovicchabant/vim-gutentags')
     call dein#add('gvelchuru/gruvbox')
     call dein#add('scrooloose/nerdcommenter', {'on_map': ['<Leader>cc', '<Leader>c<space>', '<Leader>cs']})
     call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
@@ -58,7 +54,6 @@ if dein#load_state('~/.cache/dein')
     call dein#add('wakatime/vim-wakatime')
     call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme'})
     call dein#add('Valloric/YouCompleteMe', {'build': './install.py --clang-completer'})
-    call dein#add('davidhalter/jedi', {'on_ft': 'py', 'hook_source': 'call init#_py()'})
     call dein#add('majutsushi/tagbar')
     call dein#add('tmsvg/pear-tree')
     call dein#add('rdnetto/YCM-Generator')
@@ -83,43 +78,17 @@ filetype plugin on
 set conceallevel=2
 
 let g:ycm_confirm_extra_conf = 0
-
-
-"TODO: hook
-function! init#_clang() abort
-    if $HOSTNAME =~ 'attu'
-        let g:deoplete#sources#clang#libclang_path = '/homes/iws/gauthv/llvm/lib/libclang.so'
-        let g:deoplete#sources#clang#clang_header = '/homes/iws/gauthv/llvm/lib/clang/6.0.1/include'
-    endif
-endfunction
+let g:ycm_show_diagnostics_ui = 0
 
 "let g:deoplete#disable_auto_complete = 1
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-"augroup omnifuncs
-    "autocmd!
-    "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"augroup end
-
-"TODO: do I need custom source
-"call deoplete#custom#source('omni', 'functions', {
-    "\ 'python': 'pythoncomplete#Complete',
-    "\ 'vim' : 'vim'
-    "\})
-"call deoplete#custom#source('_', 'sorters', ['sorter_word'])
-
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-"JAVA
-"set omnifunc=syntaxcomplete#Complete
-"autocmd FileType java setlocal omnifunc=javacomplete#Complete
-"let g:deoplete#omni#input_patterns.java = '[^. *\t]\.\w*'
 
 set autoindent
 set cindent
 "set statusline+=set statusline+=%#warningmsg#
 "set statusline+=%*
-" imap jk <Esc>
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -170,6 +139,7 @@ let g:ale_fix_on_save=1
 "let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save ='always'
+let g:ale_line_on_enter = 'never'
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -190,8 +160,6 @@ if $HOSTNAME !~ 'attu'
     autocmd VimEnter * silent call dein#update()
     autocmd VimEnter * silent call dein#remote_plugins()
 endif
-
-"let g:NERDTreeUpdateOnWrite = 0
 
 " highlight Normal ctermfg=grey ctermbg=black
 
