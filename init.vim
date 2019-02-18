@@ -14,7 +14,6 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
      return deoplete#close_popup() . "\<CR>"
    endfunction
 
-nnoremap <C-]> :YcmCompleter GoToDefinition
 noremap <C-]> <C-W><C-]>
 nmap <C-N> :NERDTreeToggle<CR>
 
@@ -55,6 +54,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme'})
     call dein#add('Valloric/YouCompleteMe', {'build': './install.py --clang-completer'})
     call dein#add('majutsushi/tagbar')
+    call dein#add('ludovicchabant/vim-gutentags')
     call dein#add('tmsvg/pear-tree')
     call dein#add('rdnetto/YCM-Generator')
 "Plug 'tpope/vim-obsession'
