@@ -36,7 +36,7 @@ if dein#load_state('~/.cache/dein')
 
     "TEX
     call dein#add('donRaphaco/neotex', {'on_ft': 'tex'})
-    call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme'})
+    call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'call init#_tex()'})
 
     "AESTHETIC
     call dein#add('gvelchuru/gruvbox')
@@ -70,6 +70,7 @@ if dein#load_state('~/.cache/dein')
     "GENERAL
     call dein#add('christoomey/vim-tmux-navigator')
     call dein#add('wakatime/vim-wakatime')
+    call dein#add('tweekmonster/startuptime.vim', {'on_cmd': 'StartupTime'})
 
     "TESTING/ETC
 "Plug 'tpope/vim-obsession'
@@ -82,6 +83,10 @@ if dein#load_state('~/.cache/dein')
     "\ 'rev': 'next',
     "\ 'build': 'bash install.sh'
     "\ })
+"    call dein#add('jeaye/color_coded', {
+       " \ 'build' : 'rm -f CMakeCache.txt && cmake . && make && make install',
+       " \ 'on_ft': ['c','cpp', 'objc', 'objcpp'],
+       " \})
     call dein#end()
     call dein#save_state()
 endif
@@ -191,9 +196,13 @@ set background=dark
   "execfile(activate_this, dict(__file__=activate_this))
 "EOF
 
-au BufNewFile,BufRead *.tex set filetype=tex
-let g:tex_flavor = 'latex'
-let g:neotex_latexdiff = 1
+
+function! init#_tex() abort
+    au BufNewFile,BufRead *.tex set filetype=tex
+    let g:tex_flavor = 'latex'
+    let g:neotex_latexdiff = 1
+    let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+endfunction
 
 set encoding=utf-8
 set guifont=Inconsolata\ 11
