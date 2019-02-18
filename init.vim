@@ -96,9 +96,9 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0
 
 "let g:deoplete#disable_auto_complete = 1
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 set autoindent
 set cindent
@@ -129,12 +129,9 @@ function! init#_brace() abort
     autocmd FileType python BracelessEnable +fold +highlight
 endfunction
 
-
-
-"add isort, black, autopep8, yapf
 let g:ale_fixers = {
 \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
-\   'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf'],
+\   'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'isort', 'black'],
 \   'cpp' : ['clang-format', 'uncrustify'],
 \   'c': ['clang-format', 'uncrustify'],
 \   'haskell': ['brittany', 'hfmt'],
@@ -234,9 +231,7 @@ let g:airline_symbols.maxlinenr = ''
 
 
 let g:colorizer_auto_color = 1
-
-"let g:vimtex_view_general_viewer = 'evince'
-
+let g:vimtex_view_general_viewer = 'evince'
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 
