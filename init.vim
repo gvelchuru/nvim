@@ -212,8 +212,10 @@ let g:typescript_compiler_options = ''
 
 
 autocmd VimEnter * wincmd p
-autocmd VimEnter * silent call dein#update()
-autocmd VimEnter * silent call dein#remote_plugins()
+if $HOSTNAME !~ 'attu'
+    autocmd VimEnter * silent call dein#update()
+    autocmd VimEnter * silent call dein#remote_plugins()
+endif
 
 "let g:NERDTreeUpdateOnWrite = 0
 
