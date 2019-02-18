@@ -14,7 +14,6 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
      return deoplete#close_popup() . "\<CR>"
    endfunction
 
-nnoremap <C-]> :YcmCompleter GoToDefinition
 noremap <C-]> <C-W><C-]>
 nmap <C-N> :NERDTreeToggle<CR>
 
@@ -30,33 +29,49 @@ endif
 
 "TODO: check branches for other ones, automated install
 if dein#load_state('~/.cache/dein')
-    "PY
-    call dein#add('davidhalter/jedi', {'on_ft': 'py', 'hook_source': 'call init#_py()'})
-
     call dein#begin('~/.cache/dein')
-    call dein#add('w0rp/ale') "TODO: LSP functions
+
+    "PY
+    call dein#add('tweekmonster/braceless.vim', {'on_ft': 'py', 'hook_source': 'call init#_brace()'})
+
+    "TEX
     call dein#add('donRaphaco/neotex', {'on_ft': 'tex'})
-    call dein#add('tweekmonster/braceless.vim', {'on_ft': 'py'})
-    call dein#add('lilydjwg/colorizer', {'on_ft': ['html', 'css']})
-    call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
-    call dein#add('easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'})
+    call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme'})
+
+    "AESTHETIC
     call dein#add('gvelchuru/gruvbox')
-    call dein#add('scrooloose/nerdcommenter', {'on_map': ['<Leader>cc', '<Leader>c<space>', '<Leader>cs']})
-    call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
+    call dein#add('mhinz/vim-startify')
     call dein#add('kien/rainbow_parentheses.vim')
     call dein#add('vim-airline/vim-airline')
+    call dein#add('lilydjwg/colorizer', {'on_ft': ['html', 'css']})
     call dein#add('ryanoasis/vim-devicons')
+
+    "SEARCH
+    call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
+    call dein#add('easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'})
+    call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
+    call dein#add('majutsushi/tagbar')
+    call dein#add('ludovicchabant/vim-gutentags')
+
+    "GIT
     call dein#add('tpope/vim-fugitive') "TODO: cmd
     call dein#add('airblade/vim-gitgutter')
-    call dein#add('mhinz/vim-startify')
+
+    "SURROUND
+    call dein#add('scrooloose/nerdcommenter', {'on_map': ['<Leader>cc', '<Leader>c<space>', '<Leader>cs']})
     call dein#add('tpope/vim-surround') "TODO: mappings
+    call dein#add('tmsvg/pear-tree')
+
+    "COMPLETION/LINTING
+    call dein#add('w0rp/ale') "TODO: LSP functions
+    call dein#add('Valloric/YouCompleteMe', {'build': './install.py --clang-completer'})
+    call dein#add('rdnetto/YCM-Generator')
+
+    "GENERAL
     call dein#add('christoomey/vim-tmux-navigator')
     call dein#add('wakatime/vim-wakatime')
-    call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme'})
-    call dein#add('Valloric/YouCompleteMe', {'build': './install.py --clang-completer'})
-    call dein#add('majutsushi/tagbar')
-    call dein#add('tmsvg/pear-tree')
-    call dein#add('rdnetto/YCM-Generator')
+
+    "TESTING/ETC
 "Plug 'tpope/vim-obsession'
 "Plug 'dhruvasagar/vim-prosession'
 "Plug 'artur-shaik/vim-javacomplete2'
@@ -110,14 +125,7 @@ set cursorline
 "nnoremap <space> za
 
 
-function! init#_py() abort
-    let g:jedi#goto_command = ''
-    let g:jedi#goto_assignments_command = ''
-    let g:jedi#goto_definitions_command = ''
-    let g:jedi#documentation_command = ''
-    let g:jedi#usages_command = ''
-    let g:jedi#completions_command = ''
-    let g:jedi#rename_command = ''
+function! init#_brace() abort
     autocmd FileType python BracelessEnable +fold +highlight
 endfunction
 
