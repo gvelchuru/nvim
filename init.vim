@@ -72,6 +72,9 @@ if dein#load_state('~/.cache/dein')
     call dein#add('wakatime/vim-wakatime')
     call dein#add('tweekmonster/startuptime.vim', {'on_cmd': 'StartupTime'})
 
+    "C
+    call dein#add('justinmk/vim-syntax-extra', {'on_ft': 'c'})
+
     "TESTING/ETC
 "Plug 'tpope/vim-obsession'
 "Plug 'dhruvasagar/vim-prosession'
