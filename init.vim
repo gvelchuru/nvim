@@ -87,8 +87,10 @@ set conceallevel=2
 
 "TODO: hook
 function! init#_clang() abort
-    let g:deoplete#sources#clang#libclang_path = '/homes/iws/gauthv/llvm/lib/libclang.so'
-    let g:deoplete#sources#clang#clang_header = '/homes/iws/gauthv/llvm/lib/clang/6.0.1/include'
+    if $HOSTNAME =~ 'attu'
+        let g:deoplete#sources#clang#libclang_path = '/homes/iws/gauthv/llvm/lib/libclang.so'
+        let g:deoplete#sources#clang#clang_header = '/homes/iws/gauthv/llvm/lib/clang/6.0.1/include'
+    endif
 endfunction
 
 "let g:deoplete#disable_auto_complete = 1
