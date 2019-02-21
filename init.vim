@@ -27,6 +27,9 @@ if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
 endif
 
+let g:lion_squeeze_spaces = 1
+
+"TODO: snippets
 "TODO: check branches for other ones, automated install
 if dein#load_state('~/.cache/dein')
     call dein#begin('~/.cache/dein')
@@ -45,6 +48,9 @@ if dein#load_state('~/.cache/dein')
     call dein#add('vim-airline/vim-airline')
     call dein#add('lilydjwg/colorizer', {'on_ft': ['html', 'css']})
     call dein#add('ryanoasis/vim-devicons')
+    call dein#add('tommcdo/vim-lion')
+    call dein#add('tpope/vim-sleuth')
+    call dein#add('tpope/vim-repeat')
 
     "SEARCH
     call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
@@ -61,6 +67,8 @@ if dein#load_state('~/.cache/dein')
     call dein#add('scrooloose/nerdcommenter', {'on_map': ['<Leader>cc', '<Leader>c<space>', '<Leader>cs']})
     call dein#add('tpope/vim-surround') "TODO: mappings
     call dein#add('tmsvg/pear-tree')
+    call dein#add('wellle/targets.vim')
+    call dein#add('michaeljsmith/vim-indent-object') "TODO: mappings
 
     "COMPLETION/LINTING
     call dein#add('w0rp/ale') "TODO: LSP functions
@@ -71,6 +79,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('christoomey/vim-tmux-navigator')
     call dein#add('wakatime/vim-wakatime')
     call dein#add('tweekmonster/startuptime.vim', {'on_cmd': 'StartupTime'})
+    call dein#add('sheerun/vim-polyglot')
 
     "C
     call dein#add('justinmk/vim-syntax-extra', {'on_ft': 'c'})
@@ -97,6 +106,7 @@ if dein#check_install()
     call dein#install()
 endif
 filetype plugin on
+syntax on
 
 set conceallevel=2
 
