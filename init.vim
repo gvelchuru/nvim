@@ -16,6 +16,7 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
 noremap <C-]> <C-W><C-]>
 nmap <C-N> :NERDTreeToggle<CR>
+cnoremap sudow w !sudo tee % >/dev/null
 
 if &compatible
     set nocompatible
