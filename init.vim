@@ -18,10 +18,6 @@ noremap <C-]> <C-W><C-]>
 nmap <C-N> :NERDTreeToggle<CR>
 cnoremap sudow w !sudo tee % >/dev/null
 
-if &compatible
-    set nocompatible
-endif
-
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if !exists('g:ycm_semantic_triggers')
@@ -106,7 +102,6 @@ endif
 if dein#check_install()
     call dein#install()
 endif
-filetype plugin on
 syntax on
 
 set conceallevel=2
