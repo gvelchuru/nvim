@@ -25,6 +25,8 @@ if !exists('g:ycm_semantic_triggers')
 endif
 
 let g:lion_squeeze_spaces = 1
+set completeopt-=preview
+set pumblend=30
 
 "TODO: snippets
 "TODO: check branches for other ones, automated install
@@ -47,6 +49,9 @@ if dein#load_state('~/.cache/dein')
     call dein#add('ryanoasis/vim-devicons')
     call dein#add('tommcdo/vim-lion')
     call dein#add('tpope/vim-sleuth')
+    call dein#add('ncm2/float-preview.nvim')
+
+    "TEXT OBJECTS
     call dein#add('tpope/vim-repeat')
 
     "SEARCH
@@ -183,9 +188,9 @@ endif
 
 
 " set Vim-specific sequences for RGB colors
-"set termguicolors
+set termguicolors
 
-"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark= 'soft'
@@ -253,9 +258,9 @@ let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 
 au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+au VimEnter * RainbowParenthesesLoadRound
+au VimEnter * RainbowParenthesesLoadSquare
+au VimEnter * RainbowParenthesesLoadBraces
 
 hi Normal guibg=NONE ctermbg=NONE
 hi! link ALEErrorSign GruvboxRed
