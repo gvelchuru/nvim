@@ -108,9 +108,8 @@ set conceallevel=2
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0
-
-"let g:deoplete#disable_auto_complete = 1
-"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 "inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
