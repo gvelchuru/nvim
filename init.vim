@@ -37,7 +37,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tweekmonster/braceless.vim', {'on_ft': 'py', 'hook_source': 'call init#_brace()'})
 
     "TEX
-    call dein#add('donRaphaco/neotex', {'on_ft': 'tex'})
+    "call dein#add('donRaphaco/neotex', {'on_ft': 'tex'})
     call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'call init#_tex()'})
 
     "AESTHETIC
@@ -108,6 +108,7 @@ if dein#check_install()
     call dein#install()
 endif
 syntax on
+let g:polyglot_disabled = ['latex']
 
 set conceallevel=2
 
@@ -214,8 +215,11 @@ set background=dark
 function! init#_tex() abort
     au BufNewFile,BufRead *.tex set filetype=tex
     let g:tex_flavor = 'latex'
-    let g:neotex_latexdiff = 1
+    "let g:neotex_latexdiff = 1
     let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+    let g:vimtex_view_automatic = 1
+    let g:vimtex_compiler_method = 'latexmk'
+    let g:vimtex_view_general_viewer = 'evince'
 endfunction
 
 set encoding=utf-8
@@ -254,7 +258,6 @@ let g:airline_symbols.maxlinenr = ''
 
 
 let g:colorizer_auto_color = 1
-let g:vimtex_view_general_viewer = 'evince'
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 
