@@ -1,6 +1,5 @@
-"set runtimepath^=~/.vim runtimepath+=~/.vim/after
-"let &packpath = &runtimepath
-
+set encoding=utf-8
+scriptencoding utf-8
 let mapleader = ','
 let maplocalleader = ','
 noremap \ ,
@@ -9,13 +8,7 @@ set wildmode=full
 set history=200
 imap jj <Esc>
 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-   function! s:my_cr_function() abort
-     return deoplete#close_popup() . "\<CR>"
-   endfunction
-
 noremap <C-]> <C-W><C-]>
-nmap <C-N> :NERDTreeToggle<CR>
 cnoremap sudow w !sudo tee % >/dev/null
 
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
@@ -28,8 +21,9 @@ let g:lion_squeeze_spaces = 1
 set completeopt-=preview
 set pumblend=30
 
-"TODO: snippets
-"TODO: check branches for other ones, automated install
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+
 if dein#load_state('~/.cache/dein')
     call dein#begin('~/.cache/dein')
 
@@ -37,33 +31,38 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tweekmonster/braceless.vim', {'on_ft': 'py', 'hook_source': 'call init#_brace()'})
 
     "TEX
-    "call dein#add('donRaphaco/neotex', {'on_ft': 'tex'})
     call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'call init#_tex()'})
 
     "AESTHETIC
     call dein#add('gvelchuru/gruvbox')
     call dein#add('mhinz/vim-startify')
-    call dein#add('kien/rainbow_parentheses.vim')
+    call dein#add('junegunn/rainbow_parentheses.vim')
     call dein#add('vim-airline/vim-airline')
-    call dein#add('lilydjwg/colorizer', {'on_ft': ['html', 'css']})
-    call dein#add('ryanoasis/vim-devicons')
-    call dein#add('tommcdo/vim-lion')
-    call dein#add('tpope/vim-sleuth')
-    call dein#add('ncm2/float-preview.nvim')
+    call dein#add('lilydjwg/colorizer', {'on_ft': ['html', 'css']}) "color html codes
+    call dein#add('ryanoasis/vim-devicons') "nice icons
+    call dein#add('tommcdo/vim-lion') "Alignment
+    call dein#add('tpope/vim-sleuth') "heuristically set indent
+    call dein#add('ncm2/float-preview.nvim') "show preview in floating window
 
     "TEXT OBJECTS
     call dein#add('tpope/vim-repeat')
 
+    "SNIPPETS
+    call dein#add('SirVer/ultisnips')
+    call dein#add('honza/vim-snippets')
+
+
     "SEARCH
     call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
     call dein#add('easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'})
-    call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
+    "call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
+    "//TODO: replace with fzf
     call dein#add('majutsushi/tagbar')
     call dein#add('ludovicchabant/vim-gutentags')
 
     "GIT
     call dein#add('tpope/vim-fugitive') "TODO: cmd
-    call dein#add('airblade/vim-gitgutter')
+    "call dein#add('airblade/vim-gitgutter')
 
     "SURROUND
     call dein#add('scrooloose/nerdcommenter', {'on_map': ['<Leader>cc', '<Leader>c<space>', '<Leader>cs']})
@@ -75,13 +74,12 @@ if dein#load_state('~/.cache/dein')
     "COMPLETION/LINTING
     call dein#add('w0rp/ale') "TODO: LSP functions
     call dein#add('Valloric/YouCompleteMe', {'build': './install.py --clang-completer'})
-    call dein#add('rdnetto/YCM-Generator')
+    call dein#add('rdnetto/YCM-Generator', {'on_cmd': 'YcmGenerateConfig'})
 
     "GENERAL
     call dein#add('christoomey/vim-tmux-navigator')
     call dein#add('wakatime/vim-wakatime')
     call dein#add('tweekmonster/startuptime.vim', {'on_cmd': 'StartupTime'})
-    call dein#add('sheerun/vim-polyglot')
 
     "C
     call dein#add('justinmk/vim-syntax-extra', {'on_ft': 'c'})
@@ -108,26 +106,14 @@ if dein#check_install()
     call dein#install()
 endif
 syntax on
-let g:polyglot_disabled = ['latex']
 
 set conceallevel=2
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0
 
-"let g:deoplete#disable_auto_complete = 1
-"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 set autoindent
 set cindent
-"set statusline+=set statusline+=%#warningmsg#
-"set statusline+=%*
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
 set number
 set showcmd
 set showmatch
@@ -138,7 +124,6 @@ set splitbelow
 set splitright
 set cursorline
 
-
  "Enable folding
 "set foldmethod=indent
 "set foldlevel=99
@@ -146,9 +131,12 @@ set cursorline
 
 
 function! init#_brace() abort
+  augroup python
     autocmd FileType python BracelessEnable +fold +highlight
+  augroup END
 endfunction
 
+"ALE
 let g:ale_fixers = {
 \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
 \   'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'isort', 'black'],
@@ -161,7 +149,6 @@ let g:ale_fixers = {
 \}
 
 let g:ale_fix_on_save=1
-"let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save ='always'
 let g:ale_line_on_enter = 'never'
@@ -176,27 +163,21 @@ nnoremap <C-H> <C-W><C-H>
 inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
 
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = ''
-
-
-autocmd VimEnter * wincmd p
-if $HOSTNAME !~ 'attu'
-    autocmd VimEnter * silent call dein#update()
-    autocmd VimEnter * silent call dein#remote_plugins()
+if $HOSTNAME !~# 'attu'
+    augroup dein_update
+      au VimEnter * silent call dein#update()
+      au VimEnter * silent call dein#remote_plugins()
+    augroup END
 endif
 
+
+" COLORS
 " highlight Normal ctermfg=grey ctermbg=black
-
-
-" set Vim-specific sequences for RGB colors
 set termguicolors
-
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
+colorscheme gruvbox
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark= 'soft'
-colorscheme gruvbox
 set background=dark
 "highlight BadWhitespace ctermbg=red guibg=darkred
 "au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
@@ -211,25 +192,24 @@ set background=dark
   "execfile(activate_this, dict(__file__=activate_this))
 "EOF
 
-
+"INIT_TEX
 function! init#_tex() abort
-    au BufNewFile,BufRead *.tex set filetype=tex
+    augroup tex
+      au BufNewFile,BufRead *.tex set filetype=tex
+    augroup END
     let g:tex_flavor = 'latex'
-    "let g:neotex_latexdiff = 1
     let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
     let g:vimtex_view_automatic = 1
     let g:vimtex_compiler_method = 'latexmk'
     let g:vimtex_view_general_viewer = 'evince'
 endfunction
 
-set encoding=utf-8
+"AIRLINE
 set guifont=Inconsolata\ 11
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 let g:airline#extensions#ale#enabled = 1
-
-
 
 if !exists('g:airline_symbols')
 let g:airline_symbols = {}
@@ -252,19 +232,12 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.maxlinenr = ''
 
-"mine
-"let g:airline_left_sep = ''
-"let g:airline_right_sep = ''
-
 
 let g:colorizer_auto_color = 1
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-
-au VimEnter * RainbowParenthesesToggle
-au VimEnter * RainbowParenthesesLoadRound
-au VimEnter * RainbowParenthesesLoadSquare
-au VimEnter * RainbowParenthesesLoadBraces
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+augroup enter
+  au VimEnter * RainbowParentheses
+augroup END
 
 hi Normal guibg=NONE ctermbg=NONE
 hi! link ALEErrorSign GruvboxRed
