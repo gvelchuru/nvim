@@ -111,13 +111,6 @@ set conceallevel=2
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0
-<<<<<<< HEAD
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-
-"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-=======
->>>>>>> e2b47caf4c06517336daae949cdd1fe10c368e73
 
 set autoindent
 set cindent
