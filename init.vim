@@ -6,7 +6,7 @@ noremap \ ,
 ":set lazyredraw
 set wildmode=full
 set history=200
-imap jj <Esc>
+"imap jj <Esc>
 
 noremap <C-]> <C-W><C-]>
 cnoremap sudow w !sudo tee % >/dev/null
@@ -59,6 +59,7 @@ if dein#load_state('~/.cache/dein')
     "//TODO: replace with fzf
     call dein#add('majutsushi/tagbar')
     call dein#add('ludovicchabant/vim-gutentags')
+    call dein#add('skywind3000/gutentags_plus')
 
     "GIT
     call dein#add('tpope/vim-fugitive') "TODO: cmd
