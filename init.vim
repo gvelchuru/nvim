@@ -159,13 +159,11 @@ nnoremap <C-H> <C-W><C-H>
 inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
 
-if $HOSTNAME !~# 'attu'
-    augroup dein_update
-    autocmd!
-      au VimEnter * silent call dein#update()
-      au VimEnter * silent call dein#remote_plugins()
-    augroup END
-endif
+augroup dein_update
+  autocmd!
+  au VimEnter * silent call dein#update()
+  au VimEnter * silent call dein#remote_plugins()
+augroup END
 
 " COLORS
 set termguicolors
