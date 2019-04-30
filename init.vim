@@ -9,7 +9,6 @@ set history=200
 noremap <C-]> <C-W><C-]>
 cnoremap sudow w !sudo tee % >/dev/null
 
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
@@ -22,6 +21,7 @@ set pumblend=30
 let g:UltiSnipsJumpForwardTrigger='<c-b>'
 let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 if dein#load_state('~/.cache/dein')
     call dein#begin('~/.cache/dein')
 
@@ -149,7 +149,7 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save ='always'
 let g:ale_lint_on_enter = 'never'
 let g:ale_set_signs = 0
-let g:ale_set_highlights = 0
+let g:ale_set_highlights = 1
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -168,6 +168,10 @@ augroup END
 " COLORS
 set termguicolors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+augroup highlights
+  autocmd!
+  autocmd ColorScheme * highlight Normal guibg=NONE ctermbg=NONE
+augroup END
 colorscheme gruvbox
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark= 'soft'
@@ -194,7 +198,7 @@ let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 let g:airline#extensions#ale#enabled = 1
 
 if !exists('g:airline_symbols')
-let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 
 " unicode symbols
@@ -214,18 +218,12 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.maxlinenr = ''
 
+"COLORIZER
 let g:colorizer_auto_color = 1
+
+"RAINBOW
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 augroup enter
-    autocmd!
+  autocmd!
   au VimEnter * RainbowParentheses
 augroup END
-
-hi Normal guibg=NONE ctermbg=NONE
-hi! link ALEErrorSign GruvboxRed
-hi! link ALEWarningSign GruvboxYellow
-hi! link GitGutterChange GruvboxGreen
-hi! link GitGutterAdd GruvboxGreen
-hi! link GitGutterDelete GruvboxRed
-"let g:limelight_conceal_ctermfg = 'gray'
-"au VimEnter * Limelight
