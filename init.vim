@@ -3,10 +3,8 @@ scriptencoding utf-8
 let mapleader = ','
 let maplocalleader = ','
 noremap \ ,
-":set lazyredraw
 set wildmode=full
 set history=200
-"imap jj <Esc>
 
 noremap <C-]> <C-W><C-]>
 cnoremap sudow w !sudo tee % >/dev/null
@@ -53,11 +51,10 @@ if dein#load_state('~/.cache/dein')
 
 
     "SEARCH
-    call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
+    "call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
     call dein#add('easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'})
     "call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
-    "//TODO: replace with fzf
-    call dein#add('majutsushi/tagbar')
+    "call dein#add('majutsushi/tagbar')
     call dein#add('ludovicchabant/vim-gutentags')
     call dein#add('skywind3000/gutentags_plus')
 
@@ -88,9 +85,7 @@ if dein#load_state('~/.cache/dein')
     "TESTING/ETC
 "Plug 'tpope/vim-obsession'
 "Plug 'dhruvasagar/vim-prosession'
-"Plug 'artur-shaik/vim-javacomplete2'
 "Plug 'TaDaa/vimade'
-"Plug 'junegunn/limelight.vim'
 "Plug 'junegunn/goyo.vim'
     "call dein#add('autozimu/LanguageClient-neovim', {
     "\ 'rev': 'next',
@@ -130,9 +125,9 @@ set cursorline
 "set foldlevel=99
 "nnoremap <space> za
 
-
 function! init#_brace() abort
   augroup python
+    autocmd!
     autocmd FileType python BracelessEnable +fold +highlight
   augroup END
 endfunction
@@ -152,50 +147,37 @@ let g:ale_fixers = {
 let g:ale_fix_on_save=1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save ='always'
-let g:ale_line_on_enter = 'never'
+let g:ale_lint_on_enter = 'never'
+let g:ale_set_signs = 0
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" nnoremap <S-Tab> <<
-" inoremap <S-Tab> <C-d>
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
 
 if $HOSTNAME !~# 'attu'
     augroup dein_update
+    autocmd!
       au VimEnter * silent call dein#update()
       au VimEnter * silent call dein#remote_plugins()
     augroup END
 endif
 
-
 " COLORS
-" highlight Normal ctermfg=grey ctermbg=black
 set termguicolors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme gruvbox
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark= 'soft'
 set background=dark
-"highlight BadWhitespace ctermbg=red guibg=darkred
-"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
-"python with virtualenv support
-"py3 << EOF
-"import os
-"import sys
-"if 'VIRTUAL_ENV' in os.environ:
-  "project_base_dir = os.environ['VIRTUAL_ENV']
-  "activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  "execfile(activate_this, dict(__file__=activate_this))
-"EOF
 
 "INIT_TEX
 function! init#_tex() abort
     augroup tex
+      autocmd!
       au BufNewFile,BufRead *.tex set filetype=tex
     augroup END
     let g:tex_flavor = 'latex'
@@ -233,10 +215,10 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.maxlinenr = ''
 
-
 let g:colorizer_auto_color = 1
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 augroup enter
+    autocmd!
   au VimEnter * RainbowParentheses
 augroup END
 
