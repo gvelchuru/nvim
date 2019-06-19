@@ -21,7 +21,7 @@ set pumblend=30
 let g:UltiSnipsJumpForwardTrigger='<c-b>'
 let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 
-set runtimepath+=/usr/share/vim/vimfiles/autoload/dein.vim
+set rtp+=/usr/share/vim/vimfiles
 if dein#load_state('~/.cache/dein')
     call dein#begin('~/.cache/dein')
 
