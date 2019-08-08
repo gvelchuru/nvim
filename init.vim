@@ -44,6 +44,7 @@ if dein#load_state('~/.cache/dein')
 
     "TEXT OBJECTS
     call dein#add('tpope/vim-repeat')
+    call dein#add('tpope/vim-unimpaired')
 
     "SNIPPETS
     call dein#add('SirVer/ultisnips')
