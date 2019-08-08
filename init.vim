@@ -8,6 +8,8 @@ set history=200
 
 noremap <C-]> <C-W><C-]>
 cnoremap sudow w !sudo tee % >/dev/null
+"expand active buffer path
+cnoremap <expr> %% getcmdtype() == ':' ? expand ('%:h').'/' : '%%'
 
 
 if !exists('g:ycm_semantic_triggers')
