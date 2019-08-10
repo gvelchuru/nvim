@@ -3,14 +3,129 @@ scriptencoding utf-8
 let mapleader = ','
 let maplocalleader = ','
 noremap \ ,
-set wildmode=full
-set history=200
+set backspace=indent,eol,start
+set linespace=0
+set wildmode=longest,full
+set history=1000
+set spell
+set ignorecase
+set smartcase
+set autoindent
+set cindent
+set number
+set showcmd
+"search
+set showmatch
+set incsearch
+set hlsearch
+
+set splitbelow
+set splitright
+set cursorline
+set scrolljump=5
+set scrolloff=3
+set pastetoggle=<F12>
+
+"backup
+set backup
+set undofile
+set undolevels=1000
+set undoreload=10000
+
+set viewoptions=cursor,folds,slash,unix
 
 noremap <C-]> <C-W><C-]>
 cnoremap sudow w !sudo tee % >/dev/null
 "expand active buffer path
 cnoremap <expr> %% getcmdtype() == ':' ? expand ('%:h').'/' : '%%'
 
+"replace grep with ag
+if executable("ag")
+  set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+
+"persistent undo
+function! InitializeDirectories()
+  let parent = $HOME
+  let prefix = 'vim'
+  let dir_list = {
+              \ 'backup': 'backupdir',
+              \ 'views': 'viewdir',
+              \ 'swap': 'directory' }
+
+  if has('persistent_undo')
+      let dir_list['undo'] = 'undodir'
+  endif
+
+  let common_dir = parent . '/.' . prefix
+
+  for [dirname, settingname] in items(dir_list)
+      let directory = common_dir . dirname . '/'
+      if exists("*mkdir")
+          if !isdirectory(directory)
+              call mkdir(directory)
+          endif
+      endif
+      if !isdirectory(directory)
+          echo "Warning: Unable to create backup directory: " . directory
+          echo "Try: mkdir -p " . directory
+      else
+          let directory = substitute(directory, " ", "\\\\ ", "g")
+          exec "set " . settingname . "=" . directory . '/'
+      endif
+  endfor
+endfunction
+call InitializeDirectories()
+
+"switch to current dir on load
+autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+
+" Instead of reverting the cursor to the last position in the buffer, we
+" set it to the first line when editing a git commit message
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+" Ctags
+set tags=./tags;/,~/.vimtags
+
+" Make tags placed in .git/tags file available in all levels of a repository
+let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+if gitroot != ''
+  let &tags = &tags . ',' . gitroot . '/.git/tags'
+endif
+
+"Leader mapping
+nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
+nnoremap <leader>b :b <C-d>
+nnoremap <leader>e :e **/
+nnoremap <leader>g :grep<space>
+nnoremap <leader>i :Ilist<space>
+nnoremap <leader>j :tjump /
+nnoremap <leader>m :make<cr>
+nnoremap <leader>s :call StripTrailingWhitespace()<cr>
+nnoremap <leader>q :b#<cr>
+"nnoremap <leader>t :TTags<space>*<space>*<space>.<cr> need ttags
+
+"CTRLP settings
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = {
+\ 'dir':  '\.git$\|\.hg$\|\.svn$',
+\ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+
+if executable('ag')
+  let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
+endif
+if exists("g:ctrlp_user_command")
+  unlet g:ctrlp_user_command
+endif
+let g:ctrlp_user_command = {
+      \ 'types': {
+          \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+          \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+      \ },
+      \ 'fallback': s:ctrlp_fallback
+\ }
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
@@ -20,8 +135,9 @@ let g:lion_squeeze_spaces = 1
 set completeopt-=preview
 set pumblend=30
 
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:UltiSnipsJumpExpandTrigger='<C-j>'
+let g:UltiSnipsJumpForwardTrigger='<C-j>'
+let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 
 set rtp+=/usr/share/vim/vimfiles
 if dein#load_state('~/.cache/dein')
@@ -35,9 +151,9 @@ if dein#load_state('~/.cache/dein')
 
     "AESTHETIC
     call dein#add('gvelchuru/gruvbox')
-    call dein#add('mhinz/vim-startify')
-    call dein#add('junegunn/rainbow_parentheses.vim')
-    call dein#add('vim-airline/vim-airline')
+    call dein#add('mhinz/vim-startify') "start screen
+    call dein#add('junegunn/rainbow_parentheses.vim') "colorize matching parens
+    call dein#add('vim-airline/vim-airline') "line prompt on bottom
     call dein#add('lilydjwg/colorizer', {'on_ft': ['html', 'css']}) "color html codes
     call dein#add('ryanoasis/vim-devicons') "nice icons
     call dein#add('tommcdo/vim-lion') "Alignment
@@ -48,22 +164,21 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-unimpaired')
 
+    "SEARCH
+    call dein#add('nelstrom/vim-visual-star-search')
+
     "SNIPPETS
     call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
 
-
     "SEARCH
-    "call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
+    call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
     call dein#add('easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'})
-    "call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
-    "call dein#add('majutsushi/tagbar')
     call dein#add('ludovicchabant/vim-gutentags')
     call dein#add('skywind3000/gutentags_plus')
 
     "GIT
     call dein#add('tpope/vim-fugitive') "TODO: cmd
-    "call dein#add('airblade/vim-gitgutter')
 
     "SURROUND
     call dein#add('scrooloose/nerdcommenter', {'on_map': ['<Leader>cc', '<Leader>c<space>', '<Leader>cs']})
@@ -73,7 +188,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('michaeljsmith/vim-indent-object') "TODO: mappings
 
     "COMPLETION/LINTING
-    call dein#add('w0rp/ale') "TODO: LSP functions
+    call dein#add('dense-analysis/ale') "TODO: LSP functions
     call dein#add('Valloric/YouCompleteMe', {'build': './install.py --clang-completer'})
     call dein#add('rdnetto/YCM-Generator', {'on_cmd': 'YcmGenerateConfig'})
 
@@ -85,19 +200,9 @@ if dein#load_state('~/.cache/dein')
     "C
     call dein#add('justinmk/vim-syntax-extra', {'on_ft': 'c'})
 
-    "TESTING/ETC
-"Plug 'tpope/vim-obsession'
-"Plug 'dhruvasagar/vim-prosession'
-"Plug 'TaDaa/vimade'
-"Plug 'junegunn/goyo.vim'
-    "call dein#add('autozimu/LanguageClient-neovim', {
-    "\ 'rev': 'next',
-    "\ 'build': 'bash install.sh'
-    "\ })
-"    call dein#add('jeaye/color_coded', {
-       " \ 'build' : 'rm -f CMakeCache.txt && cmake . && make && make install',
-       " \ 'on_ft': ['c','cpp', 'objc', 'objcpp'],
-       " \})
+    "RESTORATION
+    call dein#add('vim-scripts/restore_view.vim')
+
     call dein#end()
     call dein#save_state()
 endif
@@ -106,27 +211,17 @@ if dein#check_install()
 endif
 syntax on
 
-set conceallevel=2
+set conceallevel=2 concealcursor=i
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0
-
-set autoindent
-set cindent
-set number
-set showcmd
-set showmatch
-set incsearch
-set hlsearch
-set ruler
-set splitbelow
-set splitright
-set cursorline
+let g:ycm_collect_identifiers_from_tags_files = 1
 
  "Enable folding
-"set foldmethod=indent
-"set foldlevel=99
-"nnoremap <space> za
+set foldenable
+set foldmethod=syntax
+set foldlevel=99
+nnoremap <space> za
 
 function! init#_brace() abort
   augroup python
@@ -135,17 +230,18 @@ function! init#_brace() abort
   augroup END
 endfunction
 
-"ALE
-let g:ale_fixers = {
-\   '*' : ['remove_trailing_lines', 'trim_whitespace'],
-\   'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'isort', 'black'],
-\   'cpp' : ['clang-format', 'uncrustify'],
-\   'c': ['clang-format', 'uncrustify'],
-\   'haskell': ['brittany', 'hfmt'],
-\   'ruby': ['rubocop'],
-\   'tex': ['textlint'],
-\   'java': ['google_java_format', 'uncrustify']
-\}
+"ALE {
+  let g:ale_fixers = {
+  \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
+  \   'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'isort', 'black'],
+  \   'cpp' : ['clang-format', 'uncrustify'],
+  \   'c': ['clang-format', 'uncrustify'],
+  \   'haskell': ['brittany', 'hfmt'],
+  \   'ruby': ['rubocop'],
+  \   'tex': ['textlint'],
+  \   'java': ['google_java_format', 'uncrustify']
+  \}
+" }
 
 let g:ale_fix_on_save=1
 let g:ale_lint_on_text_changed = 'never'
