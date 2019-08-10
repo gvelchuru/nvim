@@ -1,5 +1,4 @@
 "Settings {
-  syntax on
   set encoding=utf-8
   scriptencoding utf-8
   let mapleader = ','
@@ -37,7 +36,7 @@
   set completeopt-=preview
   set pumblend=30
   set conceallevel=2 concealcursor=i
-}
+"}
 
 "Remapping {
   noremap <C-]> <C-W><C-]>
@@ -87,7 +86,7 @@
     endfor
   endfunction
   call InitializeDirectories()
-}
+"}
 
 "switch to current dir on load
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
@@ -104,7 +103,7 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
   if gitroot != ''
     let &tags = &tags . ',' . gitroot . '/.git/tags'
   endif
-}
+"}
 
 "Leader mapping {
   nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
@@ -238,7 +237,7 @@ let g:UltiSnipsJumpBackwardTrigger='<C-k>'
     au VimEnter * silent call dein#remote_plugins()
   augroup END
 "}
-
+syntax on
 
 
 "FOLDING {
@@ -287,7 +286,7 @@ let g:UltiSnipsJumpBackwardTrigger='<C-k>'
   let g:gruvbox_italic=1
   let g:gruvbox_contrast_dark= 'soft'
   set background=dark
-}
+"}
 
 "INIT_TEX {
   function! init#_tex() abort
