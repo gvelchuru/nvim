@@ -50,6 +50,9 @@
 
   inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
   inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
+  
+  nnoremap & :&&<CR> 
+  xnoremap & :&&<CR>
 "}
 
 
