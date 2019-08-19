@@ -59,7 +59,6 @@
       call dein#add('deoplete-plugins/deoplete-zsh', {'on_ft': 'zsh'})
       call dein#add('deoplete-plugins/deoplete-dictionary')
       call dein#add('deoplete-plugins/deoplete-tag')
-      call dein#add('deoplete-plugins/deoplete-make')
 
       "GENERAL
       call dein#add('christoomey/vim-tmux-navigator')
