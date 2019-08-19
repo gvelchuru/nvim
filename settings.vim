@@ -1,0 +1,68 @@
+"Settings {
+  set encoding=utf-8
+  scriptencoding utf-8
+  let mapleader = ','
+  let maplocalleader = ','
+  noremap \ ,
+  set backspace=indent,eol,start
+  set linespace=0
+  set wildmode=longest,full
+  set history=1000
+  set spell
+  set ignorecase
+  set smartcase
+  set autoindent
+  set cindent
+  set number
+  set showcmd
+  set showmatch
+  set incsearch
+  set hlsearch
+
+  set splitbelow
+  set splitright
+  set cursorline
+  set scrolljump=5
+  set scrolloff=3
+  set pastetoggle=<F12>
+
+  set backup
+  set undofile
+  set undolevels=1000
+  set undoreload=10000
+
+  set viewoptions=cursor,folds,slash,unix
+
+  set pumblend=30
+  set conceallevel=2 concealcursor=i
+"}
+
+"Remapping {
+  noremap <C-]> <C-W><C-]>
+  cnoremap sudow w !sudo tee % >/dev/null
+  "expand active buffer path
+  cnoremap <expr> %% getcmdtype() == ':' ? expand ('%:h').'/' : '%%'
+  nnoremap <C-J> <C-W><C-J>
+  nnoremap <C-K> <C-W><C-K>
+  nnoremap <C-L> <C-W><C-L>
+  nnoremap <C-H> <C-W><C-H>
+
+  inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
+  inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
+
+  nnoremap & :&&<CR>
+  xnoremap & :&&<CR>
+"}
+
+"Leader mapping {
+  nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
+  nnoremap <leader>b :b <C-d>
+  nnoremap <leader>e :e **/
+  nnoremap <leader>g :grep<space>
+  nnoremap <leader>i :Ilist<space>
+  nnoremap <leader>j :tjump /
+  nnoremap <leader>m :make<cr>
+  nnoremap <leader>s :call StripTrailingWhitespace()<cr>
+  nnoremap <leader>q :b#<cr>
+  "nnoremap <leader>t :TTags<space>*<space>*<space>.<cr> need ttags
+"}
