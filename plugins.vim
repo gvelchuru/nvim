@@ -1,6 +1,15 @@
 "Deoplete {
   let g:deoplete#enable_at_startup = 1
   let g:tmuxcomplete#trigger = ''
+
+  setlocal dictionary+=/usr/share/dict/words
+  setlocal dictionary+=/usr/share/dict/american-english
+  " If dictionary is already sorted, no need to sort it again.
+  call deoplete#custom#source(
+  \ 'dictionary', 'sorters', [])
+  " Do not complete too short words
+  call deoplete#custom#source(
+  \ 'dictionary', 'min_pattern_length', 4)
 "}
 
 let g:lion_squeeze_spaces = 1
@@ -12,6 +21,12 @@ let g:lion_squeeze_spaces = 1
       autocmd FileType python BracelessEnable +fold +highlight
     augroup END
   endfunction
+"}
+
+"PEAR {
+  let g:pear_tree_smart_openers = 1
+  let g:pear_tree_smart_closers = 1
+  let g:pear_tree_smart_backspace = 1
 "}
 
 "ALE {

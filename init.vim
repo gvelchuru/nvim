@@ -1,6 +1,6 @@
+source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/dein.vim
 source $HOME/.config/nvim/plugins.vim
-source $HOME/.config/nvim/settings.vim
 
 "persistent undo {
   function! InitializeDirectories()
