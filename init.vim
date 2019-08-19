@@ -50,6 +50,9 @@
 
   inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
   inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
+  
+  nnoremap & :&&<CR> 
+  xnoremap & :&&<CR>
 "}
 
 
@@ -172,7 +175,7 @@ let g:UltiSnipsJumpBackwardTrigger='<C-k>'
       call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'call init#_tex()'})
 
       "AESTHETIC
-      call dein#add('gvelchuru/gruvbox')
+      call dein#add('gvelchuru/gruvbox') "my version of the gruvbox colorscheme
       call dein#add('mhinz/vim-startify') "start screen
       call dein#add('junegunn/rainbow_parentheses.vim') "colorize matching parens
       call dein#add('vim-airline/vim-airline') "line prompt on bottom
@@ -187,7 +190,7 @@ let g:UltiSnipsJumpBackwardTrigger='<C-k>'
       call dein#add('tpope/vim-unimpaired')
 
       "SEARCH
-      call dein#add('nelstrom/vim-visual-star-search')
+      call dein#add('nelstrom/vim-visual-star-search') "perform search on the current visual selection
 
       "SNIPPETS
       call dein#add('SirVer/ultisnips')
