@@ -50,15 +50,8 @@
 
       "COMPLETION/LINTING
       call dein#add('dense-analysis/ale') "TODO: LSP functions
-      call dein#add('Shougo/deoplete.nvim')
-      call dein#add('Shougo/neco-syntax')
-      call dein#add('tbodt/deoplete-tabnine', {'build': './install.sh'})
-      call dein#add('deoplete-plugins/deoplete-clang')
-      call dein#add('Shougo/neoinclude.vim')
-      call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
-      call dein#add('deoplete-plugins/deoplete-zsh', {'on_ft': 'zsh'})
-      call dein#add('deoplete-plugins/deoplete-dictionary')
-      call dein#add('deoplete-plugins/deoplete-tag')
+      call dein#add('Valloric/YouCompleteMe', {'build': './install.py --clang-completer'})
+      call dein#add('rdnetto/YCM-Generator', {'on_cmd': 'YcmGenerateConfig'})
 
       "GENERAL
       call dein#add('christoomey/vim-tmux-navigator')

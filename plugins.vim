@@ -1,16 +1,15 @@
-"Deoplete {
-  let g:deoplete#enable_at_startup = 1
-  let g:tmuxcomplete#trigger = ''
-
-  setlocal dictionary+=/usr/share/dict/words
-  setlocal dictionary+=/usr/share/dict/american-english
-  " If dictionary is already sorted, no need to sort it again.
-  call deoplete#custom#source(
-  \ 'dictionary', 'sorters', [])
-  " Do not complete too short words
-  call deoplete#custom#source(
-  \ 'dictionary', 'min_pattern_length', 4)
+ "YCM {
+ if !exists('g:ycm_semantic_triggers')
+   let g:ycm_semantic_triggers = {}
+ endif
+ let g:ycm_confirm_extra_conf = 0
+ let g:ycm_show_diagnostics_ui = 0
+ let g:ycm_collect_identifiers_from_tags_files = 1 "}
 "}
+let g:UltiSnipsExpandTrigger="<c-b>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 
 let g:lion_squeeze_spaces = 1
 
@@ -54,9 +53,10 @@ let g:lion_squeeze_spaces = 1
         au BufNewFile,BufRead *.tex set filetype=tex
       augroup END
       let g:tex_flavor = 'latex'
-      call deoplete#custom#var('omni', 'input_patterns', {
-            \ 'tex': g:vimtext#re#deoplete
-            \})
+      if !exists('g:ycm_semantic_triggers')
+        let g:ycm_semantic_triggers = {}
+      endif
+      au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
       let g:vimtex_view_automatic = 1
       let g:vimtex_compiler_method = 'latexmk'
       let g:vimtex_view_general_viewer = 'evince'

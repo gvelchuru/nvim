@@ -35,6 +35,7 @@
 
   set pumblend=30
   set conceallevel=2 concealcursor=i
+  set completeopt-=preview
 "}
 
 "Remapping {
@@ -46,9 +47,6 @@
   nnoremap <C-K> <C-W><C-K>
   nnoremap <C-L> <C-W><C-L>
   nnoremap <C-H> <C-W><C-H>
-
-  inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
-  inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
 
   nnoremap & :&&<CR>
   xnoremap & :&&<CR>
