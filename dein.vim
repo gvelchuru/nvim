@@ -50,7 +50,7 @@
 
       "COMPLETION/LINTING
       call dein#add('dense-analysis/ale') "TODO: LSP functions
-      call dein#add('Valloric/YouCompleteMe', {'build': './install.py --clang-completer'})
+      call dein#add('ycm-core/YouCompleteMe', {'build': './install.py --clangd-completer'})
       call dein#add('rdnetto/YCM-Generator', {'on_cmd': 'YcmGenerateConfig'})
 
       "GENERAL
