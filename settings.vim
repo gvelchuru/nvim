@@ -8,13 +8,14 @@
   set linespace=0
   set wildmode=longest,full
   set history=1000
-  set spell
+  "set spell
   set ignorecase
   set smartcase
   set autoindent
   set cindent
   set number
   set showcmd
+  set cmdheight=1
   set showmatch
   set incsearch
   set hlsearch
@@ -26,7 +27,10 @@
   set scrolloff=3
   set pastetoggle=<F12>
 
-  set backup
+  set nobackup
+  set nowritebackup
+  set updatetime=300
+
   set undofile
   set undolevels=1000
   set undoreload=10000
@@ -35,7 +39,8 @@
 
   set pumblend=30
   set conceallevel=2 concealcursor=i
-  set completeopt-=preview
+
+  set hidden
 "}
 
 "Remapping {

@@ -1,5 +1,5 @@
 "Dein loading {
-  set rtp+=/usr/share/vim/vimfiles
+  set runtimepath+=/usr/share/vim/vimfiles
   if dein#load_state('~/.cache/dein')
       call dein#begin('~/.cache/dein')
 
@@ -10,15 +10,15 @@
       call dein#add('lervag/vimtex', {'on_ft': 'tex', 'hook_source': 'call plugins#_tex()'})
 
       "AESTHETIC
-      call dein#add('gvelchuru/gruvbox') "my version of the gruvbox colorscheme
+      call dein#add('morhetz/gruvbox') "my version of the gruvbox colorscheme
       call dein#add('mhinz/vim-startify') "start screen
-      call dein#add('junegunn/rainbow_parentheses.vim') "colorize matching parens
       call dein#add('vim-airline/vim-airline') "line prompt on bottom
       call dein#add('lilydjwg/colorizer', {'on_ft': ['html', 'css']}) "color html codes
       call dein#add('ryanoasis/vim-devicons') "nice icons
       call dein#add('tommcdo/vim-lion') "Alignment
       call dein#add('tpope/vim-sleuth') "heuristically set indent
       call dein#add('ncm2/float-preview.nvim') "show preview in floating window
+      call dein#add('junegunn/limelight.vim')
 
       "TEXT OBJECTS
       call dein#add('tpope/vim-repeat')
@@ -34,8 +34,6 @@
       "SEARCH
       call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
       call dein#add('easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'})
-      call dein#add('ludovicchabant/vim-gutentags')
-      call dein#add('skywind3000/gutentags_plus')
 
       "GIT
       call dein#add('tpope/vim-fugitive') "TODO: cmd
@@ -50,8 +48,10 @@
 
       "COMPLETION/LINTING
       call dein#add('dense-analysis/ale') "TODO: LSP functions
-      call dein#add('ycm-core/YouCompleteMe', {'build': './install.py --clangd-completer'})
-      call dein#add('rdnetto/YCM-Generator', {'on_cmd': 'YcmGenerateConfig'})
+      call dein#add('neoclide/coc.nvim' ,{'rev': 'release'})
+      call dein#add('neoclide/coc-sources')
+      call dein#add('neoclide/coc-neco')
+      call dein#add('jsfaint/coc-neoinclude', {'hook_source': 'call coc#util#install()'})
 
       "GENERAL
       call dein#add('christoomey/vim-tmux-navigator')
@@ -76,4 +76,3 @@
     au VimEnter * silent call dein#remote_plugins()
   augroup END
 "}
-syntax on
