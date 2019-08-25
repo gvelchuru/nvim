@@ -1,7 +1,7 @@
 source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/dein.vim
 source $HOME/.config/nvim/plugins.vim
-syntax off
+syntax enable
 
 "persistent undo {
   function! InitializeDirectories()
@@ -36,14 +36,6 @@ syntax off
   endfunction
   call InitializeDirectories()
 "}
-
-"switch to current dir on load
-  autocmd BufEnter * if bufname("") !~ '^\[A-Za-z0-9\]*://' && bufname("") !~ "list:///" | lcd %:p:h | endif
-  autocmd BufEnter * Limelight
-
-" Instead of reverting the cursor to the last position in the buffer, we
-" set it to the first line when editing a git commit message
-  au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 "CTRLP and grep settings {
   "replace grep with ag
@@ -85,3 +77,15 @@ syntax off
   let g:gruvbox_italic=1
   set background=dark
 "}
+
+augroup loading
+  autocmd!
+
+  autocmd BufEnter * syntax off
+  "switch to current dir on load
+  autocmd BufEnter * if bufname("") !~ '^\[A-Za-z0-9\]*://' && bufname("") !~ "list:///" | lcd %:p:h | endif
+
+  " Instead of reverting the cursor to the last position in the buffer, we
+  " set it to the first line when editing a git commit message
+  au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+augroup END

@@ -5,10 +5,8 @@
   let maplocalleader = ','
   noremap \ ,
   set backspace=indent,eol,start
-  set linespace=0
   set wildmode=longest,full
   set history=1000
-  "set spell
   set ignorecase
   set smartcase
   set autoindent
@@ -22,7 +20,6 @@
 
   set splitbelow
   set splitright
-  set cursorline
   set scrolljump=5
   set scrolloff=3
   set pastetoggle=<F12>
@@ -37,7 +34,9 @@
 
   set viewoptions=cursor,folds,slash,unix
 
-  set pumblend=30
+  if has('pumblend')
+    set pumblend=30
+  endif
   set conceallevel=2 concealcursor=i
 
   set hidden

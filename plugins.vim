@@ -49,12 +49,6 @@ let g:lion_squeeze_spaces = 1
   endfunction
 "}
 
-"PEAR {
-  let g:pear_tree_smart_openers = 1
-  let g:pear_tree_smart_closers = 1
-  let g:pear_tree_smart_backspace = 1
-"}
-
 "ALE {
   let g:ale_fixers = {
   \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
