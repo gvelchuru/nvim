@@ -56,6 +56,11 @@ endif
       call dein#add('neoclide/coc-neco')
       call dein#add('jsfaint/coc-neoinclude')
 
+      "TAGS
+      call dein#add('ludovicchabant/vim-gutentags')
+      call dein#add('skywind3000/gutentags_plus')
+
+
       "GENERAL
       call dein#add('christoomey/vim-tmux-navigator')
       call dein#add('wakatime/vim-wakatime')
