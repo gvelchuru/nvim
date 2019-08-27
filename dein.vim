@@ -1,5 +1,9 @@
 "Dein loading {
-  set runtimepath+=/usr/share/vim/vimfiles
+  if !empty(glob('/usr/share/vim/vimfiles/dein.vim'))
+	  set runtimepath+=/usr/share/vim/vimfiles
+  else
+	set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+endif
   if dein#load_state('~/.cache/dein')
       call dein#begin('~/.cache/dein')
 
