@@ -75,7 +75,7 @@ syntax enable
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   colorscheme gruvbox
   let g:gruvbox_italic=1
-  let g:gruvbox_light='soft'
+  let g:gruvbox_contrast_light='soft'
   set background=light
 "}
 
