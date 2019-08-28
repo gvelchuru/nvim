@@ -60,12 +60,8 @@ let g:lion_squeeze_spaces = 1
   \   'tex': ['textlint'],
   \   'java': ['google_java_format', 'uncrustify']
   \}
-  let g:ale_fix_on_save=1
-  let g:ale_lint_on_text_changed = 'auto'
-  let g:ale_lint_on_save ='always'
-  let g:ale_lint_on_enter = 'always'
   let g:ale_set_signs = 1
-  let g:ale_set_highlights = 1
+  let g:ale_set_highlights = 0
 " }
 "INIT_TEX {
   function! plugins#_tex() abort
