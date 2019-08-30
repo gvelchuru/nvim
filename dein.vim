@@ -54,6 +54,7 @@ endif
       call dein#add('neoclide/coc.nvim' ,{'rev': 'release'})
       call dein#add('neoclide/coc-sources')
       call dein#add('neoclide/coc-neco')
+      call dein#add('Shougo/neoinclude.vim')
       call dein#add('jsfaint/coc-neoinclude')
 
       "TAGS
