@@ -37,30 +37,13 @@ syntax enable
   call InitializeDirectories()
 "}
 
-"CTRLP and grep settings {
-  "replace grep with ag
-  if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
+"fzf and grep settings {
+  "replace grep with rg
+  if executable('rg')
+    set grepprg=rg\ --vimgrep
     set grepformat=%f:%l:%c:%m,%f:%l:%m
   endif
-  let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$'
-  \}
-  if executable('ag')
-    let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
-  endif
-  if exists('g:ctrlp_user_command')
-    unlet g:ctrlp_user_command
-  endif
-  let g:ctrlp_user_command = {
-        \ 'types': {
-            \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-        \ },
-        \ 'fallback': s:ctrlp_fallback
-  \ }
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 "}
 
 "FOLDING {

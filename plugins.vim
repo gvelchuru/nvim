@@ -1,6 +1,6 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-ccls', 'coc-yank', 'coc-word']
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-ccls', 'coc-yank', 'coc-word', 'coc-json']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 augroup closeCompletion
@@ -63,7 +63,9 @@ let g:lion_squeeze_spaces = 1
   let g:ale_set_signs = 1
   let g:ale_set_highlights = 0
   let g:ale_lint_on_enter = 0
-  let g:ale_lint_on_text_changed = 0 
+  let g:ale_lint_on_save = 0
+  let g:ale_lint_on_text_changed = 0
+  let g:ale_lint_on_insert_leave = 0
 " }
 "INIT_TEX {
   function! plugins#_tex() abort

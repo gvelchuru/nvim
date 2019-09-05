@@ -36,7 +36,8 @@ endif
       call dein#add('honza/vim-snippets')
 
       "SEARCH
-      call dein#add('ctrlpvim/ctrlp.vim', {'on_map': '<C-P>'})
+      call dein#add('junegunn/fzf', {'build': './install --all'})
+      call dein#add('junegunn/fzf.vim')
       call dein#add('easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'})
 
       "GIT
@@ -50,7 +51,7 @@ endif
       call dein#add('michaeljsmith/vim-indent-object') "TODO: mappings
 
       "COMPLETION/LINTING
-      call dein#add('dense-analysis/ale') "TODO: LSP functions
+      call dein#add('dense-analysis/ale') 
       call dein#add('neoclide/coc.nvim' ,{'rev': 'release'})
       call dein#add('neoclide/coc-sources')
       call dein#add('neoclide/coc-neco')

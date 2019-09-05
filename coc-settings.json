@@ -1,7 +1,7 @@
 {
     "git.enableGutters": false,
     "diagnostic.displayByAle": true,
-    "diagnostic.enable": false,
+    "diagnostic.enable": true,
     "languageserver": {
         "ccls": {
             "command": "ccls",
