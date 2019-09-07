@@ -1,5 +1,5 @@
 source $HOME/.config/nvim/settings.vim
-source $HOME/.config/nvim/dein.vim
+source $HOME/.config/nvim/vim-plug.vim
 source $HOME/.config/nvim/plugins.vim
 syntax enable
 
