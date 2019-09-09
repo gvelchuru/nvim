@@ -16,26 +16,25 @@
       Plug 'mhinz/vim-startify' "start screen
       Plug 'vim-airline/vim-airline' "line prompt on bottom
       Plug 'ryanoasis/vim-devicons' "nice icons
-      Plug 'tommcdo/vim-lion' "Alignment
+      Plug 'tommcdo/vim-lion', {'on_map': ['gl', 'gL']} "Alignment
       Plug 'tpope/vim-sleuth' "heuristically set indent
       if has('pumblend')
         Plug 'ncm2/float-preview.nvim' "show preview in floating window
       endif
 
       "TEXT OBJECTS
-      Plug 'tpope/vim-repeat'
+      Plug 'tpope/vim-repeat', {'on_map': '.'}
       Plug 'tpope/vim-unimpaired'
 
       "SEARCH
-      Plug 'nelstrom/vim-visual-star-search' "perform search on the current visual selection
+      Plug 'nelstrom/vim-visual-star-search', {'on_map': ['*', '#']} "perform search on the current visual selection
 
       "SNIPPETS
       Plug 'SirVer/ultisnips'
       Plug 'honza/vim-snippets'
 
       "SEARCH
-      Plug 'junegunn/fzf', {'do': './install --all'}
-      Plug 'junegunn/fzf.vim'
+      Plug 'junegunn/fzf', {'do': './install --all'} | Plug 'junegunn/fzf.vim', {'on': ['FZF']}
       Plug 'easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'}
 
       "GIT
@@ -44,9 +43,9 @@
 
       "SURROUND
       Plug 'scrooloose/nerdcommenter', {'on_map': ['<Leader>cc', '<Leader>c<space>', '<Leader>cs']}
-      Plug 'tpope/vim-surround' "TODO: mappings
+      Plug 'tpope/vim-surround', {'on_map': ['ds', 'cs', 'ys']} 
       Plug 'wellle/targets.vim'
-      Plug 'michaeljsmith/vim-indent-object' "TODO: mappings
+      Plug 'michaeljsmith/vim-indent-object', {'on_map': ['ai', 'ii', 'aI', 'iI']}
 
       "COMPLETION/LINTING
       Plug 'dense-analysis/ale' 
@@ -60,9 +59,8 @@
       Plug 'ludovicchabant/vim-gutentags'
       Plug 'skywind3000/gutentags_plus'
 
-
       "GENERAL
-      Plug 'christoomey/vim-tmux-navigator'
+      Plug 'christoomey/vim-tmux-navigator', {'on_map': ['<C-h>', '<C-j', '<C-k>', '<C-l>', '<C-\>']}
       Plug 'wakatime/vim-wakatime'
       Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'}
 
