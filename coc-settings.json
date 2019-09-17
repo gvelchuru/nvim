@@ -23,6 +23,10 @@
                     "directory": "/tmp/ccls"
                 }
             }
+        },
+        "lua": {
+          "command": "lua-lsp",
+          "filetypes": ["lua"]
         }
     },
     "coc.preferences.formatOnType": false
