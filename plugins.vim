@@ -63,12 +63,15 @@ let g:lion_squeeze_spaces = 1
   \   'tex': ['textlint'],
   \   'java': ['google_java_format', 'uncrustify']
   \}
+  let g:ale_linters = {
+  \   'cpp' : []
+  \}
   let g:ale_set_signs = 1
   let g:ale_set_highlights = 0
-  let g:ale_lint_on_enter = 0
-  let g:ale_lint_on_save = 0
-  let g:ale_lint_on_text_changed = 0
-  let g:ale_lint_on_insert_leave = 0
+  let g:ale_lint_on_enter = 1
+  let g:ale_lint_on_save = 1
+  let g:ale_lint_on_text_changed = 1
+  let g:ale_lint_on_insert_leave = 1
 " }
 "INIT_TEX {
   function! plugins#_tex() abort
