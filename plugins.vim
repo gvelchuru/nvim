@@ -63,7 +63,7 @@ let g:lion_squeeze_spaces = 1
   \   'tex': ['textlint'],
   \   'java': ['google_java_format', 'uncrustify']
   \}
-  if !empty(glob("/apollo/env/"))
+  if !empty(glob("/apollo"))
     let g:ale_linters = {
     \   'cpp' : ['cppcheck', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'flawfinder', 'gcc']
     \}
