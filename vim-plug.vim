@@ -9,7 +9,7 @@
       Plug 'tweekmonster/braceless.vim', {'for': 'py', 'do': ':call plugins#_brace()'}
 
       "TEX
-      Plug 'lervag/vimtex', {'for': 'tex', 'do': 'call plugins#_tex()'}
+      Plug 'lervag/vimtex', {'for': 'tex', 'do': ':call plugins#_tex()'}
 
       "AESTHETIC
       Plug 'gvelchuru/gruvbox' "my version of the gruvbox colorscheme
