@@ -54,6 +54,7 @@
       Plug 'neoclide/coc-neco'
       Plug 'Shougo/neoinclude.vim'
       Plug 'jsfaint/coc-neoinclude'
+      Plug 'zxqfl/tabnine-vim'
 
       "TAGS
       Plug 'ludovicchabant/vim-gutentags'
