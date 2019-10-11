@@ -13,7 +13,6 @@
 
       "AESTHETIC
       Plug 'gvelchuru/gruvbox' "my version of the gruvbox colorscheme
-      Plug 'mhinz/vim-startify' "start screen
       Plug 'vim-airline/vim-airline' "line prompt on bottom
       Plug 'ryanoasis/vim-devicons' "nice icons
       Plug 'tommcdo/vim-lion', {'on_map': ['gl', 'gL']} "Alignment
