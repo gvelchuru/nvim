@@ -9,7 +9,7 @@
       Plug 'tweekmonster/braceless.vim', {'for': 'py', 'do': ':call plugins#_brace()'}
 
       "TEX
-      Plug 'lervag/vimtex', {'for': 'tex', 'do': 'call plugins#_tex()'}
+      Plug 'lervag/vimtex', {'for': 'tex', 'do': ':call plugins#_tex()'}
 
       "AESTHETIC
       Plug 'gvelchuru/gruvbox' "my version of the gruvbox colorscheme
@@ -53,6 +53,7 @@
       Plug 'neoclide/coc-neco'
       Plug 'Shougo/neoinclude.vim'
       Plug 'jsfaint/coc-neoinclude'
+      Plug 'zxqfl/tabnine-vim'
 
       "TAGS
       Plug 'ludovicchabant/vim-gutentags'

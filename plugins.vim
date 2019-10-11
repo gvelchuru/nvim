@@ -1,6 +1,6 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-ccls', 'coc-yank', 'coc-word', 'coc-json']
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-ccls', 'coc-yank', 'coc-word', 'coc-json', 'coc-tabnine', 'coc-python']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 augroup closeCompletion
@@ -63,7 +63,7 @@ let g:lion_squeeze_spaces = 1
   \   'tex': ['textlint'],
   \   'java': ['google_java_format', 'uncrustify']
   \}
-  if !empty(glob("/apollo/env/"))
+  if !empty(glob("/apollo"))
     let g:ale_linters = {
     \   'cpp' : ['cppcheck', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'flawfinder', 'gcc']
     \}
