@@ -10,7 +10,6 @@
   set ignorecase
   set smartcase
   set autoindent
-  set cindent
   set number
   set showcmd
   set cmdheight=1

@@ -66,8 +66,9 @@ augroup loading
   autocmd!
 
   autocmd BufEnter * syntax off
+
   "switch to current dir on load
-  autocmd BufEnter * if bufname("") !~ '^\[A-Za-z0-9\]*://' && bufname("") !~ "list:///" | lcd %:p:h | endif
+  "autocmd BufEnter * if bufname("") !~ '^\[A-Za-z0-9\]*://' && bufname("") !~ "list:///" | lcd %:p:h | endif
 
   " Instead of reverting the cursor to the last position in the buffer, we
   " set it to the first line when editing a git commit message
