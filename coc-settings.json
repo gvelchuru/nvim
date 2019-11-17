@@ -1,5 +1,4 @@
 {
-    "git.enableGutters": false,
     "diagnostic.displayByAle": true,
     "diagnostic.enable": true,
     "languageserver": {
@@ -23,7 +22,11 @@
                     "directory": "/tmp/ccls"
                 }
             }
-        }
-    },
-    "coc.preferences.formatOnType": false
+        },
+      "lua": {
+        "command": "lua-lsp",
+        "filetypes": ["lua"]
+      }
+  },
+  "coc.preferences.formatOnType": false
 }
