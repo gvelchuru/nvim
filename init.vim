@@ -47,9 +47,10 @@ syntax enable
 "}
 
 "FOLDING {
+  set foldmethod=syntax
+  set foldnestmax=3
+  set foldlevel=2
   set foldenable
-  set foldmethod=indent
-  set foldlevel=99
   nnoremap <space> za
 "}
 
@@ -66,6 +67,7 @@ augroup loading
   autocmd!
 
   autocmd BufEnter * syntax off
+  autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zM
 
   "switch to current dir on load
   "autocmd BufEnter * if bufname("") !~ '^\[A-Za-z0-9\]*://' && bufname("") !~ "list:///" | lcd %:p:h | endif

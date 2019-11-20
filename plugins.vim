@@ -1,6 +1,6 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-ccls', 'coc-yank', 'coc-word', 'coc-json', 'coc-tabnine', 'coc-python']
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-ccls', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 augroup closeCompletion
@@ -125,6 +125,11 @@ let g:lion_squeeze_spaces = 1
   let g:airline_symbols.branch = ''
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.maxlinenr = ''
+
+  let g:airline_section_b = ''
+  let g:airline_section_x = ''
+  let g:airline_section_y = ''
+  let g:airline_section_z = ''
 "}
 
 "COLORIZER
