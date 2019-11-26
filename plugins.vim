@@ -1,6 +1,6 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-ccls', 'coc-yank', 'coc-json', 'coc-tabnine', 'coc-python']
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-ccls', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 augroup closeCompletion
@@ -19,6 +19,9 @@ nmap <silent> gr <Plug>(coc-references)
 
 "NERD
 let g:NERDCompactSexyComs = 1
+
+"remap fzf
+nnoremap <C-P> :FZF <cr>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -55,7 +58,7 @@ let g:lion_squeeze_spaces = 1
 "ALE {
   let g:ale_fixers = {
   \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
-  \   'python' : ['add_blank_lines_for_python_control_statements', 'autopep8', 'yapf', 'isort', 'black'],
+  \   'python' : ['isort', 'black'],
   \   'cpp' : ['clang-format', 'uncrustify'],
   \   'c': ['clang-format', 'uncrustify'],
   \   'haskell': ['brittany', 'hfmt'],
@@ -67,6 +70,12 @@ let g:lion_squeeze_spaces = 1
     let g:ale_linters = {
     \   'cpp' : ['cppcheck', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'flawfinder', 'gcc']
     \}
+    let g:ale_fixers = {
+    \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
+    \   'python' : ['isort', 'black'],
+    \   'cpp' : ['remove_trailing_lines', 'trim_whitespace'],
+    \   'c': ['remove_trailing_lines', 'trim_whitespace'],
+    \}
   endif
   let g:ale_set_signs = 1
   let g:ale_set_highlights = 0
@@ -74,6 +83,7 @@ let g:lion_squeeze_spaces = 1
   let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 1
   let g:ale_lint_on_insert_leave = 1
+  let g:ale_fix_on_save = 1
 " }
 "INIT_TEX {
   function! plugins#_tex() abort
@@ -115,6 +125,11 @@ let g:lion_squeeze_spaces = 1
   let g:airline_symbols.branch = ''
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.maxlinenr = ''
+
+  let g:airline_section_b = ''
+  let g:airline_section_x = ''
+  let g:airline_section_y = ''
+  let g:airline_section_z = ''
 "}
 
 "COLORIZER
