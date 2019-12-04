@@ -10,7 +10,7 @@
   set ignorecase
   set smartcase
   set autoindent
-  set number
+  set nonumber
   set showcmd
   set cmdheight=1
   set showmatch
@@ -39,6 +39,8 @@
   set conceallevel=2 concealcursor=i
 
   set hidden
+  set lazyredraw
+  set ttyfast
 "}
 
 "Remapping {
