@@ -61,6 +61,7 @@ syntax enable
   let g:gruvbox_italic=1
   let g:gruvbox_contrast_light='soft'
   set background=light
+  hi NonText cterm=NONE ctermfg=NONE
 "}
 
 augroup loading
