@@ -133,6 +133,3 @@ let g:lion_squeeze_spaces = 1
   let g:airline_section_z = ''
   let airline#extensions#wordcount#enabled = 0
 "}
-
-"COLORIZER
-let g:colorizer_auto_color = 1
