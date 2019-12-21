@@ -1,6 +1,6 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-ccls', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python']
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-ccls', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-tsserver']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 augroup closeCompletion
@@ -64,7 +64,8 @@ let g:lion_squeeze_spaces = 1
   \   'haskell': ['brittany', 'hfmt'],
   \   'ruby': ['rubocop'],
   \   'tex': ['textlint'],
-  \   'java': ['google_java_format', 'uncrustify']
+  \   'java': ['google_java_format', 'uncrustify'],
+  \   'typescript': ['tslint', 'prettier']
   \}
   if !empty(glob("/apollo"))
     let g:ale_linters = {
@@ -129,10 +130,7 @@ let g:lion_squeeze_spaces = 1
   let g:airline_section_b = ''
   let g:airline_section_x = ''
   let g:airline_section_y = ''
-  let g:airline_section_z = ''
 "}
 
 "COLORIZER
 let g:colorizer_auto_color = 1
-
-let g:limelight_priority = -1
