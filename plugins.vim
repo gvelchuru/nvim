@@ -72,7 +72,10 @@ let g:lion_squeeze_spaces = 1
     \   'cpp' : ['cppcheck', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'flawfinder', 'gcc']
     \}
     let g:ale_fixers = {
+    \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
     \   'python' : ['isort', 'black'],
+    \   'cpp' : ['remove_trailing_lines', 'trim_whitespace'],
+    \   'c': ['remove_trailing_lines', 'trim_whitespace'],
     \}
   endif
   let g:ale_set_signs = 1
