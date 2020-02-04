@@ -28,6 +28,6 @@
         "filetypes": ["lua"]
       }
   },
-  "coc.preferences.formatOnType": false
+  "coc.preferences.formatOnType": false,
   "python.jediEnabled":false
 }
