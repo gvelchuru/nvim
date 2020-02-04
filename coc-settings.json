@@ -29,4 +29,5 @@
       }
   },
   "coc.preferences.formatOnType": false
+  "python.jediEnabled":false
 }
