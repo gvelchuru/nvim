@@ -33,6 +33,10 @@
 
   set viewoptions=cursor,folds,slash,unix
 
+  set tabstop=4
+  set softtabstop=0 noexpandtab
+  set shiftwidth=4
+
   if has('pumblend')
     set pumblend=30
   endif
