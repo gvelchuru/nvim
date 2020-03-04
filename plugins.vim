@@ -86,6 +86,10 @@ let g:lion_squeeze_spaces = 1
   let g:ale_lint_on_insert_leave = 1
   let g:ale_fix_on_save = 0
 " }
+"CCLS {
+  au CursorHold * sil call CocActionAsync('highlight')
+  au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
+"}
 "INIT_TEX {
   function! plugins#_tex() abort
       augroup tex
@@ -133,3 +137,4 @@ let g:lion_squeeze_spaces = 1
   let g:airline_section_z = ''
   let airline#extensions#wordcount#enabled = 0
 "}
+

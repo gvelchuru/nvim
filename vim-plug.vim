@@ -52,6 +52,8 @@
       Plug 'neoclide/coc-neco'
       Plug 'Shougo/neoinclude.vim'
       Plug 'jsfaint/coc-neoinclude'
+      Plug 'jackguo380/vim-lsp-cxx-highlight'
+      Plug 'numirias/semshi'
 
       "TAGS
       Plug 'ludovicchabant/vim-gutentags'
