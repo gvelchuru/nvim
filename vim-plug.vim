@@ -13,6 +13,7 @@
 
       "AESTHETIC
       Plug 'gvelchuru/gruvbox' "my version of the gruvbox colorscheme
+      "Plug 'altercation/vim-colors-solarized'
       Plug 'vim-airline/vim-airline' "line prompt on bottom
       Plug 'tommcdo/vim-lion', {'on_map': ['gl', 'gL']} "Alignment
       Plug 'tpope/vim-sleuth' "heuristically set indent

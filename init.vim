@@ -57,11 +57,17 @@ syntax enable
 " COLORS {
   set termguicolors
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  colorscheme gruvbox
   let g:gruvbox_italic=1
   let g:gruvbox_contrast_light='soft'
+  "let g:solarized_termcolors=256
+  "let g:solarized_bold=1
+  "let g:solarized_underline=1
+  "let g:solarized_italic=1
   set background=light
+  "colorscheme solarized
+  colorscheme gruvbox
   "hi NonText cterm=NONE ctermfg=NONE
+  hi LspCxxHlGroupMemberVariable ctermfg=Grey guifg=Grey
 "}
 
 augroup loading
