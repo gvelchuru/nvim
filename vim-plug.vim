@@ -1,7 +1,7 @@
-"vim-plug loading {
+  "vim-plug loading
   if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
     silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-    	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   endif
   call plug#begin('~/.local/share/nvim/plugged')
 
@@ -12,9 +12,10 @@
       Plug 'lervag/vimtex', {'for': 'tex', 'do': ':call plugins#_tex()'}
 
       "AESTHETIC
-      Plug 'gvelchuru/gruvbox' "my version of the gruvbox colorscheme
-      "Plug 'altercation/vim-colors-solarized'
+      "Plug 'gvelchuru/gruvbox' "my version of the gruvbox colorscheme
+      Plug 'altercation/vim-colors-solarized'
       Plug 'vim-airline/vim-airline' "line prompt on bottom
+      Plug 'vim-airline/vim-airline-themes'
       Plug 'tommcdo/vim-lion', {'on_map': ['gl', 'gL']} "Alignment
       Plug 'tpope/vim-sleuth' "heuristically set indent
       if has('pumblend')

@@ -105,9 +105,8 @@ let g:lion_squeeze_spaces = 1
 
 "AIRLINE {
   set guifont=Inconsolata\ 11
-  let g:airline_theme='gruvbox'
-  "let g:airline_theme = 'solarized'
-  let g:airline_solarized_bg = 'light'
+  let g:airline_theme='solarized'
+  let g:airline_solarized_bg='light'
   let g:airline_powerline_fonts = 1
   let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
   let g:airline#extensions#ale#enabled = 1
