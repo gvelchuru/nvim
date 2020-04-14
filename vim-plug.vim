@@ -12,10 +12,8 @@
       Plug 'lervag/vimtex', {'for': 'tex', 'do': ':call plugins#_tex()'}
 
       "AESTHETIC
-      "Plug 'gvelchuru/gruvbox' "my version of the gruvbox colorscheme
       Plug 'altercation/vim-colors-solarized'
-      Plug 'vim-airline/vim-airline' "line prompt on bottom
-      Plug 'vim-airline/vim-airline-themes'
+      Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
       Plug 'tommcdo/vim-lion', {'on_map': ['gl', 'gL']} "Alignment
       Plug 'tpope/vim-sleuth' "heuristically set indent
       if has('pumblend')
@@ -49,20 +47,20 @@
 
       "COMPLETION/LINTING
       Plug 'dense-analysis/ale'
-      Plug 'neoclide/coc.nvim', {'branch': 'release'}
-      Plug 'neoclide/coc-sources'
-      Plug 'neoclide/coc-neco'
       Plug 'Shougo/neoinclude.vim'
-      Plug 'jsfaint/coc-neoinclude'
-      Plug 'jackguo380/vim-lsp-cxx-highlight'
+      Plug 'neoclide/coc.nvim', {'branch': 'release'} | Plug 'neoclide/coc-sources' | Plug 'neoclide/coc-neco' | Plug 'jsfaint/coc-neoinclude'
       Plug 'numirias/semshi'
 
       "TAGS
-      Plug 'ludovicchabant/vim-gutentags'
-      Plug 'skywind3000/gutentags_plus'
+      Plug 'ludovicchabant/vim-gutentags', {'for': ['c', 'c++']}
+      Plug 'skywind3000/gutentags_plus', {'for': ['c', 'c++']}
+
+      "SPLITTING
+      Plug 'christoomey/vim-tmux-navigator', {'on_map': ['<C-h>', '<C-j', '<C-k>', '<C-l>', '<C-\>']}
+      Plug 'camspiers/animate.vim'
+      Plug 'camspiers/lens.vim'
 
       "GENERAL
-      Plug 'christoomey/vim-tmux-navigator', {'on_map': ['<C-h>', '<C-j', '<C-k>', '<C-l>', '<C-\>']}
       Plug 'wakatime/vim-wakatime'
       Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'}
 

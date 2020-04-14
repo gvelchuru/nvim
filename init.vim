@@ -62,8 +62,6 @@ syntax enable
   let g:solarized_italic=1
   set background=light
   colorscheme solarized
-  "hi NonText cterm=NONE ctermfg=NONE
-  hi LspCxxHlGroupMemberVariable ctermfg=Grey guifg=Grey
   if (has("termguicolors"))
     set termguicolors
   endif
@@ -71,12 +69,7 @@ syntax enable
 
 augroup loading
   autocmd!
-
-  autocmd BufEnter * syntax off
   autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zM
-
-  "switch to current dir on load
-  "autocmd BufEnter * if bufname("") !~ '^\[A-Za-z0-9\]*://' && bufname("") !~ "list:///" | lcd %:p:h | endif
 
   " Instead of reverting the cursor to the last position in the buffer, we
   " set it to the first line when editing a git commit message

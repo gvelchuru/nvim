@@ -1,15 +1,15 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 augroup closeCompletion
   autocmd!
   autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
 augroup END
-let g:UltiSnipsExpandTrigger='<c-b>'
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger='<c-k>'
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -104,7 +104,7 @@ let g:lion_squeeze_spaces = 1
 "}
 
 "AIRLINE {
-  set guifont=Inconsolata\ 11
+  "set guifont=Inconsolata\ 11
   let g:airline_theme='solarized'
   let g:airline_solarized_bg='light'
   let g:airline_powerline_fonts = 1
@@ -123,8 +123,7 @@ let g:lion_squeeze_spaces = 1
   let g:airline_symbols.notexists = '∄'
   let g:airline_symbols.whitespace = 'Ξ'
 
-  " powerline symbols
-  let g:airline_left_sep = ''
+  " powerline symbols let g:airline_left_sep = ''
   let g:airline_left_alt_sep = ''
   let g:airline_right_sep = ''
   let g:airline_right_alt_sep = ''
