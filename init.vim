@@ -56,15 +56,17 @@ syntax enable
 
 " COLORS {
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let g:solarized_termcolors=16
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+  "let g:solarized_termcolors=16
   let g:solarized_bold=1
   let g:solarized_underline=1
   let g:solarized_italic=1
   set background=light
+  "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   colorscheme solarized
-  if (has("termguicolors"))
-    set termguicolors
-  endif
 "}
 
 augroup loading

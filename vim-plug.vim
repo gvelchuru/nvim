@@ -13,6 +13,7 @@
 
       "AESTHETIC
       Plug 'altercation/vim-colors-solarized'
+      "Plug 'lifepillar/vim-solarized8'
       Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
       Plug 'tommcdo/vim-lion', {'on_map': ['gl', 'gL']} "Alignment
       Plug 'tpope/vim-sleuth' "heuristically set indent
@@ -57,8 +58,7 @@
 
       "SPLITTING
       Plug 'christoomey/vim-tmux-navigator', {'on_map': ['<C-h>', '<C-j', '<C-k>', '<C-l>', '<C-\>']}
-      Plug 'camspiers/animate.vim'
-      Plug 'camspiers/lens.vim'
+      Plug 'camspiers/animate.vim' | Plug 'camspiers/lens.vim'
 
       "GENERAL
       Plug 'wakatime/vim-wakatime'
