@@ -69,7 +69,7 @@ let g:lion_squeeze_spaces = 1
   \}
   if !empty(glob("/apollo"))
     let g:ale_linters = {
-    \   'cpp' : ['cppcheck', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'flawfinder', 'gcc']
+    \   'cpp' : ['ccls', 'clang','cpplint', 'uncrustify', 'cppcheck', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'flawfinder', 'gcc']
     \}
     let g:ale_fixers = {
     \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
@@ -131,6 +131,7 @@ let g:lion_squeeze_spaces = 1
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.maxlinenr = ''
 
+  let g:airline_section_a = ''
   let g:airline_section_b = ''
   let g:airline_section_x = ''
   let g:airline_section_y = ''
