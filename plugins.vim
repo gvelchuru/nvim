@@ -130,12 +130,5 @@ let g:lion_squeeze_spaces = 1
   let g:airline_symbols.branch = ''
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.maxlinenr = ''
-
-  let g:airline_section_a = ''
-  let g:airline_section_b = ''
-  let g:airline_section_x = ''
-  let g:airline_section_y = ''
-  let g:airline_section_z = ''
-  let airline#extensions#wordcount#enabled = 0
 "}
 
