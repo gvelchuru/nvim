@@ -57,18 +57,21 @@ let g:lion_squeeze_spaces = 1
 "}
 
 "ALE {
-  let g:ale_fixers = {
-  \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
-  \   'python' : ['isort', 'black'],
-  \   'cpp' : ['clang-format', 'uncrustify'],
-  \   'c': ['clang-format', 'uncrustify'],
-  \   'cs': ['ale-cs-csc', 'uncrustify'],
-  \   'haskell': ['brittany', 'hfmt'],
-  \   'ruby': ['rubocop'],
-  \   'tex': ['textlint'],
-  \   'java': ['google_java_format', 'uncrustify'],
-  \   'typescript': ['tslint', 'prettier']
-  \}
+  if !(has('win32') || has('win64'))
+  {
+    let g:ale_fixers = {
+    \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
+    \   'python' : ['isort', 'black'],
+    \   'cpp' : ['clang-format', 'uncrustify'],
+    \   'c': ['clang-format', 'uncrustify'],
+    \   'cs': ['ale-cs-csc', 'uncrustify'],
+    \   'haskell': ['brittany', 'hfmt'],
+    \   'ruby': ['rubocop'],
+    \   'tex': ['textlint'],
+    \   'java': ['google_java_format', 'uncrustify'],
+    \   'typescript': ['tslint', 'prettier']
+    \}
+  }
   let g:ale_set_signs = 1
   let g:ale_set_highlights = 0
   let g:ale_lint_on_enter = 1
