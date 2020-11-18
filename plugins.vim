@@ -19,6 +19,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 "NERD
 let g:NERDCompactSexyComs = 1
+map <C-n> :NERDTreeToggle<CR>
 
 "remap fzf
 nnoremap <C-P> :FZF <cr>

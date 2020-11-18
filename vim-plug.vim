@@ -21,7 +21,6 @@
 
       "AESTHETIC
       Plug 'altercation/vim-colors-solarized'
-      "Plug 'lifepillar/vim-solarized8'
       Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
       Plug 'tommcdo/vim-lion', {'on_map': ['gl', 'gL']} "Alignment
       Plug 'tpope/vim-sleuth' "heuristically set indent
@@ -43,6 +42,8 @@
       "SEARCH
       Plug 'junegunn/fzf', {'do': './install --all'} | Plug 'junegunn/fzf.vim', {'on': ['FZF']}
       Plug 'easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'}
+      Plug 'preservim/nerdtree', {'on': ['NERDTree', 'NERDTreeToggle']}
+
 
       "GIT
       Plug 'tpope/vim-fugitive' "TODO: cmd
