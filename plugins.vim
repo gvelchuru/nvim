@@ -61,23 +61,13 @@ let g:lion_squeeze_spaces = 1
   \   'python' : ['isort', 'black'],
   \   'cpp' : ['clang-format', 'uncrustify'],
   \   'c': ['clang-format', 'uncrustify'],
+  \   'cs': ['ale-cs-csc', 'uncrustify'],
   \   'haskell': ['brittany', 'hfmt'],
   \   'ruby': ['rubocop'],
   \   'tex': ['textlint'],
   \   'java': ['google_java_format', 'uncrustify'],
   \   'typescript': ['tslint', 'prettier']
   \}
-  if !empty(glob("/apollo"))
-    let g:ale_linters = {
-    \   'cpp' : ['ccls', 'clang','cpplint', 'uncrustify', 'cppcheck', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'flawfinder', 'gcc']
-    \}
-    let g:ale_fixers = {
-    \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
-    \   'python' : ['isort', 'black'],
-    \   'cpp' : ['remove_trailing_lines', 'trim_whitespace'],
-    \   'c': ['remove_trailing_lines', 'trim_whitespace'],
-    \}
-  endif
   let g:ale_set_signs = 1
   let g:ale_set_highlights = 0
   let g:ale_lint_on_enter = 1

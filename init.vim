@@ -1,6 +1,12 @@
-source $HOME/.config/nvim/settings.vim
-source $HOME/.config/nvim/vim-plug.vim
-source $HOME/.config/nvim/plugins.vim
+if has("win32") || has("win64")
+	source $HOME\AppData\Local\nvim\settings.vim
+	source $HOME\AppData\Local\nvim\vim-plug.vim
+	source $HOME\AppData\Local\nvim\plugins.vim
+else
+	source $HOME/.config/nvim/settings.vim
+	source $HOME/.config/nvim/vim-plug.vim
+	source $HOME/.config/nvim/plugins.vim
+endif
 syntax enable
 
 "persistent undo {
@@ -56,7 +62,7 @@ syntax enable
 
 " COLORS {
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  if (has("termguicolors"))
+  if (!(has("win32") || has("win64")) && has("termguicolors"))
     set termguicolors
   endif
   "let g:solarized_termcolors=16
@@ -71,7 +77,7 @@ syntax enable
 
 augroup loading
   autocmd!
-  autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zM
+  autocmd Syntax c,cpp,cs,vim,xml,html,xhtml,perl normal zM
 
   " Instead of reverting the cursor to the last position in the buffer, we
   " set it to the first line when editing a git commit message
