@@ -59,6 +59,8 @@
 
   nnoremap & :&&<CR>
   xnoremap & :&&<CR>
+
+  tnoremap <Esc> <C-\><C-n>
 "}
 
 "Leader mapping {

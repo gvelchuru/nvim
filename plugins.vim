@@ -1,6 +1,6 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver', 'coc-powershell']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 augroup closeCompletion
@@ -57,21 +57,18 @@ let g:lion_squeeze_spaces = 1
 "}
 
 "ALE {
-  if !(has('win32') || has('win64'))
-  {
-    let g:ale_fixers = {
-    \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
-    \   'python' : ['isort', 'black'],
-    \   'cpp' : ['clang-format', 'uncrustify'],
-    \   'c': ['clang-format', 'uncrustify'],
-    \   'cs': ['ale-cs-csc', 'uncrustify'],
-    \   'haskell': ['brittany', 'hfmt'],
-    \   'ruby': ['rubocop'],
-    \   'tex': ['textlint'],
-    \   'java': ['google_java_format', 'uncrustify'],
-    \   'typescript': ['tslint', 'prettier']
-    \}
-  }
+  let g:ale_fixers = {
+  \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
+  \   'python' : ['isort', 'black'],
+  \   'cpp' : ['clang-format', 'uncrustify'],
+  \   'c': ['clang-format', 'uncrustify'],
+  \   'cs': ['ale-cs-csc', 'uncrustify'],
+  \   'haskell': ['brittany', 'hfmt'],
+  \   'ruby': ['rubocop'],
+  \   'tex': ['textlint'],
+  \   'java': ['google_java_format', 'uncrustify'],
+  \   'typescript': ['tslint', 'prettier']
+  \}
   let g:ale_set_signs = 1
   let g:ale_set_highlights = 0
   let g:ale_lint_on_enter = 1

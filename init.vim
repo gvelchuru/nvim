@@ -82,4 +82,9 @@ augroup loading
   " Instead of reverting the cursor to the last position in the buffer, we
   " set it to the first line when editing a git commit message
   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+  " Powershell
+  au BufNewFile,BufRead   *.ps1   set ft=powershell
+  au BufNewFile,BufRead   *.psd1  set ft=powershell
+  au BufNewFile,BufRead   *.psm1  set ft=powershell
+  au BufNewFile,BufRead   *.pssc  set ft=powershell
 augroup END
