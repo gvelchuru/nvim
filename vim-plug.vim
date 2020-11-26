@@ -74,6 +74,9 @@
       Plug 'justinmk/vim-syntax-extra', {'for': 'c'}
       Plug 'vim-scripts/a.vim', {'for': ['c', 'c++']}
 
+      "CSV
+      Plug 'chrisbra/csv.vim'
+
       "RESTORATION
       Plug 'vim-scripts/restore_view.vim'
 
