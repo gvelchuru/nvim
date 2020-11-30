@@ -61,13 +61,17 @@
   xnoremap & :&&<CR>
 
   tnoremap <Esc> <C-\><C-n>
+
+  " Navigate quickfix list with ease
+  nnoremap <silent> [q :cprevious<CR>
+  nnoremap <silent> ]q :cnext<CR>
 "}
 
 "Leader mapping {
   nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
   nnoremap <leader>b :b <C-d>
   nnoremap <leader>e :e **/
-  nnoremap <leader>g :grep<space>
+  nnoremap <Leader>g :Ack!<Space>
   nnoremap <leader>i :Ilist<space>
   nnoremap <leader>j :tjump /
   nnoremap <leader>m :make<cr>

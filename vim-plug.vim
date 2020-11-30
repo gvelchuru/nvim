@@ -31,6 +31,7 @@
 
       "SEARCH
       Plug 'nelstrom/vim-visual-star-search', {'on_map': ['*', '#']} "perform search on the current visual selection
+      Plug 'mileszs/ack.vim', {'on': ['Ack!']}
 
       "SNIPPETS
       Plug 'SirVer/ultisnips'
