@@ -69,6 +69,7 @@
       "GENERAL
       Plug 'wakatime/vim-wakatime'
       Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'}
+      Plug 'rizzatti/dash.vim'
 
       "C
       Plug 'justinmk/vim-syntax-extra', {'for': 'c'}
