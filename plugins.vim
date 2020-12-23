@@ -1,6 +1,6 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver', 'coc-powershell']
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver', 'coc-powershell', 'coc-omnisharp']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 augroup closeCompletion
@@ -46,6 +46,19 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 "}
 
 let g:lion_squeeze_spaces = 1
+
+"ACK {
+let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
+
+" Auto close the Quickfix list after pressing '<enter>' on a list item
+let g:ack_autoclose = 1
+
+" Any empty ack search will search for the work the cursor is on
+let g:ack_use_cword_for_empty_search = 1
+
+" Don't jump to first match
+cnoreabbrev Ack Ack!
+"}
 
 "INIT_BRACE {
   function! plugins#_brace() abort
