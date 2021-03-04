@@ -21,6 +21,7 @@
       Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
       Plug 'tommcdo/vim-lion', {'on_map': ['gl', 'gL']} "Alignment
       Plug 'tpope/vim-sleuth' "heuristically set indent
+      Plug 'sheerun/vim-polyglot'
       if has('pumblend')
         Plug 'ncm2/float-preview.nvim' "show preview in floating window
       endif
@@ -42,10 +43,9 @@
       Plug 'easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'}
       Plug 'preservim/nerdtree', {'on': ['NERDTree', 'NERDTreeToggle']}
 
-
       "GIT
       Plug 'tpope/vim-fugitive' "TODO: cmd
-      Plug 'tpope/vim-rhubarb'
+      Plug 'tpope/vim-rhubarb' "TODO: cmd
 
       "SURROUND
       Plug 'scrooloose/nerdcommenter', {'on_map': ['<Leader>cc', '<Leader>c<space>', '<Leader>cs']}
@@ -65,7 +65,7 @@
 
       "SPLITTING
       Plug 'christoomey/vim-tmux-navigator', {'on_map': ['<C-h>', '<C-j', '<C-k>', '<C-l>', '<C-\>']}
-      Plug 'camspiers/animate.vim' | Plug 'camspiers/lens.vim'
+      Plug 'camspiers/lens.vim'
 
       "GENERAL
       Plug 'wakatime/vim-wakatime'
@@ -73,7 +73,6 @@
       Plug 'rizzatti/dash.vim'
 
       "C
-      Plug 'justinmk/vim-syntax-extra', {'for': 'c'}
       Plug 'vim-scripts/a.vim', {'for': ['c', 'c++']}
 
       "CSV
