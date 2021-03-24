@@ -1,3 +1,5 @@
+"pre-plugins settings
+let g:ale_disable_lsp = 1
 if has("win32") || has("win64")
 	source $HOME\AppData\Local\nvim\settings.vim
 	source $HOME\AppData\Local\nvim\vim-plug.vim
