@@ -33,5 +33,6 @@
       }
   },
   "coc.preferences.formatOnType": false,
-  "python.jediEnabled":false
+  "python.jediEnabled":false,
+  "git.enableGutters": false
 }
