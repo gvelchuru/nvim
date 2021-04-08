@@ -1,13 +1,13 @@
 "pre-plugins settings
 let g:ale_disable_lsp = 1
 if has("win32") || has("win64")
-	source $HOME\AppData\Local\nvim\settings.vim
-	source $HOME\AppData\Local\nvim\vim-plug.vim
-	source $HOME\AppData\Local\nvim\plugins.vim
+      source $HOME\AppData\Local\nvim\settings.vim
+      source $HOME\AppData\Local\nvim\vim-plug.vim
+      source $HOME\AppData\Local\nvim\plugins.vim
 else
-	source $HOME/.config/nvim/settings.vim
-	source $HOME/.config/nvim/vim-plug.vim
-	source $HOME/.config/nvim/plugins.vim
+      source $HOME/.config/nvim/settings.vim
+      source $HOME/.config/nvim/vim-plug.vim
+      source $HOME/.config/nvim/plugins.vim
 endif
 syntax enable
 
