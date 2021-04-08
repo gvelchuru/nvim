@@ -82,4 +82,3 @@
       Plug 'vim-scripts/restore_view.vim'
 
   call plug#end()
-"}
