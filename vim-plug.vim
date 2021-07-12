@@ -68,7 +68,6 @@
       Plug 'camspiers/lens.vim'
 
       "GENERAL
-      Plug 'wakatime/vim-wakatime'
       Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'}
       Plug 'rizzatti/dash.vim'
 
