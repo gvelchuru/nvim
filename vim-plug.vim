@@ -39,7 +39,7 @@
       Plug 'honza/vim-snippets'
 
       "SEARCH
-      Plug 'junegunn/fzf.vim', {'on': ['FZF']}
+      Plug 'junegunn/fzf', {'do': './install --all'} | Plug 'junegunn/fzf.vim', {'on': ['FZF']}
       Plug 'easymotion/vim-easymotion', {'on_map': '<Leader><Leader>'}
       Plug 'preservim/nerdtree', {'on': ['NERDTree', 'NERDTreeToggle']}
 
