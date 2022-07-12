@@ -70,6 +70,9 @@ cnoreabbrev Ack Ack!
 "}
 
 "ALE {
+  let g:ale_linters = {
+  \   'java': ['google_java_format', 'uncrustify', 'pmd', 'eclipselsp'],
+  \}
   let g:ale_fixers = {
   \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
   \   'python' : ['isort', 'black'],
@@ -102,8 +105,6 @@ cnoreabbrev Ack Ack!
       augroup END
       let g:tex_flavor = 'latex'
       let g:vimtex_view_automatic = 1
-      let g:vimtex_compiler_method = 'latexmk'
-      let g:vimtex_view_general_viewer = 'evince'
   endfunction
 "}
 

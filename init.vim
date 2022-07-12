@@ -2,12 +2,12 @@
 let g:ale_disable_lsp = 1
 if has("win32") || has("win64")
       source $HOME\AppData\Local\nvim\settings.vim
-      source $HOME\AppData\Local\nvim\vim-plug.vim
       source $HOME\AppData\Local\nvim\plugins.vim
+      source $HOME\AppData\Local\nvim\vim-plug.vim
 else
       source $HOME/.config/nvim/settings.vim
-      source $HOME/.config/nvim/vim-plug.vim
       source $HOME/.config/nvim/plugins.vim
+      source $HOME/.config/nvim/vim-plug.vim
 endif
 syntax enable
 
@@ -33,7 +33,6 @@ syntax enable
   if (!(has("win32") || has("win64")) && has("termguicolors"))
     set termguicolors
   endif
-  "let g:solarized_termcolors=16
   let g:solarized_bold=1
   let g:solarized_underline=1
   let g:solarized_italic=1
