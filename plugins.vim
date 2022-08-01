@@ -1,12 +1,25 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver', 'coc-powershell', 'coc-omnisharp', 'coc-rls', 'coc-java']
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-augroup closeCompletion
-  autocmd!
-  autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
-augroup END
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver', 'coc-powershell', 'coc-omnisharp', 'coc-rls', 'coc-java', 'coc-lua']
+
+  function! s:check_back_space() abort 
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction
+
+  inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1):  <SID>check_back_space() ? "\<Tab>" :  coc#refresh()
+  inoremap <silent><expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+ if has('nvim')                                                                                                                                                                                                                                                                                                                                                                                                                              
+    inoremap <silent><expr> <c-space> coc#refresh()                                                                                                                                                                                                                                                                                                                                                                                           
+  else                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    inoremap <silent><expr> <c-@> coc#refresh()                                                                                                                                                                                                                                                                                                                                                                                               
+  endif
+
+  inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+
+  inoremap <silent><expr> <TAB>
+
 let g:UltiSnipsExpandTrigger='<c-k>'
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
@@ -69,8 +82,11 @@ cnoreabbrev Ack Ack!
   endfunction
 "}
 
+call neomake#configure#automake('nrwi', 500)
+
 "ALE {
   let g:ale_linters = {
+  \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
   \   'java': ['google_java_format', 'uncrustify', 'pmd', 'eclipselsp'],
   \}
   let g:ale_fixers = {

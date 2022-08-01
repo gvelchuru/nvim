@@ -1,15 +1,15 @@
 "pre-plugins settings
 let g:ale_disable_lsp = 1
-if has("win32") || has("win64")
+if has('win32') || has('win64')
       source $HOME\AppData\Local\nvim\settings.vim
       source $HOME\AppData\Local\nvim\plugins.vim
-      source $HOME\AppData\Local\nvim\vim-plug.vim
 else
       source $HOME/.config/nvim/settings.vim
       source $HOME/.config/nvim/plugins.vim
-      source $HOME/.config/nvim/vim-plug.vim
 endif
 syntax enable
+
+lua require('plugins')
 
 "fzf and grep settings {
   "replace grep with rg
@@ -30,7 +30,7 @@ syntax enable
 
 " COLORS {
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  if (!(has("win32") || has("win64")) && has("termguicolors"))
+  if (!(has('win32') || has('win64')) && has('termguicolors'))
     set termguicolors
   endif
   let g:solarized_bold=1
