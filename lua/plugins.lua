@@ -28,20 +28,21 @@ return require('packer').startup(function(use)
     use { 'sheerun/vim-polyglot' }
     use { 'ncm2/float-preview.nvim' }
     use { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' }
+    use { 'kyazdani42/nvim-web-devicons' }
 
   --TEXT OBJECTS
     use { 'tpope/vim-repeat', keys = '.' }
     use { 'tpope/vim-unimpaired' }
 	use { 'nelstrom/vim-visual-star-search', keys = {'*', '#'} }
-	use { 'mileszs/ack.vim', cmd = 'Ack!', cmd = 'Ack!' }
 
 --SNIPPETS
 	use { 'SirVer/ultisnips' }
 	use { 'honza/vim-snippets' }
 
 --SEARCH
-	use { 'junegunn/fzf', run = './install --all', requires = {'junegunn/fzf.vim'} }
 	use { 'easymotion/vim-easymotion' }
+	use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzy-native.nvim', 'fannheyward/telescope-coc.nvim'} }
+
 	use { 'preservim/nerdtree', cmd = {'NERDTree', 'NERDTreeToggle'} }
 
 --GIT

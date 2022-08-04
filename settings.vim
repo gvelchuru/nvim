@@ -42,8 +42,7 @@
   set conceallevel=2 concealcursor=i
 
   set hidden
-  set lazyredraw
-  set ttyfast
+  set number
 "}
 
 "Remapping {
@@ -70,7 +69,7 @@
   nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
   nnoremap <leader>b :b <C-d>
   "nnoremap <leader>e :e **/
-  nnoremap <Leader>g :Ack!<Space>
+  nnoremap <Leader>g <cmd>Telescope live_grep<cr>
   nnoremap <leader>i :Ilist<space>
   nnoremap <leader>j :tjump /
   nnoremap <leader>m :make<cr>
