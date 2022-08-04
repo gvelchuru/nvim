@@ -27,12 +27,13 @@ return require('packer').startup(function(use)
     use { 'tpope/vim-sleuth' } --heuristically set indent
     use { 'sheerun/vim-polyglot' }
     use { 'ncm2/float-preview.nvim' }
+    use { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' }
 
   --TEXT OBJECTS
     use { 'tpope/vim-repeat', keys = '.' }
     use { 'tpope/vim-unimpaired' }
 	use { 'nelstrom/vim-visual-star-search', keys = {'*', '#'} }
-	use { 'mileszs/ack.vim', cmd = 'Ack!', config = 'vim.cmd[[Ack!]]' }
+	use { 'mileszs/ack.vim', cmd = 'Ack!', cmd = 'Ack!' }
 
 --SNIPPETS
 	use { 'SirVer/ultisnips' }
@@ -54,10 +55,9 @@ return require('packer').startup(function(use)
 	use { 'michaeljsmith/vim-indent-object' }
 
 --COMPLETION/LINTING
-	use { 'neomake/neomake' }
+	use { 'dense-analysis/ale' }
 	use { 'Shougo/neoinclude.vim' }
 	use { 'neoclide/coc.nvim', branch = 'release', requires = {'neoclide/coc-sources', 'neoclide/coc-neco', 'jsfaint/coc-neoinclude'} }
-	use { 'numirias/semshi' }
 
 --TAGS
     use { 'ludovicchabant/vim-gutentags', ft = {'c', 'cpp' } }

@@ -82,8 +82,6 @@ cnoreabbrev Ack Ack!
   endfunction
 "}
 
-call neomake#configure#automake('nrwi', 500)
-
 "ALE {
   let g:ale_linters = {
   \   '*' : ['remove_trailing_lines', 'trim_whitespace'],

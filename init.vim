@@ -55,3 +55,7 @@ augroup loading
   au BufNewFile,BufRead   *.psm1  set ft=powershell
   au BufNewFile,BufRead   *.pssc  set ft=powershell
 augroup END
+
+
+packadd nvim-treesitter
+lua require('treesitter')

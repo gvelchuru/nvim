@@ -10,7 +10,6 @@
   set ignorecase
   set smartcase
   set autoindent
-  set nonumber
   set showcmd
   set cmdheight=1
   set showmatch
