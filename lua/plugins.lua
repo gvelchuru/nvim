@@ -21,8 +21,8 @@ return require('packer').startup(function(use)
   use { 'lervag/vimtex', ft = 'tex', run = function() vim.fn['call plugins#_tex'](0) end  } 
 
   --AESTHETIC
-    use { 'altercation/vim-colors-solarized' } 
-    use { 'vim-airline/vim-airline', requires = { 'vim-airline/vim-airline-themes' } } 
+    use { 'altercation/vim-colors-solarized' }
+    use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
     use { 'tommcdo/vim-lion', keys = {'gl', 'gL'} }
     use { 'tpope/vim-sleuth' } --heuristically set indent
     use { 'sheerun/vim-polyglot' }
