@@ -35,9 +35,9 @@ lua require('plugins')
   endif
 
   " Load the colorscheme
-  set background=light
+  set background=dark
   " Available values: 'hard', 'medium'(default), 'soft'
-        let g:gruvbox_material_background = 'soft'
+        let g:gruvbox_material_background = 'medium'
   " For better performance
 	let g:gruvbox_material_better_performance = 1
 	colorscheme gruvbox-material
