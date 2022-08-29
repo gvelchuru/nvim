@@ -85,6 +85,7 @@ let g:lion_squeeze_spaces = 1
   \   'ruby': ['rubocop'],
   \   'tex': ['textlint'],
   \   'java': ['google_java_format', 'uncrustify'],
+  \   'javascript': ['prettier'],
   \   'typescript': ['tslint', 'prettier']
   \}
   let g:ale_set_signs = 1
@@ -111,5 +112,9 @@ let g:lion_squeeze_spaces = 1
 "}
 
 lua << END
-require('lualine').setup()
+require('lualine').setup {
+	options = {
+		theme = 'gruvbox-material'
+	}
+}
 END
