@@ -37,10 +37,10 @@ lua require('plugins')
   " Load the colorscheme
   set background=dark
   " Available values: 'hard', 'medium'(default), 'soft'
-        let g:gruvbox_material_background = 'medium'
+  let g:gruvbox_material_background = 'medium'
   " For better performance
-	let g:gruvbox_material_better_performance = 1
-	colorscheme gruvbox-material
+  let g:gruvbox_material_better_performance = 1
+  colorscheme gruvbox-material
 "}
 
 augroup loading
@@ -58,10 +58,8 @@ augroup loading
 augroup END
 
 
-packadd nvim-treesitter
-lua require('treesitter')
-
 lua << EOF
+require('treesitter')
 require('telescope').setup {
     extensions = {
         fzy_native = {

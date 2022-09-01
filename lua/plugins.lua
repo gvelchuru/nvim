@@ -20,14 +20,17 @@ return require('packer').startup(function(use)
   --TEX
   use { 'lervag/vimtex', ft = 'tex', run = function() vim.fn['call plugins#_tex'](0) end  } 
 
+  --PLANTUML
+  use { 'weirongxu/plantuml-previewer.vim', requires = { 'tyru/open-browser.vim', 'aklt/plantuml-syntax' } }
+  --use { 'scrooloose/vim-slumlord', requires = 'aklt/plantuml-syntax'  }
+
   --AESTHETIC
     use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
 	use { 'sainnhe/gruvbox-material' }
     use { 'tommcdo/vim-lion', keys = {'gl', 'gL'} }
     use { 'tpope/vim-sleuth' } --heuristically set indent
-    use { 'sheerun/vim-polyglot' }
     use { 'ncm2/float-preview.nvim' }
-    use { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' }
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'kyazdani42/nvim-web-devicons' }
 
   --TEXT OBJECTS
@@ -48,6 +51,14 @@ return require('packer').startup(function(use)
 --GIT
 	use { 'tpope/vim-fugitive' }
 	use { 'tpope/vim-rhubarb' }
+	use { 
+		'lewis6991/gitsigns.nvim', 
+		config = function()
+			require('gitsigns').setup {
+				current_line_blame = true
+			}
+		end
+	}
 
 --SURROUND
 	use { 'scrooloose/nerdcommenter' }
@@ -57,6 +68,22 @@ return require('packer').startup(function(use)
 
 --COMPLETION/LINTING
 	use { 'dense-analysis/ale' }
+	use {
+	  "folke/trouble.nvim",
+	  requires = { "kyazdani42/nvim-web-devicons", 'folke/lsp-colors.nvim' },
+	  config = function()
+	    require("trouble").setup {
+			--[[signs = {
+			   [-- icons / text used for a diagnostic
+			   [error = "error",
+			   [warning = "warn",
+			   [hint = "hint",
+			   [information = "info"
+			   [},
+			   [use_diagnostic_signs = true]]
+		}
+	  end
+	}
 	use { 'Shougo/neoinclude.vim' }
 	use { 'neoclide/coc.nvim', branch = 'release', requires = {'neoclide/coc-sources', 'neoclide/coc-neco', 'jsfaint/coc-neoinclude'} }
 

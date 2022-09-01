@@ -88,13 +88,15 @@ let g:lion_squeeze_spaces = 1
   \   'javascript': ['prettier'],
   \   'typescript': ['tslint', 'prettier']
   \}
-  let g:ale_set_signs = 1
+  let g:ale_disable_lsp = 1
+  let g:ale_set_signs = 0
   let g:ale_set_highlights = 0
   let g:ale_lint_on_enter = 1
   let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 1
   let g:ale_lint_on_insert_leave = 1
   let g:ale_fix_on_save = 0
+  let g:ale_set_loclist = 1
 " }
 "CCLS {
   "au CursorHold * sil call CocActionAsync('highlight')
@@ -115,6 +117,9 @@ lua << END
 require('lualine').setup {
 	options = {
 		theme = 'gruvbox-material'
+	},
+      sections = {
+	lualine_c = {'filename', 'g:coc_status'}
 	}
 }
 END
