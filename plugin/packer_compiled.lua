@@ -41,6 +41,9 @@ local function save_profiles(threshold)
       results[i] = elem[1] .. ' took ' .. elem[2] .. 'ms'
     end
   end
+  if threshold then
+    table.insert(results, '(Only showing plugins that took longer than ' .. threshold .. ' ms ' .. 'to load)')
+  end
 
   _G._packer.profile_output = results
 end
@@ -168,13 +171,10 @@ _G.packer_plugins = {
     path = "/Users/gvelchuru/.local/share/nvim/site/pack/packer/start/nerdcommenter",
     url = "https://github.com/scrooloose/nerdcommenter"
   },
-  nerdtree = {
-    commands = { "NERDTree", "NERDTreeToggle" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/Users/gvelchuru/.local/share/nvim/site/pack/packer/opt/nerdtree",
-    url = "https://github.com/preservim/nerdtree"
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/Users/gvelchuru/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -337,6 +337,11 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/Users/gvelchuru/.local/share/nvim/site/pack/packer/opt/vimtex",
     url = "https://github.com/lervag/vimtex"
+  },
+  ["wilder.nvim"] = {
+    loaded = true,
+    path = "/Users/gvelchuru/.local/share/nvim/site/pack/packer/start/wilder.nvim",
+    url = "https://github.com/gelguy/wilder.nvim"
   }
 }
 
@@ -353,27 +358,25 @@ time([[Config for gitsigns.nvim]], false)
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file StartupTime lua require("packer.load")({'startuptime.vim'}, { cmd = "StartupTime", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NERDTree lua require("packer.load")({'nerdtree'}, { cmd = "NERDTree", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NERDTreeToggle lua require("packer.load")({'nerdtree'}, { cmd = "NERDTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
-vim.cmd [[noremap <silent> * <cmd>lua require("packer.load")({'vim-visual-star-search'}, { keys = "*", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> # <cmd>lua require("packer.load")({'vim-visual-star-search'}, { keys = "#", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> gl <cmd>lua require("packer.load")({'vim-lion'}, { keys = "gl", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> . <cmd>lua require("packer.load")({'vim-repeat'}, { keys = ".", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> gL <cmd>lua require("packer.load")({'vim-lion'}, { keys = "gL", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> . <cmd>lua require("packer.load")({'vim-repeat'}, { keys = ".", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> * <cmd>lua require("packer.load")({'vim-visual-star-search'}, { keys = "*", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType c ++once lua require("packer.load")({'vim-gutentags', 'gutentags_plus', 'a.vim'}, { ft = "c" }, _G.packer_plugins)]]
-vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
+vim.cmd [[au FileType c ++once lua require("packer.load")({'gutentags_plus', 'vim-gutentags', 'a.vim'}, { ft = "c" }, _G.packer_plugins)]]
+vim.cmd [[au FileType cpp ++once lua require("packer.load")({'gutentags_plus', 'vim-gutentags', 'a.vim'}, { ft = "cpp" }, _G.packer_plugins)]]
 vim.cmd [[au FileType py ++once lua require("packer.load")({'braceless.vim'}, { ft = "py" }, _G.packer_plugins)]]
-vim.cmd [[au FileType cpp ++once lua require("packer.load")({'vim-gutentags', 'gutentags_plus', 'a.vim'}, { ft = "cpp" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

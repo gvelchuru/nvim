@@ -1,4 +1,9 @@
 "pre-plugins settings
+lua << END
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+END
+
 let g:ale_disable_lsp = 1
 if has('win32') || has('win64')
       source $HOME\AppData\Local\nvim\settings.vim
@@ -35,7 +40,7 @@ lua require('plugins')
   endif
 
   " Load the colorscheme
-  set background=dark
+  set background=light
   " Available values: 'hard', 'medium'(default), 'soft'
   let g:gruvbox_material_background = 'medium'
   " For better performance
@@ -71,4 +76,5 @@ require('telescope').setup {
 }
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('coc')
+require("nvim-tree").setup()
 EOF

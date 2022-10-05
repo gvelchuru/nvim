@@ -32,7 +32,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 "NERD
 let g:NERDCompactSexyComs = 1
-map <C-n> :NERDTreeToggle<CR>
+map <C-n> :NvimTreeToggle<CR>
 
 "remap telescope
 nnoremap <C-P> <cmd>Telescope find_files<cr>

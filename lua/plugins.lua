@@ -32,6 +32,7 @@ return require('packer').startup(function(use)
     use { 'ncm2/float-preview.nvim' }
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'kyazdani42/nvim-web-devicons' }
+    use { 'gelguy/wilder.nvim' }
 
   --TEXT OBJECTS
     use { 'tpope/vim-repeat', keys = '.' }
@@ -46,7 +47,7 @@ return require('packer').startup(function(use)
 	use { 'easymotion/vim-easymotion' }
 	use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzy-native.nvim', 'fannheyward/telescope-coc.nvim'} }
 
-	use { 'preservim/nerdtree', cmd = {'NERDTree', 'NERDTreeToggle'} }
+	use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
 
 --GIT
 	use { 'tpope/vim-fugitive' }
