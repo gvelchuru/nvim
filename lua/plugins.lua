@@ -87,6 +87,7 @@ return require('packer').startup(function(use)
 	}
 	use { 'Shougo/neoinclude.vim' }
 	use { 'neoclide/coc.nvim', branch = 'release', requires = {'neoclide/coc-sources', 'neoclide/coc-neco', 'jsfaint/coc-neoinclude'} }
+	--use { 'beeender/Comrade' }
 
 --TAGS
     use { 'ludovicchabant/vim-gutentags', ft = {'c', 'cpp' } }

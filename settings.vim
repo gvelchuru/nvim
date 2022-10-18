@@ -43,7 +43,9 @@
 
   set hidden
   set number
+  set signcolumn=yes
 "}
+
 
 "Remapping {
   noremap <C-]> <C-W><C-]>
