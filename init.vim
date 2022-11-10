@@ -41,11 +41,7 @@ lua require('plugins')
 
   " Load the colorscheme
   set background=light
-  " Available values: 'hard', 'medium'(default), 'soft'
-  let g:gruvbox_material_background = 'medium'
-  " For better performance
-  let g:gruvbox_material_better_performance = 1
-  colorscheme gruvbox-material
+  colorscheme solarized
 "}
 
 augroup loading
