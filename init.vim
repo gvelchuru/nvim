@@ -40,8 +40,8 @@ lua require('plugins')
   endif
 
   " Load the colorscheme
-  set background=light
-  colorscheme solarized
+  set background=dark
+  colorscheme palenight
 "}
 
 augroup loading
