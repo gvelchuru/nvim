@@ -26,7 +26,8 @@ return require('packer').startup(function(use)
 
   --AESTHETIC
     use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
-    use { 'drewtempelmeyer/palenight.vim' }
+    --use { 'drewtempelmeyer/palenight.vim' }
+    use { "ellisonleao/gruvbox.nvim" }
     use { 'tommcdo/vim-lion', keys = {'gl', 'gL'} }
     use { 'tpope/vim-sleuth' } --heuristically set indent
     use { 'ncm2/float-preview.nvim' }

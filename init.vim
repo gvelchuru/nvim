@@ -41,7 +41,7 @@ lua require('plugins')
 
   " Load the colorscheme
   set background=dark
-  colorscheme palenight
+  colorscheme gruvbox
 "}
 
 augroup loading
