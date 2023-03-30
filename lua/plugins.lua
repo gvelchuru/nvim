@@ -1,76 +1,76 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-  vim.cmd [[packadd packer.nvim]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
-
-return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+return require('lazy').setup({
+  'wbthomason/packer.nvim',
   -- PY
-  use { 'tweekmonster/braceless.vim', ft = 'py', run = function() vim.fn['call plugins#_brace'](0) end }
+  { 'tweekmonster/braceless.vim', ft = 'py', build = function() vim.fn['call plugins#_brace'](0) end },
 
   --TEX
-  use { 'lervag/vimtex', ft = 'tex', run = function() vim.fn['call plugins#_tex'](0) end  } 
+  { 'lervag/vimtex', ft = 'tex', build = function() vim.fn['call plugins#_tex'](0) end  },
 
   --PLANTUML
-  use { 'weirongxu/plantuml-previewer.vim', requires = { 'tyru/open-browser.vim', 'aklt/plantuml-syntax' } }
+  { 'weirongxu/plantuml-previewer.vim', requires = { 'tyru/open-browser.vim', 'aklt/plantuml-syntax' } },
   --use { 'scrooloose/vim-slumlord', requires = 'aklt/plantuml-syntax'  }
 
   --AESTHETIC
-    use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+     { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', lazy = true } },
     --use { 'drewtempelmeyer/palenight.vim' }
-    use { "ellisonleao/gruvbox.nvim" }
-    use { 'tommcdo/vim-lion', keys = {'gl', 'gL'} }
-    use { 'tpope/vim-sleuth' } --heuristically set indent
-    use { 'ncm2/float-preview.nvim' }
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use { 'kyazdani42/nvim-web-devicons' }
-    use { 'gelguy/wilder.nvim' }
+    { "ellisonleao/gruvbox.nvim" },
+    { 'tommcdo/vim-lion', keys = {'gl', 'gL'} },
+    { 'tpope/vim-sleuth' }, --heuristically set indent
+    { 'ncm2/float-preview.nvim' },
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+    { 'kyazdani42/nvim-web-devicons' },
+    { 'gelguy/wilder.nvim' },
 
   --TEXT OBJECTS
-    use { 'tpope/vim-repeat', keys = '.' }
-    use { 'tpope/vim-unimpaired' }
-	use { 'nelstrom/vim-visual-star-search', keys = {'*', '#'} }
+    { 'tpope/vim-repeat', keys = '.' },
+    { 'tpope/vim-unimpaired' },
+	{ 'nelstrom/vim-visual-star-search', keys = {'*', '#'} },
 
 --SNIPPETS
-	use { 'SirVer/ultisnips' }
-	use { 'honza/vim-snippets' }
+	{ 'SirVer/ultisnips' },
+	{ 'honza/vim-snippets' },
 
 --SEARCH
-	use { 'easymotion/vim-easymotion' }
-	use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzy-native.nvim', 'fannheyward/telescope-coc.nvim'} }
+	{ 'easymotion/vim-easymotion' },
+	{ 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzy-native.nvim', 'fannheyward/telescope-coc.nvim'} },
 
-	use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
+	{ 'kyazdani42/nvim-tree.lua', dependencies = { 'kyazdani42/nvim-web-devicons' } },
 
 --GIT
-	use { 'tpope/vim-fugitive' }
-	use { 'tpope/vim-rhubarb' }
-	use { 
+	{ 'tpope/vim-fugitive' },
+	{ 'tpope/vim-rhubarb' },
+	{ 
 		'lewis6991/gitsigns.nvim', 
 		config = function()
 			require('gitsigns').setup {
-				current_line_blame = true
+				current_line_blame = true,
+				signcolumn = false
 			}
 		end
-	}
+	},
 
 --SURROUND
-	use { 'scrooloose/nerdcommenter' }
-	use { 'tpope/vim-surround' }
-	use { 'wellle/targets.vim' }
-	use { 'michaeljsmith/vim-indent-object' }
+	{ 'scrooloose/nerdcommenter' },
+	{ 'tpope/vim-surround' },
+	{ 'wellle/targets.vim' },
+	{ 'michaeljsmith/vim-indent-object' },
 
 --COMPLETION/LINTING
-	use { 'dense-analysis/ale' }
-	use {
+	{ 'dense-analysis/ale' },
+	{
 	  "folke/trouble.nvim",
 	  requires = { "kyazdani42/nvim-web-devicons", 'folke/lsp-colors.nvim' },
 	  config = function()
@@ -85,32 +85,25 @@ return require('packer').startup(function(use)
 			   [use_diagnostic_signs = true]]
 		}
 	  end
-	}
-	use { 'Shougo/neoinclude.vim' }
-	use { 'neoclide/coc.nvim', branch = 'release', requires = {'neoclide/coc-sources', 'neoclide/coc-neco', 'jsfaint/coc-neoinclude'} }
+	},
+	{ 'Shougo/neoinclude.vim' },
+	{ 'neoclide/coc.nvim', branch = 'release', dependencies = {'neoclide/coc-sources', 'neoclide/coc-neco', 'jsfaint/coc-neoinclude'} },
 	--use { 'beeender/Comrade' }
 
 --TAGS
-    use { 'ludovicchabant/vim-gutentags', ft = {'c', 'cpp' } }
-	use { 'skywind3000/gutentags_plus', ft = {'c', 'cpp' }}
+    { 'ludovicchabant/vim-gutentags', ft = {'c', 'cpp' } },
+	{ 'skywind3000/gutentags_plus', ft = {'c', 'cpp' }},
 	
 --SPLITTING
-	use { 'christoomey/vim-tmux-navigator' }
-	use { 'camspiers/lens.vim' }
+	{ 'christoomey/vim-tmux-navigator' },
+	{ 'camspiers/lens.vim' },
 
 --GENERAL
-	use { 'tweekmonster/startuptime.vim', cmd = 'StartupTime' }
-	use { 'rizzatti/dash.vim' }
+	{ 'tweekmonster/startuptime.vim', cmd = 'StartupTime' },
+	{ 'rizzatti/dash.vim' },
 --C
-	use { 'vim-scripts/a.vim', ft = {'c', 'cpp'} }
-	use { 'chrisbra/csv.vim' }
+	{ 'vim-scripts/a.vim', ft = {'c', 'cpp'} },
+	{ 'chrisbra/csv.vim' },
 --RESTORATION
-	use { 'vim-scripts/restore_view.vim' }
-	
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+	{ 'vim-scripts/restore_view.vim' },
+})
