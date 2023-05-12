@@ -26,12 +26,12 @@ return require('lazy').setup({
   --AESTHETIC
      { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', lazy = true } },
     --use { 'drewtempelmeyer/palenight.vim' }
-    { "ellisonleao/gruvbox.nvim" },
+    --{ "ellisonleao/gruvbox.nvim" },
+    {'marko-cerovac/material.nvim'},
     { 'tommcdo/vim-lion', keys = {'gl', 'gL'} },
     { 'tpope/vim-sleuth' }, --heuristically set indent
     { 'ncm2/float-preview.nvim' },
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-    { 'kyazdani42/nvim-web-devicons' },
     { 'gelguy/wilder.nvim' },
 
   --TEXT OBJECTS
@@ -46,8 +46,6 @@ return require('lazy').setup({
 --SEARCH
 	{ 'easymotion/vim-easymotion' },
 	{ 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzy-native.nvim', 'fannheyward/telescope-coc.nvim'} },
-
-	{ 'kyazdani42/nvim-tree.lua', dependencies = { 'kyazdani42/nvim-web-devicons' } },
 
 --GIT
 	{ 'tpope/vim-fugitive' },
@@ -99,7 +97,6 @@ return require('lazy').setup({
 	{ 'camspiers/lens.vim' },
 
 --GENERAL
-	{ 'tweekmonster/startuptime.vim', cmd = 'StartupTime' },
 	{ 'rizzatti/dash.vim' },
 --C
 	{ 'vim-scripts/a.vim', ft = {'c', 'cpp'} },

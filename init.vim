@@ -40,8 +40,8 @@ lua require('plugins')
   endif
 
   " Load the colorscheme
-  set background=dark
-  colorscheme gruvbox
+  colorscheme material
+  let g:material_style = 'lighter'
 "}
 
 augroup loading
@@ -72,5 +72,4 @@ require('telescope').setup {
 }
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('coc')
-require("nvim-tree").setup()
 EOF
