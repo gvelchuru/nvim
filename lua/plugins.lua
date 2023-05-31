@@ -25,13 +25,11 @@ return require('lazy').setup({
 
   --AESTHETIC
      { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', lazy = true } },
-    --use { 'drewtempelmeyer/palenight.vim' }
-    --{ "ellisonleao/gruvbox.nvim" },
-    {'marko-cerovac/material.nvim'},
+     {'altercation/vim-colors-solarized'},
     { 'tommcdo/vim-lion', keys = {'gl', 'gL'} },
     { 'tpope/vim-sleuth' }, --heuristically set indent
     { 'ncm2/float-preview.nvim' },
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+    { 'nvim-treesitter/nvim-treesitter', build = function() vim.fn[':TSUpdate'](0) end },
     { 'gelguy/wilder.nvim' },
 
   --TEXT OBJECTS
@@ -98,6 +96,8 @@ return require('lazy').setup({
 
 --GENERAL
 	{ 'rizzatti/dash.vim' },
+	{ 'thalesmello/lkml.vim' },
+
 --C
 	{ 'vim-scripts/a.vim', ft = {'c', 'cpp'} },
 	{ 'chrisbra/csv.vim' },

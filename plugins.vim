@@ -124,7 +124,7 @@ let g:lion_squeeze_spaces = 1
 lua << END
 require('lualine').setup {
 	options = {
-		theme = 'material'
+		theme = 'solarized'
 	},
       sections = {
 	lualine_c = {'filename', 'g:coc_status'}

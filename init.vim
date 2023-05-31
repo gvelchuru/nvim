@@ -40,8 +40,7 @@ lua require('plugins')
   endif
 
   " Load the colorscheme
-  colorscheme material
-  let g:material_style = 'lighter'
+  colorscheme solarized
 "}
 
 augroup loading
@@ -65,8 +64,7 @@ require('telescope').setup {
     extensions = {
         fzy_native = {
             override_generic_sorter = false,
-            override_file_sorter = true,
-        }, 
+            override_file_sorter = true, }, 
         coc = { theme = 'ivy' }
     }
 }
