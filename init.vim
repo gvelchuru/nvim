@@ -59,7 +59,7 @@ augroup END
 
 
 lua << EOF
-require('treesitter')
+--require('treesitter')
 require('telescope').setup {
     extensions = {
         fzy_native = {

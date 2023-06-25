@@ -29,7 +29,7 @@ return require('lazy').setup({
     { 'tommcdo/vim-lion', keys = {'gl', 'gL'} },
     { 'tpope/vim-sleuth' }, --heuristically set indent
     { 'ncm2/float-preview.nvim' },
-    { 'nvim-treesitter/nvim-treesitter', build = function() vim.fn[':TSUpdate'](0) end },
+    --{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
     { 'gelguy/wilder.nvim' },
 
   --TEXT OBJECTS
