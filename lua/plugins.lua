@@ -24,7 +24,7 @@ return require('lazy').setup({
   --use { 'scrooloose/vim-slumlord', requires = 'aklt/plantuml-syntax'  }
 
   --AESTHETIC
-     { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', lazy = true } },
+     { 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true } },
      {'altercation/vim-colors-solarized'},
     { 'tommcdo/vim-lion', keys = {'gl', 'gL'} },
     { 'tpope/vim-sleuth' }, --heuristically set indent

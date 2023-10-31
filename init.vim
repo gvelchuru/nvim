@@ -4,6 +4,7 @@ vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 END
 
+lua require('plugins')
 let g:ale_disable_lsp = 1
 if has('win32') || has('win64')
       source $HOME\AppData\Local\nvim\settings.vim
@@ -14,7 +15,6 @@ else
 endif
 syntax enable
 
-lua require('plugins')
 
 "fzf and grep settings {
   "replace grep with rg
