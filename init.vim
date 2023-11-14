@@ -81,7 +81,7 @@ require('telescope').setup {
     extensions = {
         fzy_native = {
             override_generic_sorter = false,
-            override_file_sorter = true, }, 
+            override_file_sorter = true, },
         coc = { theme = 'ivy' }
     }
 }
@@ -89,4 +89,25 @@ require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('coc')
 --require("barbecue.ui").toggle(true)
 require('Comment').setup()
+local rainbow_delimiters = require 'rainbow-delimiters'
+
+vim.g.rainbow_delimiters = {
+    strategy = {
+        [''] = rainbow_delimiters.strategy['global'],
+        vim = rainbow_delimiters.strategy['local'],
+    },
+    query = {
+        [''] = 'rainbow-delimiters',
+        lua = 'rainbow-blocks',
+    },
+    highlight = {
+        'RainbowDelimiterRed',
+        'RainbowDelimiterYellow',
+        'RainbowDelimiterBlue',
+        'RainbowDelimiterOrange',
+        'RainbowDelimiterGreen',
+        'RainbowDelimiterViolet',
+        'RainbowDelimiterCyan',
+    }
+}
 EOF

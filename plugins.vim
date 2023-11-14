@@ -94,7 +94,8 @@ let g:lion_squeeze_spaces = 1
   \   'tex': ['textlint'],
   \   'java': ['google_java_format', 'uncrustify'],
   \   'javascript': ['prettier'],
-  \   'typescript': ['tslint', 'prettier']
+  \   'typescript': ['tslint', 'prettier'],
+  \   'lua': ['lua-format', 'luafmt','stylua'],
   \}
   let g:ale_disable_lsp = 1
   let g:ale_set_signs = 0
@@ -103,7 +104,7 @@ let g:lion_squeeze_spaces = 1
   let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 1
   let g:ale_lint_on_insert_leave = 1
-  let g:ale_fix_on_save = 0
+  let g:ale_fix_on_save = 1
   let g:ale_set_loclist = 1
 " }
 "CCLS {
