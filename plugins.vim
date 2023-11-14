@@ -1,6 +1,6 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver', 'coc-powershell', 'coc-omnisharp', 'coc-rust-analyzer', 'coc-lua']
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver', 'coc-powershell', 'coc-omnisharp', 'coc-rust-analyzer', 'coc-lua', 'coc-solargraph', 'coc-protobuf', 'coc-go']
 
   function! s:check_back_space() abort 
     let col = col('.') - 1
@@ -82,6 +82,7 @@ let g:lion_squeeze_spaces = 1
   let g:ale_linters = {
   \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
   \   'java': ['google_java_format', 'uncrustify', 'pmd', 'eclipselsp'],
+  \   'go': ['gofmt', 'gofumpt', 'golines', 'gopls']
   \}
   let g:ale_fixers = {
   \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
@@ -124,7 +125,7 @@ let g:lion_squeeze_spaces = 1
 lua << END
 require('lualine').setup {
 	options = {
-		theme = 'solarized'
+		theme = 'auto'
 	},
       sections = {
 	lualine_c = {'filename', 'g:coc_status'}

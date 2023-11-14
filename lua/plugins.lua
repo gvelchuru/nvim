@@ -25,7 +25,20 @@ return require('lazy').setup({
 
   --AESTHETIC
      { 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true } },
-     {'altercation/vim-colors-solarized'},
+     --{'altercation/vim-colors-solarized'},
+ --    {
+  --'projekt0n/github-nvim-theme',
+  --lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  --priority = 1000, -- make sure to load this before all the other start plugins
+  --config = function()
+    --require('github-theme').setup({
+      -- ...
+    --})
+
+    --vim.cmd('colorscheme github_dark')
+  --end,
+--},
+    {'drewtempelmeyer/palenight.vim', lazy=false, priority=1000},
     { 'tommcdo/vim-lion', keys = {'gl', 'gL'} },
     { 'tpope/vim-sleuth' }, --heuristically set indent
     { 'ncm2/float-preview.nvim' },
@@ -48,8 +61,8 @@ return require('lazy').setup({
 --GIT
 	{ 'tpope/vim-fugitive' },
 	{ 'tpope/vim-rhubarb' },
-	{ 
-		'lewis6991/gitsigns.nvim', 
+	{
+		'lewis6991/gitsigns.nvim',
 		config = function()
 			require('gitsigns').setup {
 				current_line_blame = true,
@@ -89,7 +102,7 @@ return require('lazy').setup({
 --TAGS
     { 'ludovicchabant/vim-gutentags', ft = {'c', 'cpp' } },
 	{ 'skywind3000/gutentags_plus', ft = {'c', 'cpp' }},
-	
+
 --SPLITTING
 	{ 'christoomey/vim-tmux-navigator' },
 	{ 'camspiers/lens.vim' },
@@ -97,6 +110,7 @@ return require('lazy').setup({
 --GENERAL
 	{ 'rizzatti/dash.vim' },
 	{ 'thalesmello/lkml.vim' },
+	{ 'github/copilot.vim' },
 
 --C
 	{ 'vim-scripts/a.vim', ft = {'c', 'cpp'} },

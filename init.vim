@@ -38,9 +38,8 @@ syntax enable
   if has('termguicolors')
           set termguicolors
   endif
-
-  " Load the colorscheme
-  colorscheme solarized
+  set background=dark
+  colorscheme palenight
 "}
 
 augroup loading
