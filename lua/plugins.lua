@@ -25,18 +25,19 @@ return require('lazy').setup({
 
   --AESTHETIC
      { 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true } },
-     {
-  "utilyre/barbecue.nvim",
-  name = "barbecue",
-  version = "*",
-  dependencies = {
-    "SmiteshP/nvim-navic",
-    "nvim-tree/nvim-web-devicons", -- optional dependency
-  },
-  opts = {
-    -- configurations go here
-  },
-},
+--      {
+--   "utilyre/barbecue.nvim",
+--   name = "barbecue",
+--   version = "*",
+--   dependencies = {
+--     "SmiteshP/nvim-navic",
+--     "nvim-tree/nvim-web-devicons", -- optional dependency
+--   },
+--   opts = {
+--     -- configurations go here
+--   },
+-- },
+--
      --{'altercation/vim-colors-solarized'},
  --    {
   --'projekt0n/github-nvim-theme',
@@ -85,7 +86,14 @@ return require('lazy').setup({
 	},
 
 --SURROUND
-	{ 'scrooloose/nerdcommenter' },
+	--{ 'scrooloose/nerdcommenter' },
+	{
+    'numToStr/Comment.nvim',
+    opts = {
+        -- add any options here
+    },
+    lazy = false,
+},
 	{ 'tpope/vim-surround' },
 	{ 'wellle/targets.vim' },
 	{ 'michaeljsmith/vim-indent-object' },

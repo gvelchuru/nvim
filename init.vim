@@ -77,11 +77,6 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
-EOF
-
-
-lua << EOF
---require('treesitter')
 require('telescope').setup {
     extensions = {
         fzy_native = {
@@ -92,5 +87,6 @@ require('telescope').setup {
 }
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('coc')
-require("barbecue.ui").toggle(true)
+--require("barbecue.ui").toggle(true)
+require('Comment').setup()
 EOF

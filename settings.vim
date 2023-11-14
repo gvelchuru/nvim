@@ -43,7 +43,7 @@
 
   set hidden
   set number
-  set signcolumn=no
+  set signcolumn=yes
 "}
 
 
