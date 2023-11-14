@@ -25,6 +25,18 @@ return require('lazy').setup({
 
   --AESTHETIC
      { 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true } },
+     {
+  "utilyre/barbecue.nvim",
+  name = "barbecue",
+  version = "*",
+  dependencies = {
+    "SmiteshP/nvim-navic",
+    "nvim-tree/nvim-web-devicons", -- optional dependency
+  },
+  opts = {
+    -- configurations go here
+  },
+},
      --{'altercation/vim-colors-solarized'},
  --    {
   --'projekt0n/github-nvim-theme',
@@ -38,11 +50,12 @@ return require('lazy').setup({
     --vim.cmd('colorscheme github_dark')
   --end,
 --},
-    {'drewtempelmeyer/palenight.vim', lazy=false, priority=1000},
+    {'folke/tokyonight.nvim', lazy=false, priority=1000},
     { 'tommcdo/vim-lion', keys = {'gl', 'gL'} },
     { 'tpope/vim-sleuth' }, --heuristically set indent
     { 'ncm2/float-preview.nvim' },
-    --{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+    {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+    {'ms-jpq/chadtree', branch= 'chad', build= ':CHADdeps'},
     { 'gelguy/wilder.nvim' },
 
   --TEXT OBJECTS

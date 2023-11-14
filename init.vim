@@ -39,7 +39,7 @@ syntax enable
           set termguicolors
   endif
   set background=dark
-  colorscheme palenight
+  colorscheme tokyonight-moon
 "}
 
 augroup loading
@@ -56,6 +56,29 @@ augroup loading
   au BufNewFile,BufRead   *.pssc  set ft=powershell
 augroup END
 
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "go", "ruby"},
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
+  highlight = {
+    enable = true,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
 
 lua << EOF
 --require('treesitter')
@@ -69,4 +92,5 @@ require('telescope').setup {
 }
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('coc')
+require("barbecue.ui").toggle(true)
 EOF

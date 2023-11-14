@@ -40,7 +40,6 @@ nmap <silent> gr <Plug>(coc-references)
 
 "NERD
 let g:NERDCompactSexyComs = 1
-map <C-n> :NvimTreeToggle<CR>
 
 "remap telescope
 nnoremap <C-P> <cmd>Telescope find_files<cr>
@@ -125,7 +124,7 @@ let g:lion_squeeze_spaces = 1
 lua << END
 require('lualine').setup {
 	options = {
-		theme = 'auto'
+		theme = 'tokyonight'
 	},
       sections = {
 	lualine_c = {'filename', 'g:coc_status'}
