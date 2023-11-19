@@ -2,7 +2,7 @@ scriptencoding utf-8
 " COC {
 let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver', 'coc-powershell', 'coc-omnisharp', 'coc-rust-analyzer', 'coc-lua', 'coc-solargraph', 'coc-protobuf', 'coc-go']
 
-  function! s:check_back_space() abort 
+  function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
   endfunction
@@ -96,15 +96,16 @@ let g:lion_squeeze_spaces = 1
   \   'javascript': ['prettier'],
   \   'typescript': ['tslint', 'prettier'],
   \   'lua': ['lua-format', 'luafmt','stylua'],
+  \   'go': ['gofmt', 'gofumpt', 'golines', 'gopls']
   \}
   let g:ale_disable_lsp = 1
-  let g:ale_set_signs = 0
-  let g:ale_set_highlights = 0
+  let g:ale_set_signs = 1
+  let g:ale_set_highlights = 1
   let g:ale_lint_on_enter = 1
   let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 1
   let g:ale_lint_on_insert_leave = 1
-  let g:ale_fix_on_save = 1
+  let g:ale_fix_on_save = 0
   let g:ale_set_loclist = 1
 " }
 "CCLS {

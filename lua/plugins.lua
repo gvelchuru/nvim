@@ -63,7 +63,8 @@ return require("lazy").setup({
 	--vim.cmd('colorscheme github_dark')
 	--end,
 	--},
-	{ "folke/tokyonight.nvim", lazy = false, priority = 1000 },
+	--{ "folke/tokyonight.nvim", lazy = false, priority = 1000 },
+	{ "nyoom-engineering/oxocarbon.nvim", lazy = false, priority = 1000 },
 	{ "tommcdo/vim-lion", keys = { "gl", "gL" } },
 	{ "tpope/vim-sleuth" }, --heuristically set indent
 	{ "ncm2/float-preview.nvim" },
