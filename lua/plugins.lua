@@ -64,7 +64,8 @@ return require("lazy").setup({
 	--end,
 	--},
 	--{ "folke/tokyonight.nvim", lazy = false, priority = 1000 },
-	{ "nyoom-engineering/oxocarbon.nvim", lazy = false, priority = 1000 },
+	--{ "nyoom-engineering/oxocarbon.nvim", lazy = false, priority = 1000 },
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "tommcdo/vim-lion", keys = { "gl", "gL" } },
 	{ "tpope/vim-sleuth" }, --heuristically set indent
 	{ "ncm2/float-preview.nvim" },
