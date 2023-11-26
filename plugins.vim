@@ -126,7 +126,7 @@ let g:lion_squeeze_spaces = 1
 lua << END
 require('lualine').setup {
 	options = {
-		theme = 'tokyonight'
+		theme = 'auto'
 	},
       sections = {
 	lualine_c = {'filename', 'g:coc_status'}

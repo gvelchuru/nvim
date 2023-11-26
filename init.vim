@@ -39,7 +39,6 @@ syntax enable
           set termguicolors
   endif
   set background=light
-  colorscheme catppuccin-latte
 "}
 
 augroup loading
