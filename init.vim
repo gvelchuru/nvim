@@ -5,6 +5,7 @@ vim.g.loaded_netrwPlugin = 1
 END
 
 lua require('plugins')
+colorscheme tokyonight
 let g:ale_disable_lsp = 1
 if has('win32') || has('win64')
       source $HOME\AppData\Local\nvim\settings.vim
@@ -38,7 +39,7 @@ syntax enable
   if has('termguicolors')
           set termguicolors
   endif
-  set background=light
+  set background=dark
 "}
 
 augroup loading
