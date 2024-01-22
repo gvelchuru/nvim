@@ -81,7 +81,8 @@ let g:lion_squeeze_spaces = 1
   let g:ale_linters = {
   \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
   \   'java': ['google_java_format', 'uncrustify', 'pmd', 'eclipselsp'],
-  \   'go': ['gofmt', 'gofumpt', 'golines', 'gopls']
+  \   'go': ['gofmt', 'gofumpt', 'golines', 'gopls'],
+  \   'ruby': ['prettier', 'rufo', 'sorbet', 'rubocop']
   \}
   let g:ale_fixers = {
   \   '*' : ['remove_trailing_lines', 'trim_whitespace'],
@@ -90,13 +91,13 @@ let g:lion_squeeze_spaces = 1
   \   'c': ['clang-format', 'uncrustify'],
   \   'cs': ['ale-cs-csc', 'uncrustify'],
   \   'haskell': ['brittany', 'hfmt'],
-  \   'ruby': ['rubocop'],
+  \   'ruby': ['rubocop', 'prettier'],
   \   'tex': ['textlint'],
   \   'java': ['google_java_format', 'uncrustify'],
   \   'javascript': ['prettier'],
   \   'typescript': ['tslint', 'prettier'],
   \   'lua': ['lua-format', 'luafmt','stylua'],
-  \   'go': ['gofmt', 'gofumpt', 'golines', 'gopls']
+  \   'go': ['gofmt', 'gofumpt', 'golines', 'gopls'],
   \}
   let g:ale_disable_lsp = 1
   let g:ale_set_signs = 1

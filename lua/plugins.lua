@@ -57,9 +57,10 @@ return require("lazy").setup({
 	priority = 1000, -- make sure to load this before all the other start plugins
 	config = function()
 	require('tokyonight').setup({
-	style='night'})
+	style='storm'})
 	end,
 	},
+	--{ 'sainnhe/everforest', lazy=false, priority=1000},
 	{ "tommcdo/vim-lion", keys = { "gl", "gL" } },
 	{ "tpope/vim-sleuth" }, --heuristically set indent
 	{ "ncm2/float-preview.nvim" },
