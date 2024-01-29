@@ -17,6 +17,7 @@ return require("lazy").setup({
 	{
 		"tweekmonster/braceless.vim",
 		ft = "py",
+		event = "VeryLazy",
 		build = function()
 			vim.fn["call plugins#_brace"](0)
 		end,
@@ -26,6 +27,7 @@ return require("lazy").setup({
 	{
 		"lervag/vimtex",
 		ft = "tex",
+		event = "VeryLazy",
 		build = function()
 			vim.fn["call plugins#_tex"](0)
 		end,
@@ -36,21 +38,7 @@ return require("lazy").setup({
 	--use { 'scrooloose/vim-slumlord', requires = 'aklt/plantuml-syntax'  }
 
 	--AESTHETIC
-	{ "nvim-lualine/lualine.nvim", dependencies = { "kyazdani42/nvim-web-devicons", lazy = true } },
-	--      {
-	--   "utilyre/barbecue.nvim",
-	--   name = "barbecue",
-	--   version = "*",
-	--   dependencies = {
-	--     "SmiteshP/nvim-navic",
-	--     "nvim-tree/nvim-web-devicons", -- optional dependency
-	--   },
-	--   opts = {
-	--     -- configurations go here
-	--   },
-	-- },
-	--
-	--{'altercation/vim-colors-solarized'},
+	{ "nvim-lualine/lualine.nvim", event = "VeryLazy", dependencies = { "kyazdani42/nvim-web-devicons", lazy = true } },
 	{
 	"folke/tokyonight.nvim",
 	lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -60,7 +48,6 @@ return require("lazy").setup({
 	style='storm'})
 	end,
 	},
-	--{ 'sainnhe/everforest', lazy=false, priority=1000},
 	{ "tommcdo/vim-lion", keys = { "gl", "gL" } },
 	{ "tpope/vim-sleuth" }, --heuristically set indent
 	{ "ncm2/float-preview.nvim" },
@@ -68,6 +55,17 @@ return require("lazy").setup({
 	{ "ms-jpq/chadtree", branch = "chad", build = ":CHADdeps" },
 	{ "gelguy/wilder.nvim" },
 	{ "hiphish/rainbow-delimiters.nvim" },
+	{ "bekaboo/dropbar.nvim" },
+	{ "RRethy/vim-illuminate" },
+	{ 'nvimdev/dashboard-nvim',
+	  event = 'VimEnter',
+	  config = function()
+		require('dashboard').setup {
+		  -- config
+		}
+	  end,
+	  dependencies = { {'nvim-tree/nvim-web-devicons'}}
+	},
 
 	--TEXT OBJECTS
 	{ "tpope/vim-repeat", keys = "." },
@@ -79,9 +77,10 @@ return require("lazy").setup({
 	{ "honza/vim-snippets" },
 
 	--SEARCH
-	{ "easymotion/vim-easymotion" },
+	{ "ggandor/leap.nvim", event = "VeryLazy"},
 	{
 		"nvim-telescope/telescope.nvim",
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-fzy-native.nvim",
@@ -103,7 +102,6 @@ return require("lazy").setup({
 	},
 
 	--SURROUND
-	--{ 'scrooloose/nerdcommenter' },
 	{
 		"numToStr/Comment.nvim",
 		opts = {
@@ -159,4 +157,20 @@ return require("lazy").setup({
 	{ "chrisbra/csv.vim" },
 	--RESTORATION
 	{ "vim-scripts/restore_view.vim" },
+
+	--NOTIFICATIONS
+	{ "folke/noice.nvim",
+	  event = "VeryLazy",
+	  opts = {
+		-- add any options here
+	  },
+	  dependencies = {
+		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+		"MunifTanjim/nui.nvim",
+		-- OPTIONAL:
+		--   `nvim-notify` is only needed, if you want to use the notification view.
+		--   If not available, we use `mini` as the fallback
+		"rcarriga/nvim-notify",
+		}
+	}
 })

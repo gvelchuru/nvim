@@ -110,4 +110,5 @@ vim.g.rainbow_delimiters = {
         'RainbowDelimiterCyan',
     }
 }
+require('leap').create_default_mappings()
 EOF
