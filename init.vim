@@ -111,4 +111,5 @@ vim.g.rainbow_delimiters = {
     }
 }
 require('leap').create_default_mappings()
+require("focus").setup()
 EOF

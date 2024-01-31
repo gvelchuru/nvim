@@ -12,12 +12,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 return require("lazy").setup({
-	"wbthomason/packer.nvim",
 	-- PY
 	{
 		"tweekmonster/braceless.vim",
 		ft = "py",
-		event = "VeryLazy",
+		lazy = true,
 		build = function()
 			vim.fn["call plugins#_brace"](0)
 		end,
@@ -27,60 +26,103 @@ return require("lazy").setup({
 	{
 		"lervag/vimtex",
 		ft = "tex",
-		event = "VeryLazy",
+		lazy = true,
 		build = function()
 			vim.fn["call plugins#_tex"](0)
 		end,
 	},
 
 	--PLANTUML
-	{ "weirongxu/plantuml-previewer.vim", requires = { "tyru/open-browser.vim", "aklt/plantuml-syntax" } },
-	--use { 'scrooloose/vim-slumlord', requires = 'aklt/plantuml-syntax'  }
+	{
+		"weirongxu/plantuml-previewer.vim",
+		lazy = true,
+		requires = {
+			"tyru/open-browser.vim",
+			"aklt/plantuml-syntax",
+		},
+	},
 
 	--AESTHETIC
-	{ "nvim-lualine/lualine.nvim", event = "VeryLazy", dependencies = { "kyazdani42/nvim-web-devicons", lazy = true } },
 	{
-	"folke/tokyonight.nvim",
-	lazy = false, -- make sure we load this during startup if it is your main colorscheme
-	priority = 1000, -- make sure to load this before all the other start plugins
-	config = function()
-	require('tokyonight').setup({
-	style='storm'})
-	end,
+		"nvim-lualine/lualine.nvim",
+		lazy = true,
+		dependencies = { "kyazdani42/nvim-web-devicons" },
 	},
-	{ "tommcdo/vim-lion", keys = { "gl", "gL" } },
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("tokyonight").setup({
+				style = "storm",
+			})
+		end,
+	},
+	{ "tommcdo/vim-lion", lazy = true, keys = { "gl", "gL" } },
 	{ "tpope/vim-sleuth" }, --heuristically set indent
 	{ "ncm2/float-preview.nvim" },
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-	{ "ms-jpq/chadtree", branch = "chad", build = ":CHADdeps" },
-	{ "gelguy/wilder.nvim" },
-	{ "hiphish/rainbow-delimiters.nvim" },
-	{ "bekaboo/dropbar.nvim" },
-	{ "RRethy/vim-illuminate" },
-	{ 'nvimdev/dashboard-nvim',
-	  event = 'VimEnter',
-	  config = function()
-		require('dashboard').setup {
-		  -- config
-		}
-	  end,
-	  dependencies = { {'nvim-tree/nvim-web-devicons'}}
+	{
+		"nvim-treesitter/nvim-treesitter",
+		lazy = true,
+		build = ":TSUpdate",
+	},
+	{
+		"ms-jpq/chadtree",
+		branch = "chad",
+		lazy = true,
+		build = ":CHADdeps",
+	},
+	--{ "gelguy/wilder.nvim" }, --doesn't work with nui
+	{ "hiphish/rainbow-delimiters.nvim", lazy = true },
+	{ "bekaboo/dropbar.nvim", lazy = true },
+	{ "RRethy/vim-illuminate", lazy = true },
+	{
+		"nvimdev/dashboard-nvim",
+		event = "VimEnter",
+		config = function()
+			require("dashboard").setup({
+				-- config
+			})
+		end,
+		dependencies = { { "nvim-tree/nvim-web-devicons" } },
+	},
+	{
+		"luukvbaal/statuscol.nvim",
+		config = function()
+			-- local builtin = require("statuscol.builtin")
+			require("statuscol").setup({
+				-- configuration goes here, for example:
+				-- relculright = true,
+				-- segments = {
+				--   { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+				--   {
+				--     sign = { name = { "Diagnostic" }, maxwidth = 2, auto = true },
+				--     click = "v:lua.ScSa"
+				--   },
+				--   { text = { builtin.lnumfunc }, click = "v:lua.ScLa", },
+				--   {
+				--     sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, auto = true, wrap = true },
+				--     click = "v:lua.ScSa"
+				--   },
+				-- }
+			})
+		end,
+		lazy = false,
 	},
 
 	--TEXT OBJECTS
 	{ "tpope/vim-repeat", keys = "." },
 	{ "tpope/vim-unimpaired" },
-	{ "nelstrom/vim-visual-star-search", keys = { "*", "#" } },
+	{ "nelstrom/vim-visual-star-search", lazy = true, keys = { "*", "#" } },
 
 	--SNIPPETS
 	{ "SirVer/ultisnips" },
 	{ "honza/vim-snippets" },
 
 	--SEARCH
-	{ "ggandor/leap.nvim", event = "VeryLazy"},
+	{ "ggandor/leap.nvim" },
 	{
 		"nvim-telescope/telescope.nvim",
-		event = "VeryLazy",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-fzy-native.nvim",
@@ -99,6 +141,7 @@ return require("lazy").setup({
 				signcolumn = false,
 			})
 		end,
+		dependencies = { "tpope/vim-fugitive", "folke/trouble.nvim" },
 	},
 
 	--SURROUND
@@ -107,17 +150,19 @@ return require("lazy").setup({
 		opts = {
 			-- add any options here
 		},
-		lazy = false,
 	},
 	{ "tpope/vim-surround" },
 	{ "wellle/targets.vim" },
 	{ "michaeljsmith/vim-indent-object" },
 
 	--COMPLETION/LINTING
-	{ "dense-analysis/ale" },
+	{ "dense-analysis/ale", lazy = false },
 	{
 		"folke/trouble.nvim",
-		requires = { "kyazdani42/nvim-web-devicons", "folke/lsp-colors.nvim" },
+		requires = {
+			"kyazdani42/nvim-web-devicons",
+			"folke/lsp-colors.nvim",
+		},
 		config = function()
 			require("trouble").setup({
 				--[[signs = {
@@ -130,47 +175,49 @@ return require("lazy").setup({
 			   [use_diagnostic_signs = true]]
 			})
 		end,
+		lazy = false,
 	},
 	{ "Shougo/neoinclude.vim" },
 	{
 		"neoclide/coc.nvim",
 		branch = "release",
-		dependencies = { "neoclide/coc-sources", "neoclide/coc-neco", "jsfaint/coc-neoinclude" },
+		dependencies = {
+			"neoclide/coc-sources",
+			"neoclide/coc-neco",
+			"jsfaint/coc-neoinclude",
+		},
+		lazy = false,
 	},
-	--use { 'beeender/Comrade' }
-
-	--TAGS
-	{ "ludovicchabant/vim-gutentags", ft = { "c", "cpp" } },
-	{ "skywind3000/gutentags_plus", ft = { "c", "cpp" } },
 
 	--SPLITTING
-	{ "christoomey/vim-tmux-navigator" },
-	{ "camspiers/lens.vim" },
+	{ "nvim-focus/focus.nvim", version = false },
 
 	--GENERAL
 	{ "rizzatti/dash.vim" },
-	{ "thalesmello/lkml.vim" },
 	{ "github/copilot.vim" },
 
 	--C
-	{ "vim-scripts/a.vim", ft = { "c", "cpp" } },
 	{ "chrisbra/csv.vim" },
-	--RESTORATION
-	{ "vim-scripts/restore_view.vim" },
+
+	--SESSIONS
+	{
+		"rmagatti/auto-session",
+		config = function()
+			require("auto-session").setup({
+				log_level = "error",
+			})
+		end,
+	},
 
 	--NOTIFICATIONS
-	{ "folke/noice.nvim",
-	  event = "VeryLazy",
-	  opts = {
-		-- add any options here
-	  },
-	  dependencies = {
-		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-		"MunifTanjim/nui.nvim",
-		-- OPTIONAL:
-		--   `nvim-notify` is only needed, if you want to use the notification view.
-		--   If not available, we use `mini` as the fallback
-		"rcarriga/nvim-notify",
-		}
-	}
+	{
+		"folke/noice.nvim",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+	},
 })
