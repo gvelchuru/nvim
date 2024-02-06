@@ -5,7 +5,7 @@ vim.g.loaded_netrwPlugin = 1
 END
 
 lua require('plugins')
-colorscheme tokyonight
+colorscheme catppuccin-latte
 let g:ale_disable_lsp = 1
 if has('win32') || has('win64')
       source $HOME\AppData\Local\nvim\settings.vim
@@ -39,7 +39,7 @@ syntax enable
   if has('termguicolors')
           set termguicolors
   endif
-  set background=dark
+  set background=light
 "}
 
 augroup loading
@@ -112,4 +112,34 @@ vim.g.rainbow_delimiters = {
 }
 require('leap').create_default_mappings()
 require("focus").setup()
+require("catppuccin").setup({
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = false,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+        coc_nvim = true,
+        dashboard = true,
+        dropbar = {
+          enabled = true,
+          color_mode = true
+        },
+        leap = true,
+        rainbow_delimiters = true,
+        telescope = {
+          enabled = true,
+          -- style = "nvchad"
+        },
+        lsp_trouble = true,
+        illuminate = {
+        enabled = true,
+        lsp = true
+}
+    }
+})
 EOF

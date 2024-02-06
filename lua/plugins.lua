@@ -48,16 +48,7 @@ return require("lazy").setup({
 		lazy = true,
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 	},
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require("tokyonight").setup({
-				style = "storm",
-			})
-		end,
-	},
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "tommcdo/vim-lion", lazy = true, keys = { "gl", "gL" } },
 	{ "tpope/vim-sleuth" }, --heuristically set indent
 	{ "ncm2/float-preview.nvim" },
@@ -74,7 +65,7 @@ return require("lazy").setup({
 	},
 	--{ "gelguy/wilder.nvim" }, --doesn't work with nui
 	{ "hiphish/rainbow-delimiters.nvim", lazy = true },
-	{ "bekaboo/dropbar.nvim", lazy = true },
+	{ "bekaboo/dropbar.nvim", lazy = false },
 	{ "RRethy/vim-illuminate", lazy = true },
 	{
 		"nvimdev/dashboard-nvim",
