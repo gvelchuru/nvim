@@ -165,6 +165,8 @@ lua << EOF
 
   -- Set up lspconfig.
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  require("mason").setup()
+  require("mason-lspconfig").setup()
   require'lspconfig'.solargraph.setup{}
   require'lspconfig'.gopls.setup{}
 

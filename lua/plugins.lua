@@ -133,6 +133,8 @@ return require("lazy").setup({
 		},
 		lazy = false,
 	},
+	{"williamboman/mason.nvim"},
+	{"williamboman/mason-lspconfig.nvim"},
 	{ 'nvimtools/none-ls.nvim', dependencies = {"nvim-lua/plenary.nvim"}},
 
 	--SPLITTING
