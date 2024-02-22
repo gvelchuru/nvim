@@ -12,36 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 return require("lazy").setup({
-	-- PY
-	{
-		"tweekmonster/braceless.vim",
-		ft = "py",
-		lazy = true,
-		build = function()
-			vim.fn["call plugins#_brace"](0)
-		end,
-	},
-
-	--TEX
-	{
-		"lervag/vimtex",
-		ft = "tex",
-		lazy = true,
-		build = function()
-			vim.fn["call plugins#_tex"](0)
-		end,
-	},
-
-	--PLANTUML
-	{
-		"weirongxu/plantuml-previewer.vim",
-		lazy = true,
-		requires = {
-			"tyru/open-browser.vim",
-			"aklt/plantuml-syntax",
-		},
-	},
-
 	--AESTHETIC
 	{
 		"nvim-lualine/lualine.nvim",
@@ -49,11 +19,9 @@ return require("lazy").setup({
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 	},
 	{ "folke/tokyonight.nvim", priority = 1000, lazy = false },
-	--{ "morhetz/gruvbox", priority = 1000, lazy = false },
-	--{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "tommcdo/vim-lion", lazy = true, keys = { "gl", "gL" } },
 	{ "tpope/vim-sleuth" }, --heuristically set indent
-	{ "ncm2/float-preview.nvim" },
+	--{ "ncm2/float-preview.nvim" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = true,
@@ -77,30 +45,7 @@ return require("lazy").setup({
 				-- config
 			})
 		end,
-		dependencies = { { "nvim-tree/nvim-web-devicons" } },
-	},
-	{
-		"luukvbaal/statuscol.nvim",
-		config = function()
-			-- local builtin = require("statuscol.builtin")
-			require("statuscol").setup({
-				-- configuration goes here, for example:
-				-- relculright = true,
-				-- segments = {
-				--   { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-				--   {
-				--     sign = { name = { "Diagnostic" }, maxwidth = 2, auto = true },
-				--     click = "v:lua.ScSa"
-				--   },
-				--   { text = { builtin.lnumfunc }, click = "v:lua.ScLa", },
-				--   {
-				--     sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, auto = true, wrap = true },
-				--     click = "v:lua.ScSa"
-				--   },
-				-- }
-			})
-		end,
-		lazy = false,
+		dependencies = {  "nvim-tree/nvim-web-devicons"  },
 	},
 
 	--TEXT OBJECTS
@@ -109,8 +54,13 @@ return require("lazy").setup({
 	{ "nelstrom/vim-visual-star-search", lazy = true, keys = { "*", "#" } },
 
 	--SNIPPETS
-	{ "SirVer/ultisnips" },
-	{ "honza/vim-snippets" },
+	{
+		"L3MON4D3/LuaSnip",
+		-- follow latest release.
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp",
+	},
 
 	--SEARCH
 	{ "ggandor/leap.nvim" },
@@ -119,7 +69,6 @@ return require("lazy").setup({
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-fzy-native.nvim",
-			"fannheyward/telescope-coc.nvim",
 		},
 	},
 
@@ -131,7 +80,7 @@ return require("lazy").setup({
 		config = function()
 			require("gitsigns").setup({
 				current_line_blame = true,
-				signcolumn = false,
+				signcolumn = true,
 			})
 		end,
 		dependencies = { "tpope/vim-fugitive", "folke/trouble.nvim" },
@@ -149,7 +98,22 @@ return require("lazy").setup({
 	{ "michaeljsmith/vim-indent-object" },
 
 	--COMPLETION/LINTING
-	{ "dense-analysis/ale", lazy = false },
+	{
+		"hrsh7th/nvim-cmp",
+		lazy = false,
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/nvim-cmp",
+			"L3MON4D3/LuaSnip",
+			"petertriho/cmp-git",
+			"onsails/lspkind.nvim",
+			"zbirenbaum/copilot-cmp"
+		},
+	},
 	{
 		"folke/trouble.nvim",
 		requires = {
@@ -157,35 +121,32 @@ return require("lazy").setup({
 			"folke/lsp-colors.nvim",
 		},
 		opts = {
-		signs = {
-      -- icons / text used for a diagnostic
-      error = "",
-      warning = "",
-      hint = "",
-      information = "",
-      other = "",
-
-    },},
-		lazy = false,
-	},
-	{ "Shougo/neoinclude.vim" },
-	{
-		"neoclide/coc.nvim",
-		branch = "release",
-		dependencies = {
-			"neoclide/coc-sources",
-			"neoclide/coc-neco",
-			"jsfaint/coc-neoinclude",
+			signs = {
+				-- icons / text used for a diagnostic
+				error = "",
+				warning = "",
+				hint = "",
+				information = "",
+				other = "",
+			},
+			use_diagnostic_signs = false
 		},
 		lazy = false,
 	},
+	{ 'nvimtools/none-ls.nvim', dependencies = {"nvim-lua/plenary.nvim"}},
 
 	--SPLITTING
 	{ "nvim-focus/focus.nvim", version = false },
 
 	--GENERAL
 	{ "rizzatti/dash.vim" },
-	{ "github/copilot.vim" },
+	{
+	  "zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot").setup({})
+		end,
+		dependencies = {'zbirenbaum/copilot.lua'}
+	},
 
 	--C
 	{ "chrisbra/csv.vim" },
