@@ -5,7 +5,7 @@ vim.g.loaded_netrwPlugin = 1
 END
 
 lua require('plugins')
-colorscheme catppuccin-latte
+colorscheme tokyonight-day
 let g:ale_disable_lsp = 1
 if has('win32') || has('win64')
       source $HOME\AppData\Local\nvim\settings.vim
@@ -77,13 +77,28 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+require("trouble").setup()
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
 require('telescope').setup {
     extensions = {
         fzy_native = {
             override_generic_sorter = false,
             override_file_sorter = true, },
         coc = { theme = 'ivy' }
-    }
+    },
+    defaults = {
+        mappings = {
+          i = { ["<c-t>"] = trouble.open_with_trouble },
+          n = { ["<c-t>"] = trouble.open_with_trouble },
+        },
+  },
 }
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('coc')
@@ -112,34 +127,4 @@ vim.g.rainbow_delimiters = {
 }
 require('leap').create_default_mappings()
 require("focus").setup()
-require("catppuccin").setup({
-    integrations = {
-        cmp = true,
-        gitsigns = true,
-        nvimtree = true,
-        treesitter = true,
-        notify = false,
-        mini = {
-            enabled = true,
-            indentscope_color = "",
-        },
-        coc_nvim = true,
-        dashboard = true,
-        dropbar = {
-          enabled = true,
-          color_mode = true
-        },
-        leap = true,
-        rainbow_delimiters = true,
-        telescope = {
-          enabled = true,
-          -- style = "nvchad"
-        },
-        lsp_trouble = true,
-        illuminate = {
-        enabled = true,
-        lsp = true
-}
-    }
-})
 EOF

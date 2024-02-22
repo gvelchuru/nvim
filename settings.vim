@@ -43,7 +43,6 @@
 
   set hidden
   set number
-  set signcolumn=yes
 "}
 
 
@@ -80,6 +79,4 @@
   "back to last buffer
   nnoremap <leader>q :b#<cr> 
   "nnoremap <leader>t :TTags<space>*<space>*<space>.<cr> need ttags
-  map <Leader><Leader> <Plug>(easymotion-prefix)
-
 "}

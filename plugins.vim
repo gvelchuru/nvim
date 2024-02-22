@@ -1,6 +1,6 @@
 scriptencoding utf-8
 " COC {
-let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver', 'coc-powershell', 'coc-omnisharp', 'coc-rust-analyzer', 'coc-lua', 'coc-solargraph', 'coc-protobuf', 'coc-go']
+let g:coc_global_extensions = ['coc-vimtex', 'coc-ultisnips', 'coc-yank', 'coc-json', 'coc-yaml', 'coc-python', 'coc-sh', 'coc-git', 'coc-tsserver', 'coc-powershell', 'coc-omnisharp', 'coc-rust-analyzer', 'coc-lua', 'coc-solargraph', 'coc-protobuf', 'coc-go', 'coc-solidity']
 
   function! s:check_back_space() abort
     let col = col('.') - 1
@@ -127,10 +127,11 @@ let g:lion_squeeze_spaces = 1
 lua << END
 require('lualine').setup {
 	options = {
-		theme = 'catppuccin'
+		theme = 'auto',
+		component_separators = '',
+		section_separators = '',
 	},
-      sections = {
-	lualine_c = {'filename', 'g:coc_status'}
-	}
+	extensions = {'trouble', 'lazy', 'fzf', 'quickfix'},
 }
+require('lualine').get_config()
 END

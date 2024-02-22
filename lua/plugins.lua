@@ -48,7 +48,9 @@ return require("lazy").setup({
 		lazy = true,
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 	},
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{ "folke/tokyonight.nvim", priority = 1000, lazy = false },
+	--{ "morhetz/gruvbox", priority = 1000, lazy = false },
+	--{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "tommcdo/vim-lion", lazy = true, keys = { "gl", "gL" } },
 	{ "tpope/vim-sleuth" }, --heuristically set indent
 	{ "ncm2/float-preview.nvim" },
@@ -154,18 +156,16 @@ return require("lazy").setup({
 			"kyazdani42/nvim-web-devicons",
 			"folke/lsp-colors.nvim",
 		},
-		config = function()
-			require("trouble").setup({
-				--[[signs = {
-			   [-- icons / text used for a diagnostic
-			   [error = "error",
-			   [warning = "warn",
-			   [hint = "hint",
-			   [information = "info"
-			   [},
-			   [use_diagnostic_signs = true]]
-			})
-		end,
+		opts = {
+		signs = {
+      -- icons / text used for a diagnostic
+      error = "",
+      warning = "",
+      hint = "",
+      information = "",
+      other = "",
+
+    },},
 		lazy = false,
 	},
 	{ "Shougo/neoinclude.vim" },
