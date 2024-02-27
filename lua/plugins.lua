@@ -135,7 +135,7 @@ return require("lazy").setup({
 	},
 	{"williamboman/mason.nvim"},
 	{"williamboman/mason-lspconfig.nvim"},
-	{ 'nvimtools/none-ls.nvim', dependencies = {"nvim-lua/plenary.nvim"}},
+	{ 'nvimtools/none-ls.nvim', name = "null-ls", dependencies = {"nvim-lua/plenary.nvim"}},
 
 	--SPLITTING
 	{ "nvim-focus/focus.nvim", version = false },
@@ -144,10 +144,19 @@ return require("lazy").setup({
 	{ "rizzatti/dash.vim" },
 	{
 	  "zbirenbaum/copilot-cmp",
-		config = function()
-			require("copilot").setup({})
-		end,
 		dependencies = {'zbirenbaum/copilot.lua'}
+	},
+	{
+		"zbirenbaum/copilot.lua",
+	    cmd = "Copilot",
+	    event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+			  filetypes = { ["*"] = true },
+			  suggestion = { enabled = false },
+			  panel = { enabled = false },
+			})
+		end
 	},
 
 	--C

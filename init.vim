@@ -172,6 +172,8 @@ lua << EOF
   require'lspconfig'.solargraph.setup{}
   require'lspconfig'.gopls.setup{}
   require'lspconfig'.bufls.setup{}
+  require'lspconfig'.yamlls.setup{}
+  require'lspconfig'.vimls.setup{}
 
   require('lualine').setup {
       options = {
@@ -196,7 +198,12 @@ lua << EOF
           null_ls.builtins.diagnostics.golangci_lint,
           null_ls.builtins.diagnostics.gospel,
           null_ls.builtins.diagnostics.vint,
-          null_ls.builtins.diagnostics.buf
+          null_ls.builtins.diagnostics.buf,
+          null_ls.builtins.diagnostics.spectral,
+          null_ls.builtins.diagnostics.standardrb,
+          null_ls.builtins.formatting.rubyfmt,
+          null_ls.builtins.formatting.rufo,
+          null_ls.builtins.formatting.standardrb
       },
   })
 EOF
