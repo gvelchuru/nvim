@@ -166,9 +166,12 @@ lua << EOF
   -- Set up lspconfig.
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
   require("mason").setup()
-  require("mason-lspconfig").setup()
+  require("mason-lspconfig").setup{
+    automatic_installation = true
+  }
   require'lspconfig'.solargraph.setup{}
   require'lspconfig'.gopls.setup{}
+  require'lspconfig'.bufls.setup{}
 
   require('lualine').setup {
       options = {
@@ -192,7 +195,8 @@ lua << EOF
           null_ls.gitsigns,
           null_ls.builtins.diagnostics.golangci_lint,
           null_ls.builtins.diagnostics.gospel,
-          null_ls.builtins.diagnostics.vint
+          null_ls.builtins.diagnostics.vint,
+          null_ls.builtins.diagnostics.buf
       },
   })
 EOF
