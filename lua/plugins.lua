@@ -107,13 +107,14 @@ return require("lazy").setup({
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"hrsh7th/nvim-cmp",
 			"L3MON4D3/LuaSnip",
+			'saadparwaiz1/cmp_luasnip',
 			"petertriho/cmp-git",
 			"onsails/lspkind.nvim",
 			"zbirenbaum/copilot-cmp"
 		},
 	},
+	{ "petertriho/cmp-git", dependencies = {"nvim-lua/plenary.nvim"}},
 	{
 		"folke/trouble.nvim",
 		requires = {
@@ -144,18 +145,19 @@ return require("lazy").setup({
 	{ "rizzatti/dash.vim" },
 	{
 	  "zbirenbaum/copilot-cmp",
-		dependencies = {'zbirenbaum/copilot.lua'}
+		dependencies = {'zbirenbaum/copilot.lua'},
+	  config = function ()
+		require("copilot_cmp").setup()
+	  end
 	},
 	{
 		"zbirenbaum/copilot.lua",
-	    cmd = "Copilot",
-	    event = "InsertEnter",
-		config = function()
-			require("copilot").setup({
-			  filetypes = { ["*"] = true },
-			  suggestion = { enabled = false },
-			  panel = { enabled = false },
-			})
+		config = function ()
+		  require("copilot").setup({
+			filetypes = { ["*"] = true },
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+		  })
 		end
 	},
 

@@ -100,13 +100,9 @@ lua << EOF
   }
   require('leap').create_default_mappings()
   require("focus").setup()
-  require("copilot").setup({
-    suggestion = { enabled = false },
-    panel = { enabled = false },
-  })
+  require("cmp_git").setup()
   local lspkind = require'lspkind'
   local cmp = require'cmp'
-
   cmp.setup({
     snippet = {
       expand = function(args)
@@ -125,13 +121,12 @@ lua << EOF
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'luasnip' },
-      { name = 'git' },
-      { name = 'copilot' },
-    }, {
-      { name = 'buffer' },
-      { name = 'path' },
+      --{ name = 'nvim_lsp'},
+      { name = 'luasnip'},
+      { name = 'git'},
+      { name = 'copilot'},
+      { name = 'buffer'},
+      { name = 'path'},
     }),
     formatting = {
     format = lspkind.cmp_format({
@@ -162,18 +157,43 @@ lua << EOF
       { name = 'cmdline' }
     })
   })
+   
+
+
 
   -- Set up lspconfig.
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+  local function on_attach(_, bufnr)
+      local bufopts = { buffer = bufnr }
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+      vim.keymap.set("n", "<LEADER>k", vim.lsp.buf.hover, bufopts)
+      vim.keymap.set("n", "<LEADER>r", vim.lsp.buf.rename, bufopts)
+      vim.keymap.set("n", "<LEADER>a", vim.lsp.buf.code_action, bufopts)
+      vim.keymap.set("v", "<LEADER>a", vim.lsp.buf.code_action, bufopts)
+    end
+
+  local lsp_opts = {
+     capabilities = capabilities,
+     on_attach = on_attach
+   }
+  local lspconfig = require("lspconfig")
   require("mason").setup()
-  require("mason-lspconfig").setup{
-    automatic_installation = true
+  require("mason-lspconfig").setup()
+  require("mason-lspconfig").setup_handlers {
+      function (server_name)
+        lspconfig[server_name].setup(lsp_opts)
+      end,
   }
-  require'lspconfig'.solargraph.setup{}
-  require'lspconfig'.gopls.setup{}
-  require'lspconfig'.bufls.setup{}
-  require'lspconfig'.yamlls.setup{}
-  require'lspconfig'.vimls.setup{}
+  require'lspconfig'.solargraph.setup({})
+  require'lspconfig'.luals.setup({})
+  require'lspconfig'.gopls.setup({})
+  require'lspconfig'.bufls.setup({})
+  require'lspconfig'.yamlls.setup({})
+  require'lspconfig'.vimls.setup({})
+  require'lspconfig'.standardrb.setup({})
+  require'lspconfig'.eslint.setup({})
+   
 
   require('lualine').setup {
       options = {
@@ -189,21 +209,16 @@ lua << EOF
   null_ls.setup({
       sources = {
           null_ls.builtins.formatting.stylua,
-          null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.completion.spell,
           null_ls.builtins.code_actions.gitrebase,
           null_ls.builtins.diagnostics.reek,
           null_ls.builtins.diagnostics.rubocop,
           null_ls.gitsigns,
           null_ls.builtins.diagnostics.golangci_lint,
-          null_ls.builtins.diagnostics.gospel,
           null_ls.builtins.diagnostics.vint,
           null_ls.builtins.diagnostics.buf,
           null_ls.builtins.diagnostics.spectral,
-          null_ls.builtins.diagnostics.standardrb,
           null_ls.builtins.formatting.rubyfmt,
           null_ls.builtins.formatting.rufo,
-          null_ls.builtins.formatting.standardrb
       },
   })
 EOF
