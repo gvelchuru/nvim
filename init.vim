@@ -179,14 +179,16 @@ lua << EOF
    }
   local lspconfig = require("lspconfig")
   require("mason").setup()
-  require("mason-lspconfig").setup()
+  require("mason-lspconfig").setup({
+    automatic_installation = true
+  })
   require("mason-lspconfig").setup_handlers {
       function (server_name)
         lspconfig[server_name].setup(lsp_opts)
       end,
   }
   require'lspconfig'.solargraph.setup({})
-  require'lspconfig'.luals.setup({})
+  require'lspconfig'.lua_ls.setup({})
   require'lspconfig'.gopls.setup({})
   require'lspconfig'.bufls.setup({})
   require'lspconfig'.yamlls.setup({})

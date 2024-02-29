@@ -93,7 +93,7 @@ return require("lazy").setup({
 			-- add any options here
 		},
 	},
-	{ "tpope/vim-surround" },
+	--{ "tpope/vim-surround" },
 	{ "wellle/targets.vim" },
 	{ "michaeljsmith/vim-indent-object" },
 
