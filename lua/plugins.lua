@@ -114,15 +114,15 @@ return require("lazy").setup({
 			"petertriho/cmp-git",
 			"onsails/lspkind.nvim",
 			"zbirenbaum/copilot-cmp",
-			"tzachar/cmp-fuzzy-buffer",
-			"tzachar/cmp-fuzzy-path",
 			"lukas-reineke/cmp-rg",
 			"tzachar/fuzzy.nvim"
 		},
 	},
-	{ 'tzachar/fuzzy.nvim', dependencies = {"junegunn/fzf.vim"}},
+	{ 'tzachar/fuzzy.nvim', dependencies = {"nvim-lua/plenary.nvim"}},
+	{'tzachar/cmp-fuzzy-buffer', requires = {'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim'}},
+	{'tzachar/cmp-fuzzy-path', requires = {'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim'}},
+	{'romgrk/fzy-lua-native', build = 'make'},
 	{ "petertriho/cmp-git", dependencies = {"nvim-lua/plenary.nvim"}},
-	{ "junegunn/fzf.vim", dependencies = {"junegunn/fzf"}},
 	{
 		"folke/trouble.nvim",
 		requires = {
