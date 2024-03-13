@@ -104,6 +104,8 @@ return require("lazy").setup({
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp-document-symbol",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
@@ -111,10 +113,16 @@ return require("lazy").setup({
 			'saadparwaiz1/cmp_luasnip',
 			"petertriho/cmp-git",
 			"onsails/lspkind.nvim",
-			"zbirenbaum/copilot-cmp"
+			"zbirenbaum/copilot-cmp",
+			"tzachar/cmp-fuzzy-buffer",
+			"tzachar/cmp-fuzzy-path",
+			"lukas-reineke/cmp-rg",
+			"tzachar/fuzzy.nvim"
 		},
 	},
+	{ 'tzachar/fuzzy.nvim', dependencies = {"junegunn/fzf.vim"}},
 	{ "petertriho/cmp-git", dependencies = {"nvim-lua/plenary.nvim"}},
+	{ "junegunn/fzf.vim", dependencies = {"junegunn/fzf"}},
 	{
 		"folke/trouble.nvim",
 		requires = {

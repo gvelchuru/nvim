@@ -121,12 +121,14 @@ lua << EOF
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
-      --{ name = 'nvim_lsp'},
+      { name = 'nvim_lsp_document_symbol'},
+      { name = 'nvim_lsp_signature_help'},
       { name = 'luasnip'},
       { name = 'git'},
       { name = 'copilot'},
-      { name = 'buffer'},
-      { name = 'path'},
+      { name = 'fuzzy_buffer'},
+      { name = 'fuzzy_path'},
+      { name = 'rg'}
     }),
     formatting = {
     format = lspkind.cmp_format({
@@ -195,6 +197,21 @@ lua << EOF
   require'lspconfig'.vimls.setup({})
   require'lspconfig'.standardrb.setup({})
   require'lspconfig'.eslint.setup({})
+  require'lspconfig'.biome.setup({})
+  require'lspconfig'.ember.setup({})
+  require'lspconfig'.emmet_language_server.setup({})
+  require'lspconfig'.flow.setup({})
+  require'lspconfig'.glint.setup({})
+  require'lspconfig'.quick_lint_js.setup({})
+  require'lspconfig'.stylelint_lsp.setup({})
+  require'lspconfig'.tsserver.setup({})
+
+
+
+
+
+
+
    
 
   require('lualine').setup {
@@ -213,7 +230,7 @@ lua << EOF
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.code_actions.gitrebase,
           null_ls.builtins.diagnostics.reek,
-          null_ls.builtins.diagnostics.rubocop,
+          --null_ls.builtins.diagnostics.rubocop,
           null_ls.gitsigns,
           null_ls.builtins.diagnostics.golangci_lint,
           null_ls.builtins.diagnostics.vint,
@@ -221,6 +238,12 @@ lua << EOF
           null_ls.builtins.diagnostics.spectral,
           null_ls.builtins.formatting.rubyfmt,
           null_ls.builtins.formatting.rufo,
+          null_ls.builtins.diagnostics.checkmake,
+          null_ls.builtins.diagnostics.djlint,
+          null_ls.builtins.diagnostics.dotenv_linter,
+          null_ls.builtins.diagnostics.erb_lint,
+          null_ls.builtins.diagnostics.gitlint,
+          null_ls.builtins.formatting.prettierd
       },
   })
 EOF
