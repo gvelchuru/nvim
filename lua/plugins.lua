@@ -138,7 +138,7 @@ return require("lazy").setup({
 				information = "",
 				other = "",
 			},
-			use_diagnostic_signs = false
+			use_diagnostic_signs = true
 		},
 		lazy = false,
 	},
