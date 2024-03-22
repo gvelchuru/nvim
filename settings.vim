@@ -68,15 +68,6 @@
 "}
 
 "Leader mapping {
-  nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
-  nnoremap <leader>b :b <C-d>
-  "nnoremap <leader>e :e **/
   nnoremap <Leader>g <cmd>Telescope live_grep<cr>
   nnoremap <leader>i :Ilist<space>
-  nnoremap <leader>j :tjump /
-  nnoremap <leader>m :make<cr>
-  "nnoremap <leader>s :call StripTrailingWhitespace()<cr>
-  "back to last buffer
-  nnoremap <leader>q :b#<cr> 
-  "nnoremap <leader>t :TTags<space>*<space>*<space>.<cr> need ttags
 "}

@@ -19,7 +19,6 @@ return require("lazy").setup({
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 	},
 	{ "folke/tokyonight.nvim", priority = 1000, lazy = false },
-	{ "tommcdo/vim-lion", lazy = true, keys = { "gl", "gL" } },
 	{ "tpope/vim-sleuth" }, --heuristically set indent
 	--{ "ncm2/float-preview.nvim" },
 	{

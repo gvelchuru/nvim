@@ -3,35 +3,17 @@ scriptencoding utf-8
 lua << END
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
+require('plugins')
+vim.cmd('colorscheme tokyonight-day')
 END
 
-lua require('plugins')
-colorscheme tokyonight-day
-if has('win32') || has('win64')
-      source $HOME\AppData\Local\nvim\settings.vim
-else
-      source $HOME/.config/nvim/settings.vim
-endif
-syntax enable
-
-
-"FOLDING {
-  set foldmethod=syntax
-  set foldnestmax=3
-  set foldlevel=2
-  set foldenable
-  nnoremap <space> za
-"}
-
-" COLORS {
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  if has('termguicolors')
-    set termguicolors
-  endif
-  set background=light
-"}
+source $HOME/.config/nvim/settings.vim
 
 lua << EOF
+  vim.cmd('syntax enable')
+  vim.env.NVIM_TUI_ENABLE_TRUE_COLOR=1
+  vim.opt.termguicolors=true
+  vim.opt.background="light"
   require'nvim-treesitter.configs'.setup {
     ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "go", "ruby"},
 
@@ -246,12 +228,8 @@ lua << EOF
           null_ls.builtins.formatting.prettierd
       },
   })
+vim.g['NERDCompactSexyComs'] = 1
+vim.keymap.set('n', '<C-P>', '<cmd>Telescope find_files<cr>')
 EOF
-
-"NERD
-let g:NERDCompactSexyComs = 1
-
-"remap telescope
-nnoremap <C-P> <cmd>Telescope find_files<cr>
 
 let g:lion_squeeze_spaces = 1
