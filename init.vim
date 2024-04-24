@@ -187,14 +187,11 @@ lua << EOF
   require'lspconfig'.quick_lint_js.setup({})
   require'lspconfig'.stylelint_lsp.setup({})
   require'lspconfig'.tsserver.setup({})
-
-
-
-
-
-
-
-   
+  require'lspconfig'.pyright.setup({})
+  require'lspconfig'.ruff.setup({})
+  require'lspconfig'.ruff_lsp.setup({})
+  require'lspconfig'.anakin_language_server.setup({})
+  require'lspconfig'.biome.setup{}
 
   require('lualine').setup {
       options = {
@@ -209,6 +206,7 @@ lua << EOF
 
   null_ls.setup({
       sources = {
+          null_ls.builtins.formatting.biome,
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.code_actions.gitrebase,
           null_ls.builtins.diagnostics.reek,
@@ -225,7 +223,11 @@ lua << EOF
           null_ls.builtins.diagnostics.dotenv_linter,
           null_ls.builtins.diagnostics.erb_lint,
           null_ls.builtins.diagnostics.gitlint,
-          null_ls.builtins.formatting.prettierd
+          --null_ls.builtins.formatting.prettierd, # replaced by biome
+          null_ls.builtins.diagnostics.mypy,
+          null_ls.builtins.diagnostics.pylint,
+          null_ls.builtins.diagnostics.semgrep,
+          null_ls.builtins.formatting.blackd
       },
   })
 vim.g['NERDCompactSexyComs'] = 1
