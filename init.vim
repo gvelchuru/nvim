@@ -4,7 +4,7 @@ lua << END
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 require('plugins')
-vim.cmd('colorscheme tokyonight-day')
+vim.cmd('colorscheme catppuccin-macchiato')
 END
 
 source $HOME/.config/nvim/settings.vim
@@ -13,7 +13,7 @@ lua << EOF
   vim.cmd('syntax enable')
   vim.env.NVIM_TUI_ENABLE_TRUE_COLOR=1
   vim.opt.termguicolors=true
-  vim.opt.background="light"
+  vim.opt.background="dark"
   require'nvim-treesitter.configs'.setup {
     ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "go", "ruby"},
 
