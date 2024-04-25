@@ -46,6 +46,7 @@ return require("lazy").setup({
 		end,
 		dependencies = {  "nvim-tree/nvim-web-devicons"  },
 	},
+	{ "mistricky/codesnap.nvim", build = "make" },
 
 	--TEXT OBJECTS
 	{ "tpope/vim-repeat", keys = "." },
@@ -124,9 +125,9 @@ return require("lazy").setup({
 	{ "petertriho/cmp-git", dependencies = {"nvim-lua/plenary.nvim"}},
 	{
 		"folke/trouble.nvim",
+	    branch = "dev",
 		requires = {
-			"kyazdani42/nvim-web-devicons",
-			"folke/lsp-colors.nvim",
+			"kyazdani42/nvim-web-devicons"
 		},
 		opts = {
 			signs = {
@@ -172,14 +173,14 @@ return require("lazy").setup({
 	{ "chrisbra/csv.vim" },
 
 	--SESSIONS
-	{
-		"rmagatti/auto-session",
-		config = function()
-			require("auto-session").setup({
-				log_level = "error",
-			})
-		end,
-	},
+	--{
+		--"rmagatti/auto-session",
+		--config = function()
+			--require("auto-session").setup({
+			--	log_level = "error",
+			--})
+		--end,
+	--},
 
 	--NOTIFICATIONS
 	{

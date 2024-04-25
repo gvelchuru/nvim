@@ -42,7 +42,8 @@
   set conceallevel=2 concealcursor=i
 
   set hidden
-  set number
+  set signcolumn=auto
+  "set number
 "}
 
 

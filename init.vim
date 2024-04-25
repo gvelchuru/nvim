@@ -205,6 +205,9 @@ lua << EOF
   local null_ls = require("null-ls")
 
   null_ls.setup({
+      diagnostic_config = {
+        signs = false,
+      },
       sources = {
           null_ls.builtins.formatting.biome,
           null_ls.builtins.formatting.stylua,
