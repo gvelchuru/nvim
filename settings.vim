@@ -6,44 +6,16 @@
   noremap \ ,
   set backspace=indent,eol,start
   set wildmode=longest,full
-  set history=1000
   set ignorecase
   set smartcase
-  set autoindent
-  set showcmd
-  set cmdheight=1
   set showmatch
   set incsearch
   set hlsearch
 
   set splitbelow
   set splitright
-  set scrolljump=5
-  set scrolloff=3
-  set pastetoggle=<F12>
-
-  set nobackup
-  set nowritebackup
-  set updatetime=300
-
-  set undofile
-  set undolevels=1000
-  set undoreload=10000
 
   set viewoptions=cursor,folds,slash,unix
-
-  set tabstop=4
-  set softtabstop=0 noexpandtab
-  set shiftwidth=4
-
-  if has('pumblend')
-    set pumblend=30
-  endif
-  set conceallevel=2 concealcursor=i
-
-  set hidden
-  set signcolumn=auto
-  "set number
 "}
 
 

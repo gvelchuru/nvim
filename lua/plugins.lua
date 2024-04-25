@@ -129,22 +129,10 @@ return require("lazy").setup({
 		requires = {
 			"kyazdani42/nvim-web-devicons"
 		},
-		opts = {
-			signs = {
-				-- icons / text used for a diagnostic
-				error = "",
-				warning = "",
-				hint = "",
-				information = "",
-				other = "",
-			},
-			use_diagnostic_signs = true
-		},
 		lazy = false,
 	},
 	{"williamboman/mason.nvim"},
 	{"williamboman/mason-lspconfig.nvim"},
-	{ 'nvimtools/none-ls.nvim', name = "null-ls", dependencies = {"nvim-lua/plenary.nvim"}},
 
 	--SPLITTING
 	{ "nvim-focus/focus.nvim", version = false },

@@ -202,39 +202,12 @@ lua << EOF
       extensions = {'trouble', 'lazy', 'fzf', 'quickfix'},
   }
   require('lualine').get_config()
-  local null_ls = require("null-ls")
 
-  null_ls.setup({
-      diagnostic_config = {
-        signs = false,
-      },
-      sources = {
-          null_ls.builtins.formatting.biome,
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.code_actions.gitrebase,
-          null_ls.builtins.diagnostics.reek,
-          --null_ls.builtins.diagnostics.rubocop,
-          null_ls.gitsigns,
-          null_ls.builtins.diagnostics.golangci_lint,
-          null_ls.builtins.diagnostics.vint,
-          null_ls.builtins.diagnostics.buf,
-          null_ls.builtins.diagnostics.spectral,
-          null_ls.builtins.formatting.rubyfmt,
-          null_ls.builtins.formatting.rufo,
-          null_ls.builtins.diagnostics.checkmake,
-          null_ls.builtins.diagnostics.djlint,
-          null_ls.builtins.diagnostics.dotenv_linter,
-          null_ls.builtins.diagnostics.erb_lint,
-          null_ls.builtins.diagnostics.gitlint,
-          --null_ls.builtins.formatting.prettierd, # replaced by biome
-          null_ls.builtins.diagnostics.mypy,
-          null_ls.builtins.diagnostics.pylint,
-          null_ls.builtins.diagnostics.semgrep,
-          null_ls.builtins.formatting.blackd
-      },
-  })
-vim.g['NERDCompactSexyComs'] = 1
-vim.keymap.set('n', '<C-P>', '<cmd>Telescope find_files<cr>')
+  vim.g['NERDCompactSexyComs'] = 1
+  vim.keymap.set('n', '<C-P>', '<cmd>Telescope find_files<cr>')
 EOF
 
-let g:lion_squeeze_spaces = 1
+sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=
+sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=
+sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=
+sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
