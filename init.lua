@@ -17,7 +17,7 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "go", "ruby"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+  sync_install = true,
 
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
@@ -36,7 +36,7 @@ require'nvim-treesitter.configs'.setup {
 require("trouble").setup()
 vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
 local actions = require("telescope.actions")
-local trouble = require("trouble.providers.telescope")
+local trouble = require("trouble.sources.telescope")
 require('telescope').setup {
     extensions = {
         fzy_native = {
@@ -45,8 +45,8 @@ require('telescope').setup {
     },
     defaults = {
         mappings = {
-          i = { ["<c-t>"] = trouble.open_with_trouble },
-          n = { ["<c-t>"] = trouble.open_with_trouble },
+          i = { ["<c-t>"] = trouble.open },
+          n = { ["<c-t>"] = trouble.open },
         },
   },
 }
@@ -209,3 +209,5 @@ vim.cmd('sign define DiagnosticSignError text= texthl=DiagnosticSignError lin
 vim.cmd('sign define DiagnosticSignWarn text= texthl= linehl= numhl=')
 vim.cmd('sign define DiagnosticSignInfo text= texthl= linehl= numhl=')
 vim.cmd('sign define DiagnosticSignHint text= texthl= linehl= numhl=')
+vim.o.undofile = true
+require('fundo').setup()

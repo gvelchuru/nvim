@@ -156,6 +156,10 @@ return require("lazy").setup({
 		  })
 		end
 	},
+	{
+    'kevinhwang91/nvim-fundo', dependencies = 'kevinhwang91/promise-async',
+     config = function() require('fundo').install() end
+	},
 
 	--C
 	{ "chrisbra/csv.vim" },
