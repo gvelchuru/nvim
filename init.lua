@@ -1,7 +1,6 @@
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 require('plugins')
-vim.cmd('colorscheme catppuccin-macchiato')
 vim.cmd('set number')
 vim.cmd('set signcolumn=number')
 vim.cmd('set ignorecase')
@@ -12,7 +11,8 @@ vim.cmd('set hlsearch')
 vim.cmd('syntax enable')
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR=1
 vim.opt.termguicolors=true
-vim.opt.background="dark"
+vim.opt.background="light"
+vim.cmd[[colorscheme tokyonight-day]]
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "go", "ruby"},
 
@@ -189,7 +189,7 @@ require'lspconfig'.biome.setup{}
 
 require('lualine').setup {
     options = {
-        theme = 'auto',
+        theme = 'tokyonight',
         component_separators = '',
         section_separators = '',
     },
