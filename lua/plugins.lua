@@ -18,7 +18,8 @@ return require("lazy").setup({
 		lazy = true,
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 	},
-	{ 'folke/tokyonight.nvim', lazy = false},
+	--{ "savq/melange-nvim", lazy = false}, 
+	{"catppuccin/nvim", name = "catppuccin", priority = 1000, lazy = false},
 	{ "tpope/vim-sleuth" }, --heuristically set indent
 	--{ "ncm2/float-preview.nvim" },
 	{

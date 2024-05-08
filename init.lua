@@ -11,8 +11,8 @@ vim.cmd('set hlsearch')
 vim.cmd('syntax enable')
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR=1
 vim.opt.termguicolors=true
-vim.opt.background="light"
-vim.cmd[[colorscheme tokyonight-day]]
+vim.opt.background="dark"
+vim.cmd[[colorscheme catppuccin-mocha]]
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "go", "ruby"},
 
@@ -189,7 +189,7 @@ require'lspconfig'.biome.setup{}
 
 require('lualine').setup {
     options = {
-        theme = 'tokyonight',
+        theme = 'auto',
         component_separators = '',
         section_separators = '',
     },
