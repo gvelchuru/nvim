@@ -12,7 +12,7 @@ vim.cmd('syntax enable')
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR=1
 vim.opt.termguicolors=true
 vim.opt.background="dark"
-vim.cmd[[colorscheme catppuccin-mocha]]
+vim.cmd[[colorscheme catppuccin-macchiato]]
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "go", "ruby"},
 
@@ -165,7 +165,10 @@ require("mason-lspconfig").setup_handlers {
       lspconfig[server_name].setup(lsp_opts)
     end,
 }
+require'lspconfig'.syntax_tree.setup{}
 require'lspconfig'.solargraph.setup({})
+--require'lspconfig'.typeprof.setup{}
+--require'lspconfig'.sorbet.setup{}
 require'lspconfig'.lua_ls.setup({})
 require'lspconfig'.gopls.setup({})
 require'lspconfig'.bufls.setup({})
@@ -186,6 +189,9 @@ require'lspconfig'.ruff.setup({})
 require'lspconfig'.ruff_lsp.setup({})
 require'lspconfig'.anakin_language_server.setup({})
 require'lspconfig'.biome.setup{}
+require'lspconfig'.harper_ls.setup{}
+require'lspconfig'.ruby_lsp.setup{}
+
 
 require('lualine').setup {
     options = {
@@ -211,3 +217,32 @@ vim.cmd('sign define DiagnosticSignInfo text= texthl= linehl= numhl=')
 vim.cmd('sign define DiagnosticSignHint text= texthl= linehl= numhl=')
 vim.o.undofile = true
 require('fundo').setup()
+
+require("mason-nvim-lint").setup()
+
+require('lint').linters_by_ft = {
+  markdown = {'vale',},
+  ruby = {'rubocop', 'trivy'},
+}
+vim.api.nvim_create_autocmd({"BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
+--require("noice").setup({
+ -- lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+  --  override = {
+   --   ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+    --  ["vim.lsp.util.stylize_markdown"] = true,
+     -- ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+   -- },
+  --},
+  -- you can enable a preset for easier configuration
+  --presets = {
+    --command_palette = false, -- position the cmdline and popupmenu together
+    --long_message_to_split = true, -- long messages will be sent to a split
+    --inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    --lsp_doc_border = true, -- add a border to hover docs and signature help
+  --},
+--})

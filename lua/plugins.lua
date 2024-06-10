@@ -71,6 +71,7 @@ return require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-fzy-native.nvim",
 		},
+		lazy = true
 	},
 
 	--GIT
@@ -101,7 +102,7 @@ return require("lazy").setup({
 	--COMPLETION/LINTING
 	{
 		"hrsh7th/nvim-cmp",
-		lazy = false,
+		lazy = true,
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"hrsh7th/cmp-nvim-lsp",
@@ -126,20 +127,20 @@ return require("lazy").setup({
 	{ "petertriho/cmp-git", dependencies = {"nvim-lua/plenary.nvim"}},
 	{
 		"folke/trouble.nvim",
-	    branch = "dev",
 		requires = {
 			"kyazdani42/nvim-web-devicons"
 		},
 		lazy = false,
 	},
 	{"williamboman/mason.nvim"},
+	{"rshkarin/mason-nvim-lint"},
 	{"williamboman/mason-lspconfig.nvim"},
+	{"mfussenegger/nvim-lint"},
 
 	--SPLITTING
 	{ "nvim-focus/focus.nvim", version = false },
 
 	--GENERAL
-	{ "rizzatti/dash.vim" },
 	{
 	  "zbirenbaum/copilot-cmp",
 		dependencies = {'zbirenbaum/copilot.lua'},
@@ -176,14 +177,15 @@ return require("lazy").setup({
 	--},
 
 	--NOTIFICATIONS
-	{
-		"folke/noice.nvim",
-		opts = {
-			-- add any options here
-		},
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
-	},
+--	{
+--		"folke/noice.nvim",
+--		opts = {
+--			-- add any options here
+--		},
+--		dependencies = {
+--			"MunifTanjim/nui.nvim",
+--			"rcarriga/nvim-notify",
+--		},
+--	},
+	{'dstein64/vim-startuptime'}
 })
