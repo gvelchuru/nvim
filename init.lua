@@ -53,27 +53,6 @@ require('telescope').setup {
 require('telescope').load_extension('fzy_native')
 --require("barbecue.ui").toggle(true)
 require('Comment').setup()
-local rainbow_delimiters = require 'rainbow-delimiters'
-
-vim.g.rainbow_delimiters = {
-    strategy = {
-        [''] = rainbow_delimiters.strategy['global'],
-        vim = rainbow_delimiters.strategy['local'],
-    },
-    query = {
-        [''] = 'rainbow-delimiters',
-        lua = 'rainbow-blocks',
-    },
-    highlight = {
-        'RainbowDelimiterRed',
-        'RainbowDelimiterYellow',
-        'RainbowDelimiterBlue',
-        'RainbowDelimiterOrange',
-        'RainbowDelimiterGreen',
-        'RainbowDelimiterViolet',
-        'RainbowDelimiterCyan',
-    }
-}
 require('leap').create_default_mappings()
 require("focus").setup()
 require("cmp_git").setup()
@@ -246,3 +225,22 @@ vim.api.nvim_create_autocmd({"BufWritePost" }, {
     --lsp_doc_border = true, -- add a border to hover docs and signature help
   --},
 --})
+require("catppuccin").setup({
+  cmp = true,
+  gitsigns = true,
+  nvimtree = true,
+  treesitter = true,
+  rainbow_delimiters = true,
+  telescope = {
+    enabled = true,
+    -- style = "nvchad"
+  },
+  lsp_trouble = true,
+  mason = true,
+  dropbar = {
+      enabled = true,
+      color_mode = false, -- enable color for kind's texts, not just kind's icons
+  },
+  leap = true,
+  noice = true
+})

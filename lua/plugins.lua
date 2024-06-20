@@ -18,10 +18,8 @@ return require("lazy").setup({
 		lazy = true,
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 	},
-	--{ "savq/melange-nvim", lazy = false}, 
 	{"catppuccin/nvim", name = "catppuccin", priority = 1000, lazy = false},
 	{ "tpope/vim-sleuth" }, --heuristically set indent
-	--{ "ncm2/float-preview.nvim" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = true,
@@ -33,9 +31,8 @@ return require("lazy").setup({
 		lazy = true,
 		build = ":CHADdeps",
 	},
-	--{ "gelguy/wilder.nvim" }, --doesn't work with nui
-	{ "hiphish/rainbow-delimiters.nvim", lazy = true },
 	{ "bekaboo/dropbar.nvim", lazy = false },
+	{ "HiPhish/rainbow-delimiters.nvim"},
 	{ "RRethy/vim-illuminate", lazy = true },
 	{
 		"nvimdev/dashboard-nvim",
@@ -177,15 +174,15 @@ return require("lazy").setup({
 	--},
 
 	--NOTIFICATIONS
---	{
---		"folke/noice.nvim",
---		opts = {
---			-- add any options here
---		},
---		dependencies = {
---			"MunifTanjim/nui.nvim",
---			"rcarriga/nvim-notify",
---		},
---	},
+	{
+		"folke/noice.nvim",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+	},
 	{'dstein64/vim-startuptime'}
 })
