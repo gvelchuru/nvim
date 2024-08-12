@@ -139,6 +139,9 @@ return require("lazy").setup({
 
 	--GENERAL
 	{
+		"pocco81/auto-save.nvim",
+	},
+	{
 	  "zbirenbaum/copilot-cmp",
 		dependencies = {'zbirenbaum/copilot.lua'},
 	  config = function ()
