@@ -14,7 +14,7 @@ vim.opt.termguicolors=true
 vim.opt.background="dark"
 vim.cmd[[colorscheme catppuccin-macchiato]]
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "go", "ruby"},
+  ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "go", "ruby", "yaml"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = true,
@@ -43,6 +43,19 @@ require('telescope').setup {
             override_generic_sorter = true,
             override_file_sorter = true, },
     },
+    pickers = {
+                live_grep = {
+                    file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+                    additional_args = function(_)
+                        return { "--hidden" }
+                    end
+                },
+                find_files = {
+                    file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+                    hidden = true
+                }
+
+            },
     defaults = {
         mappings = {
           i = { ["<c-t>"] = trouble.open },
