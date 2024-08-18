@@ -35,14 +35,11 @@ return require("lazy").setup({
 	{ "HiPhish/rainbow-delimiters.nvim"},
 	{ "RRethy/vim-illuminate", lazy = true },
 	{
-		"nvimdev/dashboard-nvim",
-		event = "VimEnter",
-		config = function()
-			require("dashboard").setup({
-				-- config
-			})
-		end,
-		dependencies = {  "nvim-tree/nvim-web-devicons"  },
+	    'goolord/alpha-nvim',
+	    dependencies = { 'echasnovski/mini.icons' },
+	    config = function ()
+		require'alpha'.setup(require'alpha.themes.startify'.config)
+	    end
 	},
 	{ "mistricky/codesnap.nvim", build = "make" },
 
