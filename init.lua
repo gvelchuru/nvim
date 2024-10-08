@@ -150,39 +150,14 @@ local lsp_opts = {
 local lspconfig = require("lspconfig")
 require("mason").setup()
 require("mason-lspconfig").setup({
+  ensure_installed = { "lua_ls", "rubocop", "solargraph" },
   automatic_installation = true
 })
 require("mason-lspconfig").setup_handlers {
-    function (server_name)
-      lspconfig[server_name].setup(lsp_opts)
+    function (server_name) -- default handler (optional)
+        require("lspconfig")[server_name].setup {}
     end,
 }
-require'lspconfig'.syntax_tree.setup{}
-require'lspconfig'.solargraph.setup({})
---require'lspconfig'.typeprof.setup{}
---require'lspconfig'.sorbet.setup{}
-require'lspconfig'.lua_ls.setup({})
-require'lspconfig'.gopls.setup({})
-require'lspconfig'.bufls.setup({})
-require'lspconfig'.yamlls.setup({})
-require'lspconfig'.vimls.setup({})
-require'lspconfig'.standardrb.setup({})
-require'lspconfig'.eslint.setup({})
-require'lspconfig'.biome.setup({})
-require'lspconfig'.ember.setup({})
-require'lspconfig'.emmet_language_server.setup({})
-require'lspconfig'.flow.setup({})
-require'lspconfig'.glint.setup({})
-require'lspconfig'.quick_lint_js.setup({})
-require'lspconfig'.stylelint_lsp.setup({})
-require'lspconfig'.ts_ls.setup({})
-require'lspconfig'.pyright.setup({})
-require'lspconfig'.ruff.setup({})
-require'lspconfig'.ruff_lsp.setup({})
-require'lspconfig'.anakin_language_server.setup({})
-require'lspconfig'.biome.setup{}
-require'lspconfig'.harper_ls.setup{}
-require'lspconfig'.ruby_lsp.setup{}
 
 
 require('lualine').setup {
