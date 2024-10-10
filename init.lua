@@ -8,6 +8,7 @@ vim.cmd('set smartcase')
 vim.cmd('set showmatch')
 vim.cmd('set incsearch')
 vim.cmd('set hlsearch')
+vim.cmd('set wildmenu')
 vim.cmd('syntax enable')
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR=1
 vim.opt.termguicolors=true
@@ -232,3 +233,5 @@ require("catppuccin").setup({
   leap = true,
   noice = true
 })
+local wilder = require('wilder')
+wilder.setup({modes = {':'}})

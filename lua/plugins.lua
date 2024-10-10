@@ -196,15 +196,16 @@ config = true,
 	--},
 
 	--NOTIFICATIONS
-	{
-		"folke/noice.nvim",
-		opts = {
+	--{
+		--"folke/noice.nvim",
+		--opts = {
 			-- add any options here
-		},
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
-	},
+		--},
+		--dependencies = {
+		--	"MunifTanjim/nui.nvim",
+		--	"rcarriga/nvim-notify",
+		--},
+	--},
+	{'gelguy/wilder.nvim'},
 	{'dstein64/vim-startuptime'}
 })
