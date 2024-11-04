@@ -1,6 +1,6 @@
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
-require('plugins')
+require('config.lazy')
 vim.cmd('set number')
 vim.cmd('set signcolumn=number')
 vim.cmd('set ignorecase')
