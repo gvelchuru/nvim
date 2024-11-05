@@ -54,7 +54,7 @@ return require("lazy").setup({
 			"tris203/precognition.nvim",
 			event = "VeryLazy",
 			opts = {
-				startVisible = true,
+				startVisible = false,
 				-- showBlankVirtLine = true,
 				-- highlightColor = { link = "Comment" },
 				-- hints = {
