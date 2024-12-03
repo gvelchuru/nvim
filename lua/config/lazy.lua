@@ -217,6 +217,8 @@ return require("lazy").setup({
 			},
 			config = true,
 		},
+		{'akinsho/toggleterm.nvim', version = "*", config = true},
+
 
 		--C
 		{ "chrisbra/csv.vim" },
