@@ -236,7 +236,8 @@ require("catppuccin").setup({
 local wilder = require('wilder')
 wilder.setup({modes = {':'}})
 require("toggleterm").setup({
-  open_mapping = [[<c-\>]]
+  open_mapping = [[<c-\>]],
+  direction = 'vertical',
 })
 
 function _G.set_terminal_keymaps()
@@ -251,4 +252,8 @@ function _G.set_terminal_keymaps()
 end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
+
+vim.keymap.set('n', '<c-n>', function()
+    require('focus').split_nicely()
+end, { desc = 'split nicely' })
