@@ -173,9 +173,31 @@ return require("lazy").setup({
 			},
 			lazy = false,
 		},
-		{ "williamboman/mason.nvim" },
 		{ "rshkarin/mason-nvim-lint" },
-		{ "williamboman/mason-lspconfig.nvim" },
+		{
+			"mason-org/mason.nvim",
+			dependencies = {
+				"mason-org/mason-lspconfig.nvim",
+				"neovim/nvim-lspconfig",
+			},
+			config = function()
+				require("mason").setup()
+				require("mason-lspconfig").setup({
+					ensure_installed = {
+						"lua_ls",
+						"ts_ls",
+						"eslint",
+						"jsonls",
+						"html",
+						"cssls",
+						"gopls",
+						"basedpyright",
+						"ruby_lsp",
+					},
+					automatic_enable = true,
+				})
+			end
+		},
 		{ "mfussenegger/nvim-lint" },
 
 		--SPLITTING
