@@ -12,8 +12,6 @@ vim.cmd('set wildmenu')
 vim.cmd('syntax enable')
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR=1
 vim.opt.termguicolors=true
-vim.opt.background="dark"
-vim.cmd[[colorscheme catppuccin-macchiato]]
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "go", "ruby", "yaml"},
 
