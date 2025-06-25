@@ -3,5 +3,5 @@ return {
   opts = {
     exclude = { "ns", "is", "nS", "iS", "vs", "vS" },
     cut_key = "m",
-    }
+  },
 }
