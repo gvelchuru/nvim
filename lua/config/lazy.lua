@@ -18,15 +18,61 @@ return require("lazy").setup({
     --AESTHETIC
     {
       "nvim-lualine/lualine.nvim",
-      lazy = true,
+      event = "VeryLazy",
       dependencies = { "kyazdani42/nvim-web-devicons" },
+      config = function()
+        require("lualine").setup({
+          options = {
+            theme = "auto",
+            component_separators = "",
+            section_separators = "",
+          },
+          extensions = { "trouble", "lazy", "fzf", "quickfix" },
+        })
+      end,
     },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000, lazy = false },
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      priority = 1000,
+      lazy = false,
+      config = function()
+        require("catppuccin").setup({
+          cmp = true,
+          gitsigns = true,
+          nvimtree = true,
+          treesitter = true,
+          rainbow_delimiters = true,
+          telescope = {
+            enabled = true,
+          },
+          lsp_trouble = true,
+          mason = true,
+          dropbar = {
+            enabled = true,
+            color_mode = false,
+          },
+          leap = true,
+          noice = true,
+        })
+      end,
+    },
     { "tpope/vim-sleuth" }, --heuristically set indent
     {
       "nvim-treesitter/nvim-treesitter",
-      lazy = true,
+      event = { "BufReadPost", "BufNewFile" },
       build = ":TSUpdate",
+      config = function()
+        require("nvim-treesitter.configs").setup({
+          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "ruby", "yaml" },
+          sync_install = true,
+          auto_install = true,
+          highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = true,
+          },
+        })
+      end,
     },
     {
       "ms-jpq/chadtree",
@@ -98,7 +144,34 @@ return require("lazy").setup({
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-fzy-native.nvim",
       },
-      lazy = true,
+      keys = {
+        { "<C-P>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+        { "<Leader>g", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+      },
+      config = function()
+        local actions = require("telescope.actions")
+        local trouble = require("trouble.sources.telescope")
+        require("telescope").setup({
+          extensions = {
+            fzy_native = {
+              override_generic_sorter = true,
+              override_file_sorter = true,
+            },
+          },
+          pickers = {
+            find_files = {
+              find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "--glob", "!node_modules/*" },
+            },
+          },
+          defaults = {
+            mappings = {
+              i = { ["<c-t>"] = trouble.open },
+              n = { ["<c-t>"] = trouble.open },
+            },
+          },
+        })
+        require("telescope").load_extension("fzy_native")
+      end,
     },
     {
       "danielfalk/smart-open.nvim",
@@ -143,7 +216,7 @@ return require("lazy").setup({
     --COMPLETION/LINTING
     {
       "hrsh7th/nvim-cmp",
-      lazy = true,
+      event = "InsertEnter",
       dependencies = {
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp",
@@ -160,6 +233,58 @@ return require("lazy").setup({
         "lukas-reineke/cmp-rg",
         "tzachar/fuzzy.nvim",
       },
+      config = function()
+        require("cmp_git").setup()
+        local cmp = require("cmp")
+        local lspkind = require("lspkind")
+        cmp.setup({
+          snippet = {
+            expand = function(args)
+              require("luasnip").lsp_expand(args.body)
+            end,
+          },
+          window = {},
+          mapping = cmp.mapping.preset.insert({
+            ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+            ["<C-f>"] = cmp.mapping.scroll_docs(4),
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-e>"] = cmp.mapping.abort(),
+            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          }),
+          sources = cmp.config.sources({
+            { name = "nvim_lsp_document_symbol" },
+            { name = "nvim_lsp_signature_help" },
+            { name = "luasnip" },
+            { name = "git" },
+            { name = "copilot" },
+            { name = "fuzzy_buffer" },
+            { name = "fuzzy_path" },
+            { name = "rg" },
+          }),
+          formatting = {
+            format = lspkind.cmp_format({
+              mode = "symbol",
+              maxwidth = 50,
+              ellipsis_char = "...",
+              show_labelDetails = true,
+            }),
+          },
+        })
+        cmp.setup.cmdline({ "/", "?" }, {
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = {
+            { name = "buffer" },
+          },
+        })
+        cmp.setup.cmdline(":", {
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = cmp.config.sources({
+            { name = "path" },
+          }, {
+            { name = "cmdline" },
+          }),
+        })
+      end,
     },
     { "tzachar/fuzzy.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
     { "tzachar/cmp-fuzzy-buffer", requires = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" } },
@@ -216,6 +341,7 @@ return require("lazy").setup({
     },
     {
       "zbirenbaum/copilot.lua",
+      event = "InsertEnter",
       config = function()
         require("copilot").setup({
           filetypes = { ["*"] = true },
@@ -227,7 +353,10 @@ return require("lazy").setup({
     {
       "kevinhwang91/nvim-fundo",
       dependencies = "kevinhwang91/promise-async",
+      event = "BufReadPost",
       config = function()
+        vim.o.undofile = true
+        require("fundo").setup()
         require("fundo").install()
       end,
     },
@@ -239,7 +368,30 @@ return require("lazy").setup({
       },
       config = true,
     },
-    { "akinsho/toggleterm.nvim", version = "*", config = true },
+    {
+      "akinsho/toggleterm.nvim",
+      version = "*",
+      keys = { "<c-\\>" },
+      config = function()
+        require("toggleterm").setup({
+          open_mapping = [[<c-\>]],
+          direction = "float",
+        })
+
+        function _G.set_terminal_keymaps()
+          local opts = { buffer = 0 }
+          vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+          vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+          vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+          vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+          vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+          vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+          vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
+        end
+
+        vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
+      end,
+    },
 
     --C
     { "chrisbra/csv.vim" },
@@ -265,7 +417,14 @@ return require("lazy").setup({
         "rcarriga/nvim-notify",
       },
     },
-    { "gelguy/wilder.nvim" },
+    {
+      "gelguy/wilder.nvim",
+      event = "CmdlineEnter",
+      config = function()
+        local wilder = require("wilder")
+        wilder.setup({ modes = { ":" } })
+      end,
+    },
     { "dstein64/vim-startuptime" },
     {
       "f-person/auto-dark-mode.nvim",
