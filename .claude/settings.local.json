@@ -18,7 +18,11 @@
       "Bash(do time nvim:*)",
       "Bash(done)",
       "Bash(do nvim --headless +qa)",
-      "Bash(hyperfine:*)"
+      "Bash(hyperfine:*)",
+      "Bash(timeout 2 nvim:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(timeout 3 nvim:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
