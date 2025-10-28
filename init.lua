@@ -1,5 +1,9 @@
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- Reduce LSP logging overhead (was causing 800MB log file)
+vim.lsp.log.set_level("WARN") -- Fixed deprecated API
+
 require("config.lazy")
 vim.cmd("set number")
 vim.cmd("set signcolumn=number")
@@ -14,34 +18,12 @@ vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
 vim.opt.termguicolors = true
 -- Treesitter setup moved to lazy.nvim config
 -- Telescope setup moved to lazy.nvim config with key-based lazy loading
-require("trouble").setup()
-vim.keymap.set("n", "gR", function()
-  require("trouble").toggle("lsp_references")
-end)
-require("Comment").setup()
+-- Trouble, Comment, Focus setups moved to lazy.nvim config with lazy loading
 -- Explicit leap.nvim keymaps (avoids conflict warnings with cutlass)
 vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)", { silent = true })
 vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)", { silent = true })
-require("focus").setup()
 -- CMP setup moved to lazy.nvim config with InsertEnter event
-
--- Set up lspconfig.
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-local function on_attach(_, bufnr)
-  local bufopts = { buffer = bufnr }
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "<LEADER>k", vim.lsp.buf.hover, bufopts)
-  vim.keymap.set("n", "<LEADER>r", vim.lsp.buf.rename, bufopts)
-  vim.keymap.set("n", "<LEADER>a", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set("v", "<LEADER>a", vim.lsp.buf.code_action, bufopts)
-end
-
-local lsp_opts = {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-local lspconfig = require("lspconfig")
+-- LSP setup moved to mason-lspconfig in lazy.nvim config
 
 -- Lualine setup moved to lazy.nvim config with VeryLazy event
 
@@ -56,24 +38,5 @@ vim.cmd("sign define DiagnosticSignWarn text= texthl= linehl= numhl=")
 vim.cmd("sign define DiagnosticSignInfo text= texthl= linehl= numhl=")
 vim.cmd("sign define DiagnosticSignHint text= texthl= linehl= numhl=")
 -- Fundo setup moved to lazy.nvim config with BufReadPost event
-
-require("mason-nvim-lint").setup()
-
-require("lint").linters_by_ft = {
-  markdown = { "vale" },
-  ruby = { "rubocop", "trivy" },
-}
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  callback = function()
-    require("lint").try_lint()
-  end,
-})
+-- Mason-nvim-lint, lint, codesnap setups moved to lazy.nvim configs with lazy loading
 -- Catppuccin, wilder, and toggleterm setups moved to lazy.nvim configs
-
-vim.keymap.set("n", "<c-n>", function()
-  require("focus").split_nicely()
-end, { desc = "split nicely" })
-require("codesnap").setup({
-  has_line_number = true,
-  has_breadcrumbs = true,
-})

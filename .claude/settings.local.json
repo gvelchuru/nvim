@@ -1,7 +1,24 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Read(//Users/gvelchuru/.local/share/nvim/lazy/**)",
+      "Bash(cat:*)",
+      "Read(//Users/gvelchuru/.local/state/nvim/**)",
+      "Read(//Users/gvelchuru/.local/share/nvim/mason/bin/**)",
+      "Read(//Users/gvelchuru/.local/share/nvim/mason/packages/**)",
+      "Read(//tmp/**)",
+      "Bash(nvim:*)",
+      "WebSearch",
+      "Bash(awk:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(time nvim:*)",
+      "Bash(/dev/null)",
+      "Bash(for:*)",
+      "Bash(do time nvim:*)",
+      "Bash(done)",
+      "Bash(do nvim --headless +qa)",
+      "Bash(hyperfine:*)"
     ],
     "deny": []
   }

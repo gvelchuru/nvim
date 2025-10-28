@@ -57,21 +57,13 @@ return require("lazy").setup({
         })
       end,
     },
-    { "tpope/vim-sleuth" }, --heuristically set indent
+    { "tpope/vim-sleuth", event = { "BufReadPost", "BufNewFile" } }, --heuristically set indent
     {
       "nvim-treesitter/nvim-treesitter",
       event = { "BufReadPost", "BufNewFile" },
       build = ":TSUpdate",
       config = function()
-        require("nvim-treesitter.configs").setup({
-          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "ruby", "yaml" },
-          sync_install = true,
-          auto_install = true,
-          highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = true,
-          },
-        })
+        require("treesitter")
       end,
     },
     {
@@ -80,17 +72,29 @@ return require("lazy").setup({
       lazy = true,
       build = ":CHADdeps",
     },
-    { "bekaboo/dropbar.nvim", lazy = false },
-    { "HiPhish/rainbow-delimiters.nvim" },
-    { "RRethy/vim-illuminate", lazy = true },
+    { "bekaboo/dropbar.nvim", event = "BufReadPost" }, -- Lazy-load for performance
+    { "HiPhish/rainbow-delimiters.nvim", event = "BufReadPost" },
+    { "RRethy/vim-illuminate", event = "BufReadPost" },
     {
       "goolord/alpha-nvim",
+      lazy = true,
+      cond = vim.fn.argc() == 0, -- Only load dashboard if no file opened
       dependencies = { "echasnovski/mini.icons" },
       config = function()
         require("alpha").setup(require("alpha.themes.startify").config)
       end,
     },
-    { "mistricky/codesnap.nvim", build = "make" },
+    {
+      "mistricky/codesnap.nvim",
+      build = "make",
+      cmd = { "CodeSnap", "CodeSnapSave" },
+      config = function()
+        require("codesnap").setup({
+          has_line_number = true,
+          has_breadcrumbs = true,
+        })
+      end,
+    },
 
     --TEXT OBJECTS
     { "tpope/vim-repeat", keys = "." },
@@ -100,7 +104,7 @@ return require("lazy").setup({
       "tris203/precognition.nvim",
       event = "VeryLazy",
       opts = {
-        startVisible = false,
+        startVisible = true, -- Enable movement hints
         -- showBlankVirtLine = true,
         -- highlightColor = { link = "Comment" },
         -- hints = {
@@ -193,9 +197,10 @@ return require("lazy").setup({
     { "tpope/vim-rhubarb" },
     {
       "lewis6991/gitsigns.nvim",
+      event = { "BufReadPost", "BufNewFile" }, -- Lazy-load for performance
       config = function()
         require("gitsigns").setup({
-          current_line_blame = true,
+          current_line_blame = false, -- Disabled for performance (was running git blame on every BufEnter)
           signcolumn = true,
         })
       end,
@@ -205,9 +210,13 @@ return require("lazy").setup({
     --SURROUND
     {
       "numToStr/Comment.nvim",
-      opts = {
-        -- add any options here
+      keys = {
+        { "gc", mode = { "n", "v" }, desc = "Comment toggle" },
+        { "gb", mode = { "n", "v" }, desc = "Comment toggle blockwise" },
       },
+      config = function()
+        require("Comment").setup()
+      end,
     },
     --{ "tpope/vim-surround" },
     { "wellle/targets.vim" },
@@ -293,12 +302,30 @@ return require("lazy").setup({
     { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } },
     {
       "folke/trouble.nvim",
-      requires = {
+      cmd = "Trouble", -- Load only when :Trouble command is used
+      keys = {
+        {
+          "gR",
+          function()
+            require("trouble").toggle("lsp_references")
+          end,
+          desc = "Toggle LSP references",
+        },
+      },
+      config = function()
+        require("trouble").setup()
+      end,
+      dependencies = {
         "kyazdani42/nvim-web-devicons",
       },
-      lazy = false,
     },
-    { "rshkarin/mason-nvim-lint" },
+    {
+      "rshkarin/mason-nvim-lint",
+      event = { "BufReadPost", "BufNewFile" },
+      config = function()
+        require("mason-nvim-lint").setup()
+      end,
+    },
     {
       "mason-org/mason.nvim",
       dependencies = {
@@ -317,16 +344,60 @@ return require("lazy").setup({
             "cssls",
             "gopls",
             "basedpyright",
-            "ruby_lsp",
+            -- Using rubocop only for Ruby (removed ruby_lsp, solargraph, standardrb to avoid conflicts)
           },
           automatic_enable = true,
         })
+
+        -- LSP on_attach moved from init.lua for lazy loading
+        -- Will be triggered when LSP servers attach
+        vim.api.nvim_create_autocmd("LspAttach", {
+          callback = function(args)
+            local bufnr = args.buf
+            local bufopts = { buffer = bufnr }
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+            vim.keymap.set("n", "<LEADER>k", vim.lsp.buf.hover, bufopts)
+            vim.keymap.set("n", "<LEADER>r", vim.lsp.buf.rename, bufopts)
+            vim.keymap.set("n", "<LEADER>a", vim.lsp.buf.code_action, bufopts)
+            vim.keymap.set("v", "<LEADER>a", vim.lsp.buf.code_action, bufopts)
+          end,
+        })
       end,
     },
-    { "mfussenegger/nvim-lint" },
+    {
+      "mfussenegger/nvim-lint",
+      event = { "BufReadPost", "BufNewFile", "BufWritePost" },
+      config = function()
+        require("lint").linters_by_ft = {
+          markdown = { "vale" },
+          ruby = { "rubocop", "trivy" },
+        }
+        vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+          callback = function()
+            require("lint").try_lint()
+          end,
+        })
+      end,
+    },
 
     --SPLITTING
-    { "nvim-focus/focus.nvim", version = false },
+    {
+      "nvim-focus/focus.nvim",
+      version = false,
+      event = "VeryLazy", -- Load after startup but needs to be active for window navigation auto-resize
+      keys = {
+        {
+          "<c-n>",
+          function()
+            require("focus").split_nicely()
+          end,
+          desc = "Split nicely",
+        },
+      },
+      config = function()
+        require("focus").setup()
+      end,
+    },
 
     --GENERAL
     --{
@@ -334,6 +405,7 @@ return require("lazy").setup({
     --},
     {
       "zbirenbaum/copilot-cmp",
+      event = "InsertEnter", -- Match copilot.lua event to prevent eager loading
       dependencies = { "zbirenbaum/copilot.lua" },
       config = function()
         require("copilot_cmp").setup()
@@ -393,8 +465,8 @@ return require("lazy").setup({
       end,
     },
 
-    --C
-    { "chrisbra/csv.vim" },
+    --CSV
+    { "chrisbra/csv.vim", ft = "csv" }, -- Only load for CSV files
 
     --SESSIONS
     --{
