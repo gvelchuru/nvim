@@ -22,7 +22,9 @@
       "Bash(timeout 2 nvim:*)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(timeout 3 nvim:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)"
     ],
     "deny": []
   }

@@ -1,6 +1,10 @@
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Set leader key to space (must be before lazy.nvim)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- Reduce LSP logging overhead (was causing 800MB log file)
 vim.lsp.log.set_level("WARN") -- Fixed deprecated API
 

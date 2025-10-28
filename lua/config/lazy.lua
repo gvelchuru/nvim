@@ -104,7 +104,7 @@ return require("lazy").setup({
                 key = "f",
                 key_hl = "Number",
                 key_format = " %s",
-                action = "Telescope find_files",
+                action = "lua require('telescope.builtin').find_files()",
               },
               {
                 icon = " ",
@@ -114,7 +114,7 @@ return require("lazy").setup({
                 key = "g",
                 key_hl = "Number",
                 key_format = " %s",
-                action = "Telescope live_grep",
+                action = "lua require('telescope.builtin').live_grep()",
               },
               {
                 icon = " ",
@@ -124,7 +124,7 @@ return require("lazy").setup({
                 key = "r",
                 key_hl = "Number",
                 key_format = " %s",
-                action = "Telescope oldfiles",
+                action = "lua require('telescope.builtin').oldfiles()",
               },
               {
                 icon = " ",
@@ -248,8 +248,12 @@ return require("lazy").setup({
     {
       "danielfalk/smart-open.nvim",
       branch = "0.2.x",
+      keys = { "<C-P>", "<Leader>g" }, -- Only load when telescope is used
       config = function()
-        require("telescope").load_extension("smart_open")
+        -- Defer extension loading for performance
+        vim.defer_fn(function()
+          require("telescope").load_extension("smart_open")
+        end, 100)
       end,
       dependencies = {
         "kkharji/sqlite.lua",
@@ -396,6 +400,8 @@ return require("lazy").setup({
     },
     {
       "mason-org/mason.nvim",
+      event = "VeryLazy", -- Lazy-load for performance, not needed at startup
+      cmd = { "Mason", "MasonInstall", "MasonUpdate" },
       dependencies = {
         "mason-org/mason-lspconfig.nvim",
         "neovim/nvim-lspconfig",
@@ -549,6 +555,7 @@ return require("lazy").setup({
     --NOTIFICATIONS
     {
       "folke/noice.nvim",
+      event = "VeryLazy", -- Lazy-load for performance, fancy UI not needed at startup
       opts = {
         -- add any options here
       },
@@ -595,4 +602,25 @@ return require("lazy").setup({
   install = { colorscheme = { "catppuccin-frappe" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
+  performance = {
+    cache = {
+      enabled = true,
+    },
+    reset_packpath = true, -- reset the package path to improve startup time
+    rtp = {
+      reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
+      ---@type string[]
+      paths = {}, -- add any custom paths here that you want to includes in the rtp
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
 })
