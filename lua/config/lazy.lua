@@ -147,7 +147,6 @@ return require("lazy").setup({
         "nvim-telescope/telescope-fzy-native.nvim",
       },
       keys = {
-        { "<C-P>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
         { "<Leader>g", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
       },
       config = function()
@@ -178,20 +177,26 @@ return require("lazy").setup({
     {
       "danielfalk/smart-open.nvim",
       branch = "0.2.x",
-      keys = { "<C-P>", "<Leader>g" }, -- Only load when telescope is used
-      config = function()
-        -- Defer extension loading for performance
-        vim.defer_fn(function()
-          require("telescope").load_extension("smart_open")
-        end, 100)
-      end,
       dependencies = {
+        "nvim-telescope/telescope.nvim",
         "kkharji/sqlite.lua",
         -- Only required if using match_algorithm fzf
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
         { "nvim-telescope/telescope-fzy-native.nvim" },
       },
+      keys = {
+        {
+          "<C-P>",
+          function()
+            require("telescope").extensions.smart_open.smart_open()
+          end,
+          desc = "Smart open files (frecency)",
+        },
+      },
+      config = function()
+        require("telescope").load_extension("smart_open")
+      end,
     },
 
     --GIT
