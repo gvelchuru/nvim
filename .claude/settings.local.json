@@ -3,7 +3,10 @@
     "allow": [
       "Bash(nvim - +'sleep 100m' +'wq')",
       "Bash(hyperfine:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(nvim --version:*)"
     ],
     "deny": [],
     "ask": []
