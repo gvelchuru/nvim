@@ -8,6 +8,9 @@ vim.g.maplocalleader = " "
 -- Reduce LSP logging overhead (was causing 800MB log file)
 vim.lsp.log.set_level("WARN") -- Fixed deprecated API
 
+-- Native smooth scrolling (Neovim 0.10+, replaces neoscroll.nvim)
+vim.opt.smoothscroll = true
+
 require("config.lazy")
 vim.cmd("set number")
 vim.cmd("set signcolumn=number")

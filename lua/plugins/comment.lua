@@ -1,7 +1,8 @@
 return {
   "numToStr/Comment.nvim",
-  opts = {
-    -- add any options here
+  keys = {
+    { "gc", mode = { "n", "v" }, desc = "Comment toggle" },
+    { "gb", mode = { "n", "v" }, desc = "Comment toggle blockwise" },
   },
   config = function()
     require("Comment").setup()

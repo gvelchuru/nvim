@@ -13,13 +13,22 @@ vim.opt.rtp:prepend(lazypath)
 
 return require("lazy").setup({
   spec = {
+    -- Core icon provider (mocks nvim-web-devicons for compatibility)
+    {
+      "echasnovski/mini.icons",
+      lazy = false,
+      priority = 1000,
+      config = function()
+        require("mini.icons").setup()
+        MiniIcons.mock_nvim_web_devicons()
+      end,
+    },
     -- import your plugins
     { import = "plugins" },
     --AESTHETIC
     {
       "nvim-lualine/lualine.nvim",
       event = "VeryLazy",
-      dependencies = { "kyazdani42/nvim-web-devicons" },
       config = function()
         require("lualine").setup({
           options = {
@@ -69,15 +78,16 @@ return require("lazy").setup({
     {
       "ms-jpq/chadtree",
       branch = "chad",
-      lazy = true,
+      keys = {
+        { "<leader>e", "<cmd>CHADopen<cr>", desc = "CHADTree file explorer" },
+      },
       build = ":CHADdeps",
     },
-    { "bekaboo/dropbar.nvim", event = "BufReadPost" }, -- Lazy-load for performance
+    { "bekaboo/dropbar.nvim", event = "VeryLazy" }, -- Lazy-load for performance
     { "HiPhish/rainbow-delimiters.nvim", event = "BufReadPost" },
     { "RRethy/vim-illuminate", event = "BufReadPost" },
     {
       "goolord/alpha-nvim",
-      dependencies = { "echasnovski/mini.icons" },
       config = function()
         require("alpha").setup(require("alpha.themes.startify").config)
       end,
@@ -139,12 +149,18 @@ return require("lazy").setup({
     },
 
     --SEARCH
-    { "ggandor/leap.nvim" },
+    {
+      "ggandor/leap.nvim",
+      keys = {
+        { "s", mode = { "n", "x", "o" }, desc = "Leap forward" },
+        { "S", mode = { "n", "x", "o" }, desc = "Leap backward" },
+      },
+    },
     {
       "nvim-telescope/telescope.nvim",
       dependencies = {
         "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope-fzy-native.nvim",
+        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       },
       keys = {
         { "<Leader>g", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
@@ -154,9 +170,11 @@ return require("lazy").setup({
         local trouble = require("trouble.sources.telescope")
         require("telescope").setup({
           extensions = {
-            fzy_native = {
+            fzf = {
+              fuzzy = true,
               override_generic_sorter = true,
               override_file_sorter = true,
+              case_mode = "smart_case",
             },
           },
           pickers = {
@@ -171,7 +189,7 @@ return require("lazy").setup({
             },
           },
         })
-        require("telescope").load_extension("fzy_native")
+        require("telescope").load_extension("fzf")
       end,
     },
     {
@@ -182,8 +200,6 @@ return require("lazy").setup({
         "kkharji/sqlite.lua",
         -- Only required if using match_algorithm fzf
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
-        { "nvim-telescope/telescope-fzy-native.nvim" },
       },
       keys = {
         {
@@ -200,31 +216,60 @@ return require("lazy").setup({
     },
 
     --GIT
-    { "tpope/vim-fugitive" },
-    { "tpope/vim-rhubarb" },
+    {
+      "NeogitOrg/neogit",
+      cmd = "Neogit",
+      keys = {
+        { "<leader>gs", "<cmd>Neogit<cr>", desc = "Neogit status" },
+        { "<leader>gc", "<cmd>Neogit commit<cr>", desc = "Neogit commit" },
+        { "<leader>gp", "<cmd>Neogit push<cr>", desc = "Neogit push" },
+        { "<leader>gl", "<cmd>Neogit log<cr>", desc = "Neogit log" },
+      },
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "sindrets/diffview.nvim",
+        "nvim-telescope/telescope.nvim",
+      },
+      config = function()
+        require("neogit").setup({
+          integrations = {
+            telescope = true,
+            diffview = true,
+          },
+          commit_editor = {
+            kind = "split",
+          },
+          signs = {
+            section = { "", "" },
+            item = { "", "" },
+            hunk = { "", "" },
+          },
+        })
+      end,
+    },
+    {
+      "sindrets/diffview.nvim",
+      cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+      keys = {
+        { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview" },
+      },
+      config = function()
+        require("diffview").setup()
+      end,
+    },
     {
       "lewis6991/gitsigns.nvim",
-      event = { "BufReadPost", "BufNewFile" }, -- Lazy-load for performance
+      event = { "BufReadPost", "BufNewFile" },
       config = function()
         require("gitsigns").setup({
-          current_line_blame = false, -- Disabled for performance (was running git blame on every BufEnter)
+          current_line_blame = false,
           signcolumn = true,
         })
       end,
-      dependencies = { "tpope/vim-fugitive", "folke/trouble.nvim" },
+      dependencies = { "folke/trouble.nvim" },
     },
 
     --SURROUND
-    {
-      "numToStr/Comment.nvim",
-      keys = {
-        { "gc", mode = { "n", "v" }, desc = "Comment toggle" },
-        { "gb", mode = { "n", "v" }, desc = "Comment toggle blockwise" },
-      },
-      config = function()
-        require("Comment").setup()
-      end,
-    },
     --{ "tpope/vim-surround" },
     { "wellle/targets.vim" },
     { "michaeljsmith/vim-indent-object" },
@@ -236,21 +281,20 @@ return require("lazy").setup({
       dependencies = {
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-nvim-lsp-document-symbol",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
-        "petertriho/cmp-git",
         "onsails/lspkind.nvim",
         "zbirenbaum/copilot-cmp",
-        "lukas-reineke/cmp-rg",
-        "tzachar/fuzzy.nvim",
+        -- REMOVED: cmp-nvim-lsp-document-symbol (use Telescope document_symbols)
+        -- REMOVED: cmp-nvim-lsp-signature-help (noice.nvim handles this)
+        -- REMOVED: cmp-rg (too slow, use Telescope live_grep)
+        -- REMOVED: cmp-git (limited use case)
+        -- REMOVED: fuzzy.nvim (not needed with fzf)
       },
       config = function()
-        require("cmp_git").setup()
         local cmp = require("cmp")
         local lspkind = require("lspkind")
         cmp.setup({
@@ -268,14 +312,17 @@ return require("lazy").setup({
             ["<CR>"] = cmp.mapping.confirm({ select = true }),
           }),
           sources = cmp.config.sources({
-            { name = "nvim_lsp_document_symbol" },
-            { name = "nvim_lsp_signature_help" },
-            { name = "luasnip" },
-            { name = "git" },
-            { name = "copilot" },
-            { name = "fuzzy_buffer" },
-            { name = "fuzzy_path" },
-            { name = "rg" },
+            { name = "nvim_lsp" }, -- FIX: Add actual LSP completion!
+            { name = "copilot", priority = 100 },
+            { name = "luasnip", priority = 90 },
+            { name = "buffer", keyword_length = 3 },
+            { name = "path" },
+            -- REMOVED: nvim_lsp_document_symbol (redundant)
+            -- REMOVED: nvim_lsp_signature_help (noice handles it)
+            -- REMOVED: fuzzy_buffer (use standard buffer)
+            -- REMOVED: fuzzy_path (use standard path)
+            -- REMOVED: rg (too slow)
+            -- REMOVED: git (limited value)
           }),
           formatting = {
             format = lspkind.cmp_format({
@@ -302,11 +349,6 @@ return require("lazy").setup({
         })
       end,
     },
-    { "tzachar/fuzzy.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
-    { "tzachar/cmp-fuzzy-buffer", requires = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" } },
-    { "tzachar/cmp-fuzzy-path", requires = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" } },
-    { "romgrk/fzy-lua-native", build = "make" },
-    { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } },
     {
       "folke/trouble.nvim",
       cmd = "Trouble", -- Load only when :Trouble command is used
@@ -322,9 +364,6 @@ return require("lazy").setup({
       config = function()
         require("trouble").setup()
       end,
-      dependencies = {
-        "kyazdani42/nvim-web-devicons",
-      },
     },
     {
       "rshkarin/mason-nvim-lint",
@@ -492,20 +531,15 @@ return require("lazy").setup({
       "folke/noice.nvim",
       event = "VeryLazy", -- Lazy-load for performance, fancy UI not needed at startup
       opts = {
-        -- add any options here
+        cmdline = {
+          enabled = true,
+          view = "cmdline_popup", -- Replaces wilder.nvim functionality
+        },
       },
       dependencies = {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
       },
-    },
-    {
-      "gelguy/wilder.nvim",
-      event = "CmdlineEnter",
-      config = function()
-        local wilder = require("wilder")
-        wilder.setup({ modes = { ":" } })
-      end,
     },
     { "dstein64/vim-startuptime" },
     {
