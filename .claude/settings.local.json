@@ -10,7 +10,8 @@
       "Bash(nvim --headless \"+Lazy! sync\" +qa)",
       "Bash(nvim:*)",
       "Read(//tmp/**)",
-      "Read(//Users/gvelchuru/.local/share/nvim/lazy/**)"
+      "Read(//Users/gvelchuru/.local/share/nvim/lazy/**)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []

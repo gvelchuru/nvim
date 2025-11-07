@@ -205,9 +205,18 @@ return require("lazy").setup({
         {
           "<C-P>",
           function()
+            require("telescope").extensions.smart_open.smart_open({
+              cwd_only = true,
+            })
+          end,
+          desc = "Smart open files (current dir)",
+        },
+        {
+          "<Leader>p",
+          function()
             require("telescope").extensions.smart_open.smart_open()
           end,
-          desc = "Smart open files (frecency)",
+          desc = "Smart open files (global)",
         },
       },
       config = function()
