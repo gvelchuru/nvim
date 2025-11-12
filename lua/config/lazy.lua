@@ -44,15 +44,65 @@ return require("lazy").setup({
           },
           lsp_trouble = true,
           mason = true,
-          dropbar = {
+          navic = {
             enabled = true,
-            color_mode = false,
+            custom_bg = "NONE",
           },
           leap = true,
           noice = true,
         })
       end,
     },
+
+    -- Lightweight LSP-based breadcrumbs (replaces dropbar.nvim)
+    {
+      "SmiteshP/nvim-navic",
+      event = "LspAttach", -- Load when LSP attaches
+      config = function()
+        require("nvim-navic").setup({
+          icons = {
+            File = " ",
+            Module = " ",
+            Namespace = " ",
+            Package = " ",
+            Class = " ",
+            Method = " ",
+            Property = " ",
+            Field = " ",
+            Constructor = " ",
+            Enum = " ",
+            Interface = " ",
+            Function = " ",
+            Variable = " ",
+            Constant = " ",
+            String = " ",
+            Number = " ",
+            Boolean = " ",
+            Array = " ",
+            Object = " ",
+            Key = " ",
+            Null = " ",
+            EnumMember = " ",
+            Struct = " ",
+            Event = " ",
+            Operator = " ",
+            TypeParameter = " ",
+          },
+          lsp = {
+            auto_attach = false, -- We'll attach manually for control
+            preference = nil, -- Use all LSP servers
+          },
+          highlight = true,
+          separator = " > ",
+          depth_limit = 0,
+          depth_limit_indicator = "..",
+          safe_output = true,
+          lazy_update_context = false,
+          click = true, -- Enable click navigation
+        })
+      end,
+    },
+
     { "tpope/vim-sleuth", event = { "BufReadPost", "BufNewFile" } }, --heuristically set indent
     {
       "nvim-treesitter/nvim-treesitter",
@@ -70,7 +120,7 @@ return require("lazy").setup({
       },
       build = ":CHADdeps",
     },
-    { "bekaboo/dropbar.nvim", event = "VeryLazy" }, -- Lazy-load for performance
+    -- REMOVED: dropbar.nvim (replaced with nvim-navic + toggle for on-demand breadcrumbs)
     { "HiPhish/rainbow-delimiters.nvim", event = "BufReadPost" },
     { "RRethy/vim-illuminate", event = "BufReadPost" },
     {
@@ -399,12 +449,23 @@ return require("lazy").setup({
         vim.api.nvim_create_autocmd("LspAttach", {
           callback = function(args)
             local bufnr = args.buf
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
             local bufopts = { buffer = bufnr }
+
+            -- Standard LSP keybindings
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
             vim.keymap.set("n", "<LEADER>k", vim.lsp.buf.hover, bufopts)
             vim.keymap.set("n", "<LEADER>r", vim.lsp.buf.rename, bufopts)
             vim.keymap.set("n", "<LEADER>a", vim.lsp.buf.code_action, bufopts)
             vim.keymap.set("v", "<LEADER>a", vim.lsp.buf.code_action, bufopts)
+
+            -- Attach navic if client supports document symbols
+            if client and client.server_capabilities.documentSymbolProvider then
+              local has_navic, navic = pcall(require, "nvim-navic")
+              if has_navic then
+                navic.attach(client, bufnr)
+              end
+            end
           end,
         })
       end,

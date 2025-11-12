@@ -13,7 +13,9 @@
       "Read(//Users/gvelchuru/.local/share/nvim/lazy/**)",
       "WebFetch(domain:github.com)",
       "Bash(find:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(cat:*)",
+      "WebFetch(domain:www.reddit.com)"
     ],
     "deny": [],
     "ask": []

@@ -32,6 +32,13 @@ vim.opt.termguicolors = true
 -- Explicit leap.nvim keymaps (avoids conflict warnings with cutlass)
 vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)", { silent = true })
 vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)", { silent = true })
+
+-- Setup breadcrumbs toggle system
+require("breadcrumbs").setup()
+vim.keymap.set("n", "<leader>bc", function()
+  require("breadcrumbs").toggle()
+end, { desc = "Toggle breadcrumbs" })
+
 -- CMP setup moved to lazy.nvim config with InsertEnter event
 -- LSP setup moved to mason-lspconfig in lazy.nvim config
 
