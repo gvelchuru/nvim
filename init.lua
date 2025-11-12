@@ -11,6 +11,9 @@ vim.lsp.log.set_level("WARN") -- Fixed deprecated API
 -- Native smooth scrolling (Neovim 0.10+, replaces neoscroll.nvim)
 vim.opt.smoothscroll = true
 
+-- Native persistent undo (replaces nvim-fundo)
+vim.opt.undofile = true
+
 require("config.lazy")
 vim.cmd("set number")
 vim.cmd("set signcolumn=number")
@@ -35,15 +38,11 @@ vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)", { silent = true 
 -- Lualine setup moved to lazy.nvim config with VeryLazy event
 
 vim.g["NERDCompactSexyComs"] = 1
--- Telescope keymaps moved to lazy.nvim config
-vim.keymap.set("n", "<C-J>", "<C-W><C-J>")
-vim.keymap.set("n", "<C-K>", "<C-W><C-K>")
-vim.keymap.set("n", "<C-L>", "<C-W><C-L>")
-vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
+-- REMOVED: Window navigation keymaps (now handled by smart-splits.nvim)
 vim.cmd("sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=")
 vim.cmd("sign define DiagnosticSignWarn text= texthl= linehl= numhl=")
 vim.cmd("sign define DiagnosticSignInfo text= texthl= linehl= numhl=")
 vim.cmd("sign define DiagnosticSignHint text= texthl= linehl= numhl=")
--- Fundo setup moved to lazy.nvim config with BufReadPost event
+-- REMOVED: Fundo reference (now using native persistent undo)
 -- Mason-nvim-lint, lint, codesnap setups moved to lazy.nvim configs with lazy loading
 -- Catppuccin, wilder, and toggleterm setups moved to lazy.nvim configs

@@ -26,20 +26,7 @@ return require("lazy").setup({
     -- import your plugins
     { import = "plugins" },
     --AESTHETIC
-    {
-      "nvim-lualine/lualine.nvim",
-      event = "VeryLazy",
-      config = function()
-        require("lualine").setup({
-          options = {
-            theme = "auto",
-            component_separators = "",
-            section_separators = "",
-          },
-          extensions = { "trouble", "lazy", "fzf", "quickfix" },
-        })
-      end,
-    },
+    -- REMOVED: lualine.nvim (replaced with mini.statusline)
     {
       "catppuccin/nvim",
       name = "catppuccin",
@@ -86,12 +73,7 @@ return require("lazy").setup({
     { "bekaboo/dropbar.nvim", event = "VeryLazy" }, -- Lazy-load for performance
     { "HiPhish/rainbow-delimiters.nvim", event = "BufReadPost" },
     { "RRethy/vim-illuminate", event = "BufReadPost" },
-    {
-      "goolord/alpha-nvim",
-      config = function()
-        require("alpha").setup(require("alpha.themes.startify").config)
-      end,
-    },
+    -- REMOVED: alpha-nvim (replaced with mini.starter)
     {
       "mistricky/codesnap.nvim",
       build = "make",
@@ -106,7 +88,7 @@ return require("lazy").setup({
 
     --TEXT OBJECTS
     { "tpope/vim-repeat", keys = "." },
-    { "tpope/vim-unimpaired" },
+    -- REMOVED: vim-unimpaired (replaced with mini.bracketed)
     { "nelstrom/vim-visual-star-search", lazy = true, keys = { "*", "#" } },
     {
       "tris203/precognition.nvim",
@@ -140,13 +122,7 @@ return require("lazy").setup({
     },
 
     --SNIPPETS
-    {
-      "L3MON4D3/LuaSnip",
-      -- follow latest release.
-      version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-      -- install jsregexp (optional!).
-      build = "make install_jsregexp",
-    },
+    -- REMOVED: LuaSnip (using AI for snippets, no custom snippets needed)
 
     --SEARCH
     {
@@ -293,7 +269,7 @@ return require("lazy").setup({
     --SURROUND
     --{ "tpope/vim-surround" },
     { "wellle/targets.vim" },
-    { "michaeljsmith/vim-indent-object" },
+    -- REMOVED: vim-indent-object (replaced with mini.indentscope)
 
     --COMPLETION/LINTING
     {
@@ -305,8 +281,7 @@ return require("lazy").setup({
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
+        -- REMOVED: LuaSnip and cmp_luasnip (using AI for snippets)
         "onsails/lspkind.nvim",
         "zbirenbaum/copilot-cmp",
         -- REMOVED: cmp-nvim-lsp-document-symbol (use Telescope document_symbols)
@@ -319,11 +294,7 @@ return require("lazy").setup({
         local cmp = require("cmp")
         local lspkind = require("lspkind")
         cmp.setup({
-          snippet = {
-            expand = function(args)
-              require("luasnip").lsp_expand(args.body)
-            end,
-          },
+          -- REMOVED: snippet configuration (using AI for snippets, no expansion needed)
           window = {},
           mapping = cmp.mapping.preset.insert({
             ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -335,7 +306,7 @@ return require("lazy").setup({
           sources = cmp.config.sources({
             { name = "nvim_lsp" }, -- FIX: Add actual LSP completion!
             { name = "copilot", priority = 100 },
-            { name = "luasnip", priority = 90 },
+            -- REMOVED: luasnip source (using AI for snippets)
             { name = "buffer", keyword_length = 3 },
             { name = "path" },
             -- REMOVED: nvim_lsp_document_symbol (redundant)
@@ -450,23 +421,7 @@ return require("lazy").setup({
     },
 
     --SPLITTING
-    {
-      "nvim-focus/focus.nvim",
-      version = false,
-      event = "VeryLazy", -- Load after startup but needs to be active for window navigation auto-resize
-      keys = {
-        {
-          "<c-n>",
-          function()
-            require("focus").split_nicely()
-          end,
-          desc = "Split nicely",
-        },
-      },
-      config = function()
-        require("focus").setup()
-      end,
-    },
+    -- REMOVED: focus.nvim (replaced with smart-splits.nvim for better window management)
 
     --GENERAL
     --{
@@ -491,16 +446,7 @@ return require("lazy").setup({
         })
       end,
     },
-    {
-      "kevinhwang91/nvim-fundo",
-      dependencies = "kevinhwang91/promise-async",
-      event = "BufReadPost",
-      config = function()
-        vim.o.undofile = true
-        require("fundo").setup()
-        require("fundo").install()
-      end,
-    },
+    -- REMOVED: nvim-fundo (using native persistent undo instead)
     {
       "oysandvik94/curl.nvim",
       cmd = { "CurlOpen" },
