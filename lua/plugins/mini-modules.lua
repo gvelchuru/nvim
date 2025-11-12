@@ -97,30 +97,5 @@ return {
     end,
   },
 
-  -- Mini.nvim starter module - replaces alpha-nvim
-  {
-    "echasnovski/mini.starter",
-    config = function()
-      local starter = require("mini.starter")
-      starter.setup({
-        items = {
-          starter.sections.recent_files(5, false, false),
-          { action = "Telescope find_files", name = "F: Find file", section = "Telescope" },
-          { action = "Telescope live_grep", name = "G: Live grep", section = "Telescope" },
-          { action = "Neogit", name = "N: Neogit", section = "Git" },
-          { action = "qa", name = "Q: Quit", section = "Actions" },
-        },
-        header = table.concat({
-          "███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
-          "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
-          "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
-          "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
-          "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
-          "╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
-          "",
-        }, "\n"),
-        footer = "",
-      })
-    end,
-  },
+  -- REMOVED: mini.starter (user prefers alpha-nvim)
 }

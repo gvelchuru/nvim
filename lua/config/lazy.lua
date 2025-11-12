@@ -73,7 +73,12 @@ return require("lazy").setup({
     { "bekaboo/dropbar.nvim", event = "VeryLazy" }, -- Lazy-load for performance
     { "HiPhish/rainbow-delimiters.nvim", event = "BufReadPost" },
     { "RRethy/vim-illuminate", event = "BufReadPost" },
-    -- REMOVED: alpha-nvim (replaced with mini.starter)
+    {
+      "goolord/alpha-nvim",
+      config = function()
+        require("alpha").setup(require("alpha.themes.startify").config)
+      end,
+    },
     {
       "mistricky/codesnap.nvim",
       build = "make",
