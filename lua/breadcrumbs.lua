@@ -4,13 +4,13 @@
 local M = {}
 
 -- State tracking
-M.enabled = false
+M.enabled = true -- Default to enabled (show breadcrumbs when available)
 M.auto_hide_timer = nil
 
 -- Configuration
 M.config = {
   max_file_lines = 5000, -- Disable for very large files
-  auto_hide_delay = 3000, -- Auto-hide after 3 seconds (0 to disable)
+  auto_hide_delay = 0, -- Auto-hide disabled (keep breadcrumbs visible)
   excluded_filetypes = {
     "help",
     "alpha",
@@ -35,12 +35,7 @@ local function is_breadcrumbs_available()
     return false, "nvim-navic not available"
   end
 
-  -- Check if LSP is attached and provides document symbols
-  if not navic.is_available() then
-    return false, "No LSP with documentSymbol capability attached"
-  end
-
-  -- Check file type
+  -- Check file type first (before LSP check to avoid noise)
   local ft = vim.bo.filetype
   if vim.tbl_contains(M.config.excluded_filetypes, ft) then
     return false, "Excluded filetype: " .. ft
@@ -52,14 +47,22 @@ local function is_breadcrumbs_available()
     return false, string.format("File too large: %d lines (max: %d)", line_count, M.config.max_file_lines)
   end
 
+  -- Check if LSP is attached and provides document symbols (silent fail for normal files)
+  if not navic.is_available() then
+    return false, "No LSP attached" -- Don't show warning for normal case
+  end
+
   return true, "Available"
 end
 
--- Show breadcrumbs in winbar
-function M.show()
+-- Show breadcrumbs in winbar (silent by default, only notify on manual toggle)
+function M.show(manual)
   local available, reason = is_breadcrumbs_available()
   if not available then
-    vim.notify("Breadcrumbs not available: " .. reason, vim.log.levels.WARN)
+    -- Only show warning for manual toggle, not automatic attempts
+    if manual then
+      vim.notify("Breadcrumbs not available: " .. reason, vim.log.levels.WARN)
+    end
     return false
   end
 
@@ -89,7 +92,10 @@ function M.show()
 
     return true
   else
-    vim.notify("No breadcrumbs available for current location", vim.log.levels.INFO)
+    -- Only notify for manual toggle
+    if manual then
+      vim.notify("No breadcrumbs available for current location", vim.log.levels.INFO)
+    end
     return false
   end
 end
@@ -113,7 +119,7 @@ function M.toggle()
     M.hide()
     vim.notify("Breadcrumbs hidden", vim.log.levels.INFO)
   else
-    if M.show() then
+    if M.show(true) then -- Pass true for manual toggle (shows warnings)
       vim.notify("Breadcrumbs shown", vim.log.levels.INFO)
     end
   end
@@ -171,6 +177,19 @@ function M.setup(opts)
     M.config = vim.tbl_deep_extend("force", M.config, opts)
   end
 
+  -- Auto-show breadcrumbs when LSP attaches (if enabled by default)
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("BreadcrumbsLspAttach", { clear = true }),
+    callback = function()
+      -- Small delay to let LSP fully initialize
+      vim.defer_fn(function()
+        if M.enabled then
+          M.show() -- Silent auto-show
+        end
+      end, 200)
+    end,
+  })
+
   -- Create autocmds for updating breadcrumbs when enabled
   vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     group = vim.api.nvim_create_augroup("BreadcrumbsUpdate", { clear = true }),
@@ -192,6 +211,19 @@ function M.setup(opts)
     callback = function()
       if M.enabled then
         M.hide()
+      end
+    end,
+  })
+
+  -- Auto-show when entering code files (if enabled and LSP available)
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    group = vim.api.nvim_create_augroup("BreadcrumbsAutoShow", { clear = true }),
+    callback = function()
+      if M.enabled then
+        -- Small delay to ensure LSP is ready
+        vim.defer_fn(function()
+          M.show() -- Silent auto-show
+        end, 100)
       end
     end,
   })
