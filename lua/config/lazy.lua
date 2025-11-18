@@ -26,7 +26,7 @@ return require("lazy").setup({
     -- import your plugins
     { import = "plugins" },
     --AESTHETIC
-    -- REMOVED: lualine.nvim (replaced with mini.statusline)
+    -- lualine.nvim - clean statusline
     {
       "catppuccin/nvim",
       name = "catppuccin",
@@ -50,7 +50,24 @@ return require("lazy").setup({
           },
           leap = true,
           noice = true,
+          native_lsp = {
+            enabled = true,
+            virtual_text = {
+              errors = { "italic" },
+              hints = { "italic" },
+              warnings = { "italic" },
+              information = { "italic" },
+            },
+            underlines = {
+              errors = { "underline" },
+              hints = { "underline" },
+              warnings = { "underline" },
+              information = { "underline" },
+            },
+          },
         })
+
+        -- lualine will auto-detect the theme
       end,
     },
 
@@ -99,6 +116,70 @@ return require("lazy").setup({
           safe_output = true,
           lazy_update_context = false,
           click = true, -- Enable click navigation
+        })
+      end,
+    },
+
+    -- Floating statuslines for breadcrumbs (works with nvim-navic)
+    {
+      "b0o/incline.nvim",
+      event = "VeryLazy",
+      config = function()
+        local helpers = require("incline.helpers")
+        local navic = require("nvim-navic")
+        require("incline").setup({
+          window = {
+            padding = 0,
+            margin = { horizontal = 0, vertical = 0 },
+          },
+          render = function(props)
+            local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+            if filename == "" then
+              filename = "[No Name]"
+            end
+
+            -- Get file icon (simplified, without using helpers)
+            local ft_icon = ""
+            local modified = vim.api.nvim_buf_get_option(props.buf, "modified")
+
+            local result = {
+              " ",
+              { filename, gui = modified and "bold,italic" or "bold" },
+            }
+
+            -- Add navic breadcrumbs if available
+            if navic.is_available(props.buf) then
+              local navic_data = navic.get_data(props.buf)
+              if navic_data and #navic_data > 0 then
+                table.insert(result, { " > ", guifg = "#6c7086" }) -- Catppuccin overlay0
+                for i, item in ipairs(navic_data) do
+                  if i > 1 then
+                    table.insert(result, { " > ", guifg = "#6c7086" })
+                  end
+                  table.insert(result, { item.icon, guifg = "#89b4fa" }) -- Catppuccin blue
+                  table.insert(result, { item.name, guifg = "#cdd6f4" }) -- Catppuccin text
+                end
+              end
+            end
+
+            return result
+          end,
+        })
+      end,
+    },
+
+    -- lualine statusline (your preferred statusline)
+    {
+      "nvim-lualine/lualine.nvim",
+      event = "VeryLazy",
+      config = function()
+        require("lualine").setup({
+          options = {
+            theme = "auto",
+            component_separators = "",
+            section_separators = "",
+          },
+          extensions = { "trouble", "lazy", "fzf", "quickfix" },
         })
       end,
     },
@@ -439,6 +520,9 @@ return require("lazy").setup({
             "cssls",
             "gopls",
             "basedpyright",
+            "dockerls",
+            "docker_compose_language_service",
+            "terraformls",
             -- Using rubocop only for Ruby (removed ruby_lsp, solargraph, standardrb to avoid conflicts)
           },
           automatic_enable = true,
@@ -590,6 +674,147 @@ return require("lazy").setup({
         fallback = "light",
       },
     },
+    -- snacks.nvim - Collection of small QoL plugins
+    {
+      "folke/snacks.nvim",
+      priority = 1000,
+      lazy = false,
+      opts = {
+        -- Large file performance optimization
+        bigfile = {
+          enabled = true,
+          notify = true, -- Show notification when big file detected
+          size = 1.5 * 1024 * 1024, -- 1.5MB threshold
+          -- Setup for better performance on large files
+          setup = function(ctx)
+            vim.cmd([[NoMatchParen]]) -- Disable match paren
+            vim.cmd([[syntax clear]]) -- Clear syntax highlighting
+            vim.opt_local.foldmethod = "manual"
+            vim.opt_local.spell = false
+          end,
+        },
+
+        -- Enhanced status column with git, folds, marks
+        statuscolumn = {
+          enabled = true,
+          left = { "mark", "sign" }, -- Left side: marks and LSP/diagnostic signs
+          right = { "fold", "git" }, -- Right side: fold indicators and git signs
+          folds = {
+            open = true, -- Show fold indicators for open folds
+            git_hl = false, -- Don't use git colors for folds
+          },
+          git = {
+            patterns = { "GitSigns", "MiniDiff" }, -- Support gitsigns and mini.diff
+          },
+        },
+
+        -- GitHub/GitLab file browsing
+        gitbrowse = {
+          enabled = true,
+          notify = false, -- Don't show notifications when opening
+          -- Will work with your existing git setup (neogit, gitsigns)
+        },
+
+        -- Scope-based text objects and navigation
+        scope = {
+          enabled = true,
+          -- Provides text objects like `ii` (inner scope) and `ai` (around scope)
+          -- Also provides navigation: `]s` / `[s` to jump between scopes
+          keys = {
+            textobject = {
+              ii = {
+                query = "@scope",
+                desc = "inner scope",
+              },
+              ai = {
+                query = "@scope",
+                desc = "around scope",
+              },
+            },
+            jump = {
+              ["]s"] = {
+                query = "@scope",
+                desc = "Next scope",
+              },
+              ["[s"] = {
+                query = "@scope",
+                desc = "Previous scope",
+              },
+            },
+          },
+        },
+
+        -- Smooth scrolling
+        scroll = {
+          enabled = true,
+          animate = {
+            duration = { step = 15, total = 250 }, -- Smooth but not too slow
+            easing = "linear", -- Linear easing for consistent feel
+          },
+          -- Works with your existing keybindings
+        },
+
+        -- Disable features we don't want in Phase 1
+        animate = { enabled = false },
+        bufdelete = { enabled = false },
+        dashboard = { enabled = false },
+        indent = { enabled = false },
+        input = { enabled = false },
+        notifier = { enabled = false },
+        picker = { enabled = false },
+        quickfile = { enabled = false },
+        rename = { enabled = false },
+        terminal = { enabled = false },
+        toggle = { enabled = false },
+        words = { enabled = false },
+        zen = { enabled = false },
+      },
+      keys = {
+        {
+          "<leader>gb",
+          function()
+            Snacks.gitbrowse()
+          end,
+          desc = "Git Browse",
+        },
+        {
+          "<leader>gB",
+          function()
+            Snacks.git.blame_line()
+          end,
+          desc = "Git Blame Line",
+        },
+        {
+          "<leader>gf",
+          function()
+            Snacks.lazygit.log_file()
+          end,
+          desc = "Lazygit Current File",
+        },
+        {
+          "<leader>gl",
+          function()
+            Snacks.lazygit()
+          end,
+          desc = "Lazygit",
+        },
+        {
+          "]s",
+          function()
+            Snacks.scope.textobject("next")
+          end,
+          desc = "Next Scope",
+        },
+        {
+          "[s",
+          function()
+            Snacks.scope.textobject("prev")
+          end,
+          desc = "Prev Scope",
+        },
+      },
+    },
+
     --LLM
     {
       "greggh/claude-code.nvim",

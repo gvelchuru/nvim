@@ -15,7 +15,9 @@
       "Bash(find:*)",
       "WebSearch",
       "Bash(cat:*)",
-      "WebFetch(domain:www.reddit.com)"
+      "WebFetch(domain:www.reddit.com)",
+      "Bash(timeout 10s nvim:*)",
+      "Bash(timeout 5s nvim:*)"
     ],
     "deny": [],
     "ask": []

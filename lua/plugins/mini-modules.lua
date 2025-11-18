@@ -84,18 +84,18 @@ return {
     end,
   },
 
-  -- Mini.nvim statusline module - replaces lualine.nvim
-  {
-    "echasnovski/mini.statusline",
-    event = "VeryLazy",
-    config = function()
-      local statusline = require("mini.statusline")
-      statusline.setup({
-        use_icons = true,
-        set_vim_settings = true,
-      })
-    end,
-  },
+  -- REMOVED: mini.statusline (replaced with vim-airline)
+  -- {
+  --   "echasnovski/mini.statusline",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     local statusline = require("mini.statusline")
+  --     statusline.setup({
+  --       use_icons = true,
+  --       set_vim_settings = true,
+  --     })
+  --   end,
+  -- },
 
   -- REMOVED: mini.starter (user prefers alpha-nvim)
 }
